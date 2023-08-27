@@ -1,13 +1,13 @@
 //
-//  ProfilePageViewController.swift
+//  FavoritesViewController.swift
 //  BestRecipes
 //
-//  Created by Александра Савчук on 26.08.2023.
+//  Created by Александра Савчук on 27.08.2023.
 //
 
 import UIKit
 
-class ProfilePageViewController: UIViewController {
+class FavoritesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
