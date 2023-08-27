@@ -22,6 +22,7 @@
 		5705A2582A9A74520040E9E5 /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A2572A9A74520040E9E5 /* ProfilePageViewController.swift */; };
 		5705A25A2A9A749B0040E9E5 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A2592A9A749B0040E9E5 /* NetworkService.swift */; };
 		5705A25C2A9B27F30040E9E5 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A25B2A9B27F30040E9E5 /* Label.swift */; };
+		5705A25F2A9B28AC0040E9E5 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5705A25E2A9B28AC0040E9E5 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5705A25F2A9B28AC0040E9E5 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -402,6 +404,9 @@
 			dependencies = (
 			);
 			name = BestRecipes;
+			packageProductDependencies = (
+				5705A25E2A9B28AC0040E9E5 /* Kingfisher */,
+			);
 			productName = BestRecipes;
 			productReference = 5705A20A2A9A14460040E9E5 /* BestRecipes.app */;
 			productType = "com.apple.product-type.application";
@@ -430,6 +435,9 @@
 				Base,
 			);
 			mainGroup = 5705A2012A9A14460040E9E5;
+			packageReferences = (
+				5705A25D2A9B28AC0040E9E5 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			productRefGroup = 5705A20B2A9A14460040E9E5 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -612,9 +620,9 @@
 				INFOPLIST_FILE = BestRecipes/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -643,9 +651,9 @@
 				INFOPLIST_FILE = BestRecipes/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -684,6 +692,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		5705A25D2A9B28AC0040E9E5 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		5705A25E2A9B28AC0040E9E5 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5705A25D2A9B28AC0040E9E5 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5705A2022A9A14460040E9E5 /* Project object */;
 }
