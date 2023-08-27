@@ -27,7 +27,8 @@
 		5705A2622A9B34700040E9E5 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5705A2242A9A64790040E9E5 /* Poppins-Regular.ttf */; };
 		5705A2632A9B34740040E9E5 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5705A2272A9A6F130040E9E5 /* Poppins-SemiBold.ttf */; };
 		5705A2652A9B35C50040E9E5 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A2642A9B35C50040E9E5 /* TabBar.swift */; };
-		5705A2672A9B3C0A0040E9E5 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A2662A9B3C0A0040E9E5 /* FavoritesViewController.swift */; };
+		5705A2672A9B3C0A0040E9E5 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A2662A9B3C0A0040E9E5 /* NotificationViewController.swift */; };
+		5705A2692A9B9E960040E9E5 /* RatingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A2682A9B9E950040E9E5 /* RatingButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,7 +53,8 @@
 		5705A25B2A9B27F30040E9E5 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		5705A2602A9B30A80040E9E5 /* CustomRedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRedButton.swift; sourceTree = "<group>"; };
 		5705A2642A9B35C50040E9E5 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
-		5705A2662A9B3C0A0040E9E5 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		5705A2662A9B3C0A0040E9E5 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		5705A2682A9B9E950040E9E5 /* RatingButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,7 +148,7 @@
 				5705A2352A9A72960040E9E5 /* See all */,
 				5705A2362A9A72A60040E9E5 /* Create recipe */,
 				5705A2372A9A72AF0040E9E5 /* Profile page */,
-				5705A2662A9B3C0A0040E9E5 /* FavoritesViewController.swift */,
+				5705A2662A9B3C0A0040E9E5 /* NotificationViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -171,6 +173,7 @@
 			isa = PBXGroup;
 			children = (
 				5705A2602A9B30A80040E9E5 /* CustomRedButton.swift */,
+				5705A2682A9B9E950040E9E5 /* RatingButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -482,12 +485,13 @@
 				5705A24E2A9A739D0040E9E5 /* OnboardingViewController.swift in Sources */,
 				5705A2522A9A741A0040E9E5 /* RecipeDetailViewController.swift in Sources */,
 				5705A2582A9A74520040E9E5 /* ProfilePageViewController.swift in Sources */,
+				5705A2692A9B9E960040E9E5 /* RatingButton.swift in Sources */,
 				5705A25C2A9B27F30040E9E5 /* Label.swift in Sources */,
 				5705A2502A9A73EF0040E9E5 /* DiscoverViewController.swift in Sources */,
 				5705A2262A9A64F20040E9E5 /* Fonts.swift in Sources */,
 				5705A20E2A9A14460040E9E5 /* AppDelegate.swift in Sources */,
 				5705A2652A9B35C50040E9E5 /* TabBar.swift in Sources */,
-				5705A2672A9B3C0A0040E9E5 /* FavoritesViewController.swift in Sources */,
+				5705A2672A9B3C0A0040E9E5 /* NotificationViewController.swift in Sources */,
 				5705A2542A9A74290040E9E5 /* SeeAllViewController.swift in Sources */,
 				5705A2222A9A16800040E9E5 /* CustomColors.swift in Sources */,
 				5705A25A2A9A749B0040E9E5 /* NetworkService.swift in Sources */,
