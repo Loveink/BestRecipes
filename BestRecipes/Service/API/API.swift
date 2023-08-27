@@ -73,7 +73,7 @@ struct RecipeAPI {
         let urlString = "\(url.MainUrl)\(adds.information)?ids=\(id)&apiKey=\(apiKeySelect)"
         return try await networkManager.request(urlString: urlString)
     }
-    // Для Search и Categories
+    // Для Search и Categories(просто вместо request подставить нужную нам категорию) 
     func fetchSearch(with request: String) async throws -> RecipeResults {
         let requestForURL = request.replacingOccurrences(of: " ", with: "%20")
         let urlString = "\(url.MainUrl)\(adds.complexSearch)?query=\(requestForURL)&number=10&apiKey=\(apiKeySelect)"
