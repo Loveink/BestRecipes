@@ -23,6 +23,11 @@
 		5705A25A2A9A749B0040E9E5 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A2592A9A749B0040E9E5 /* NetworkService.swift */; };
 		5705A25C2A9B27F30040E9E5 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A25B2A9B27F30040E9E5 /* Label.swift */; };
 		5705A25F2A9B28AC0040E9E5 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 5705A25E2A9B28AC0040E9E5 /* Kingfisher */; };
+		5705A2612A9B30A80040E9E5 /* CustomRedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A2602A9B30A80040E9E5 /* CustomRedButton.swift */; };
+		5705A2622A9B34700040E9E5 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5705A2242A9A64790040E9E5 /* Poppins-Regular.ttf */; };
+		5705A2632A9B34740040E9E5 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5705A2272A9A6F130040E9E5 /* Poppins-SemiBold.ttf */; };
+		5705A2652A9B35C50040E9E5 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A2642A9B35C50040E9E5 /* TabBar.swift */; };
+		5705A2672A9B3C0A0040E9E5 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A2662A9B3C0A0040E9E5 /* FavoritesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +50,9 @@
 		5705A2572A9A74520040E9E5 /* ProfilePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageViewController.swift; sourceTree = "<group>"; };
 		5705A2592A9A749B0040E9E5 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		5705A25B2A9B27F30040E9E5 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		5705A2602A9B30A80040E9E5 /* CustomRedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRedButton.swift; sourceTree = "<group>"; };
+		5705A2642A9B35C50040E9E5 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		5705A2662A9B3C0A0040E9E5 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +102,7 @@
 				5705A2252A9A64F20040E9E5 /* Fonts.swift */,
 				5705A2212A9A16800040E9E5 /* CustomColors.swift */,
 				5705A25B2A9B27F30040E9E5 /* Label.swift */,
+				5705A2642A9B35C50040E9E5 /* TabBar.swift */,
 				5705A22F2A9A71720040E9E5 /* Buttons */,
 			);
 			path = UIConstans;
@@ -137,6 +146,7 @@
 				5705A2352A9A72960040E9E5 /* See all */,
 				5705A2362A9A72A60040E9E5 /* Create recipe */,
 				5705A2372A9A72AF0040E9E5 /* Profile page */,
+				5705A2662A9B3C0A0040E9E5 /* FavoritesViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -160,6 +170,7 @@
 		5705A22F2A9A71720040E9E5 /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
+				5705A2602A9B30A80040E9E5 /* CustomRedButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -452,6 +463,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5705A2632A9B34740040E9E5 /* Poppins-SemiBold.ttf in Resources */,
+				5705A2622A9B34700040E9E5 /* Poppins-Regular.ttf in Resources */,
 				5705A21A2A9A14480040E9E5 /* LaunchScreen.storyboard in Resources */,
 				5705A2172A9A14480040E9E5 /* Assets.xcassets in Resources */,
 			);
@@ -473,9 +486,12 @@
 				5705A2502A9A73EF0040E9E5 /* DiscoverViewController.swift in Sources */,
 				5705A2262A9A64F20040E9E5 /* Fonts.swift in Sources */,
 				5705A20E2A9A14460040E9E5 /* AppDelegate.swift in Sources */,
+				5705A2652A9B35C50040E9E5 /* TabBar.swift in Sources */,
+				5705A2672A9B3C0A0040E9E5 /* FavoritesViewController.swift in Sources */,
 				5705A2542A9A74290040E9E5 /* SeeAllViewController.swift in Sources */,
 				5705A2222A9A16800040E9E5 /* CustomColors.swift in Sources */,
 				5705A25A2A9A749B0040E9E5 /* NetworkService.swift in Sources */,
+				5705A2612A9B30A80040E9E5 /* CustomRedButton.swift in Sources */,
 				5705A2102A9A14460040E9E5 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
