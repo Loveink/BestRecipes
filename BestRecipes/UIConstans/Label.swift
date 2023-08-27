@@ -8,12 +8,12 @@
 import UIKit
 
 extension UILabel {
-
-    convenience init(text: String = "", font: UIFont?, textColor: UIColor) {
-        self.init()
-        self.text = text
-        self.font = font
-        self.textColor = textColor
-        self.adjustsFontSizeToFitWidth = true
+    static func makeLabel(text: String = "", font: UIFont?, textColor: UIColor) -> UILabel {
+        let label = UILabel()
+        label.text = text
+        label.font = font
+        label.textColor = textColor
+        label.adjustsFontSizeToFitWidth = true
+        return label
     }
 }
