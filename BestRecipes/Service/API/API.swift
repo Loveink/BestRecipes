@@ -74,7 +74,7 @@ struct RecipeAPI {
         return try await networkManager.request(urlString: urlString)
     }
     // Для Search и Categories(просто вместо request подставить нужную нам категорию) 
-    func fetchSearch(with request: String) async throws -> RecipeResults {
+    static func fetchSearch(with request: String) async throws -> RecipeResults {
         let requestForURL = request.replacingOccurrences(of: " ", with: "%20")
         let urlString = "\(url.MainUrl)\(adds.complexSearch)?query=\(requestForURL)&number=10&apiKey=\(apiKeySelect)"
         return try await networkManager.request(urlString: urlString)
@@ -98,48 +98,6 @@ struct RecipeAPI {
 //}
 
 
-// Модель для Trending, SeeAll и Search и Categories 
-struct RecipeResults: Codable {
-    let results: [Recipe]
-}
-
-struct Recipe: Codable, Equatable {
-    let id: Int
-    let title: String
-    let image: String
-}
-
-
-import Foundation
 
 
 
-// Модель для Detail
-
-struct RecipeFullInfo: Codable {
-    let id: Int
-    let title: String
-    let readyInMinutes: Int
-    let servings: Int
-    let spoonacularSourceUrl: String
-    let instructions: String
-    let extendedIngredients: [ExtendedIngredient]
-}
-
-struct ExtendedIngredient: Codable {
-    let id: Int
-    let name: String
-    let amount: Double
-    let unit: String
-    let measures: Measures
-    let image: String
-}
-
-struct Measures: Codable {
-    let us, metric: Metric
-}
-
-struct Metric: Codable {
-    let amount: Double
-    let unitShort, unitLong: String
-}
