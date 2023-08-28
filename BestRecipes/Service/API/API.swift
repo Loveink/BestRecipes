@@ -27,7 +27,7 @@ let networkManager = NetworkManager()
         static let key2 = "c0472158d42f45c9b91c7244460c36e1"
     }
 
-    let apiKeySelect = apiKey.key1
+    let apiKeySelect = apiKey.key2
 
     enum adds {
         static let popularity = "&sort=popularity"

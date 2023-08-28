@@ -52,23 +52,30 @@ class TrendingCell: UICollectionViewCell {
 
   private let authorLabel = UILabel.makeLabelForCells(text: "By Zeelicious foods", font: .poppinsRegular(size: 12), textColor: .neutral50)
 
+  lazy var whiteCircleView: UIView = {
+      let view = UIView()
+      view.backgroundColor = .white
+      view.layer.cornerRadius = 17
+      view.translatesAutoresizingMaskIntoConstraints = false
+      return view
+  }()
+
   lazy var favouriteButton: UIButton = {
-    let button = UIButton()
-    button.tintColor = .white
-    button.setImage(UIImage(systemName: "bookmark"), for: .normal)
-    button.addTarget(self, action: #selector(favouriteButtonPressed), for: .touchUpInside)
-    button.translatesAutoresizingMaskIntoConstraints = false
-    return button
+      let button = UIButton()
+      button.setImage(UIImage(named: "bookmark"), for: .normal)
+      button.addTarget(self, action: #selector(favouriteButtonPressed), for: .touchUpInside)
+      button.translatesAutoresizingMaskIntoConstraints = false
+      return button
   }()
 
   //MARK: - Functions
   @objc func favouriteButtonPressed() {
     if liked {
-      favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+      favouriteButton.setImage(UIImage(named: "bookmark"), for: .normal)
       liked = false
       bookmarksManager.bookmarksArray.removeAll { $0 == currentRecipe }
     } else {
-      favouriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+      favouriteButton.setImage(UIImage(named: "bookmarkSelect"), for: .normal)
       liked = true
       bookmarksManager.bookmarksArray.append(currentRecipe!)
     }
@@ -88,10 +95,12 @@ class TrendingCell: UICollectionViewCell {
 
   private func setupViews() {
     contentView.addSubview(dishImageView)
-    contentView.addSubview(favouriteButton)
     contentView.addSubview(titleLabel)
     contentView.addSubview(authorImageView)
     contentView.addSubview(authorLabel)
+
+    whiteCircleView.addSubview(favouriteButton)
+    contentView.addSubview(whiteCircleView)
   }
 
   //MARK: - Constraints
@@ -102,10 +111,15 @@ class TrendingCell: UICollectionViewCell {
       dishImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
       dishImageView.heightAnchor.constraint(equalToConstant: 150),
 
-      favouriteButton.heightAnchor.constraint(equalToConstant: 32),
+      whiteCircleView.topAnchor.constraint(equalTo: dishImageView.topAnchor, constant: 8),
+      whiteCircleView.trailingAnchor.constraint(equalTo: dishImageView.trailingAnchor,constant: -9),
+      whiteCircleView.widthAnchor.constraint(equalToConstant: 32),
+      whiteCircleView.heightAnchor.constraint(equalToConstant: 32),
+
+      favouriteButton.centerXAnchor.constraint(equalTo: whiteCircleView.centerXAnchor),
+      favouriteButton.centerYAnchor.constraint(equalTo: whiteCircleView.centerYAnchor),
       favouriteButton.widthAnchor.constraint(equalToConstant: 32),
-      favouriteButton.topAnchor.constraint(equalTo: dishImageView.topAnchor, constant: 20),
-      favouriteButton.trailingAnchor.constraint(equalTo: dishImageView.trailingAnchor,constant: -10),
+      favouriteButton.heightAnchor.constraint(equalToConstant: 32),
 
       titleLabel.leadingAnchor.constraint(equalTo: dishImageView.leadingAnchor),
       titleLabel.trailingAnchor.constraint(equalTo: dishImageView.trailingAnchor, constant: -10),
