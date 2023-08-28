@@ -14,8 +14,6 @@ class HomeViewController: UIViewController {
    private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.isPagingEnabled = true
-        scrollView.showsHorizontalScrollIndicator = false
         return scrollView
     }()
 
@@ -39,6 +37,7 @@ class HomeViewController: UIViewController {
     super.viewDidLoad()
     
     view.backgroundColor = .white
+    
     setupScrollView()
     setupSearchBar()
     setupNameView()
@@ -49,6 +48,7 @@ class HomeViewController: UIViewController {
     func setupScrollView() {
         view.addSubview(scrollView)
         scrollView.contentSize = CGSize(width: .zero, height: 1400)
+        scrollView.backgroundColor = .white
     }
     func setupSearchBar() {
         searchBar.searchBar.translatesAutoresizingMaskIntoConstraints = false
@@ -77,17 +77,17 @@ class HomeViewController: UIViewController {
         
         
         searchBar.view.topAnchor.constraint(equalTo:  scrollView.topAnchor),
-        searchBar.view.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
-        searchBar.view.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -20),
+        searchBar.view.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+        searchBar.view.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
         
         mainLabel.topAnchor.constraint(equalTo: searchBar.searchBar.bottomAnchor, constant: 20),
-        mainLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
-        mainLabel.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+        mainLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+        mainLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         mainLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
         
         
-        collectionView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 10),
-        collectionView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -10),
+        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
         collectionView.topAnchor.constraint(equalTo: mainLabel.bottomAnchor, constant: 50),
       collectionView.heightAnchor.constraint(equalToConstant: 250) 
     ])
