@@ -24,7 +24,7 @@ let networkManager = NetworkManager()
 
     enum apiKey {
         static let key1 = "82c2d8b368364b64ba37c4f11aa55670"
-        static let key2 = "c0472158d42f45c9b91c7244460c36e1"
+        static let key2 = "b4768be03cc34eecac9ddff5b5ec4f66"
     }
 
     let apiKeySelect = apiKey.key2
