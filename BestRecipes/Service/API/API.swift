@@ -103,7 +103,7 @@ struct RecipeResults: Codable {
     let results: [Recipe]
 }
 
-struct Recipe: Codable {
+struct Recipe: Codable, Equatable {
     let id: Int
     let title: String
     let image: String

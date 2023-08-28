@@ -8,23 +8,38 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+  
+  private let collectionView = TrendingCollectionView()
 
-    let button = CustomRedButton(customTitle: "Next", cornerRadius: 8)
-    let titleLabel = UILabel.makeLabel(text: "fsf:", font: .poppinsSemiBold(size: 58), textColor: .error100)
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .success10
-
-        view.addSubview(titleLabel)
-        view.addSubview(button)
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        button.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            titleLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            button.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            button.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20)
-        ])
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    view.backgroundColor = .white
+    setupConstraints()
+    loadTrendingRecipes()
+  }
+  
+  private func setupConstraints() {
+    view.addSubview(collectionView)
+    collectionView.translatesAutoresizingMaskIntoConstraints = false
+    NSLayoutConstraint.activate([
+      collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+      collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+      collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
+      collectionView.heightAnchor.constraint(equalToConstant: 250) 
+    ])
+  }
+  
+  private func loadTrendingRecipes() {
+    Task {
+      do {
+        let response = try await RecipeAPI.fetchTrends()
+        self.collectionView.recipes = response.results
+      } catch {
+        await MainActor.run(body: {
+          print(error, error.localizedDescription)
+        })
+      }
     }
+  }
 }
