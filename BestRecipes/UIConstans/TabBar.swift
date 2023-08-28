@@ -17,8 +17,20 @@ class MainTabBarController: UITabBarController {
   }
 
   private func setupTabBar() {
-    tabBar.backgroundColor = .white0
-//    tabBar.backgroundImage = UIImage(named: "Bg")
+    if let backgroundImage = UIImage(named: "background") {
+      let backgroundImageView = UIImageView(image: backgroundImage)
+      backgroundImageView.contentMode = .scaleAspectFill
+      tabBar.addSubview(backgroundImageView)
+      backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+      NSLayoutConstraint.activate([
+        backgroundImageView.topAnchor.constraint(equalTo: tabBar.topAnchor),
+        backgroundImageView.leadingAnchor.constraint(equalTo: tabBar.leadingAnchor),
+        backgroundImageView.trailingAnchor.constraint(equalTo: tabBar.trailingAnchor),
+        backgroundImageView.bottomAnchor.constraint(equalTo: tabBar.bottomAnchor)
+      ])
+    } else {
+      print("Background image 'background' not found.")
+    }
   }
 
 
@@ -28,14 +40,13 @@ class MainTabBarController: UITabBarController {
     customButtonController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "add")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "add")?.withRenderingMode(.alwaysOriginal))
     customButtonController.tabBarItem.imageInsets = UIEdgeInsets(top: -20, left: 0, bottom: 20, right: 0)
 
-
     let homepage = HomeViewController()
     homepage.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "main")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "mainSelect")?.withRenderingMode(.alwaysOriginal))
 
     let discover = DiscoverViewController()
     discover.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "bookmark")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "bookmarkSelect")?.withRenderingMode(.alwaysOriginal))
 
-    let notification = FavoritesViewController()
+    let notification = NotificationViewController()
     notification.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "notification")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "notificationSelect")?.withRenderingMode(.alwaysOriginal))
 
     let profile = ProfilePageViewController()
