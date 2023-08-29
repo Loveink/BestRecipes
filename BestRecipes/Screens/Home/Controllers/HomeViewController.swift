@@ -36,6 +36,7 @@ class HomeViewController: UIViewController {
     setupConstraints()
     loadTrendingRecipes()
   }
+
   func setupScrollView() {
     view.addSubview(scrollView)
     scrollView.contentSize = CGSize(width: .zero, height: 1400)

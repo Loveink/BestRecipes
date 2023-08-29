@@ -39,7 +39,6 @@
 		5705A2622A9B34700040E9E5 /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5705A2242A9A64790040E9E5 /* Poppins-Regular.ttf */; };
 		5705A2632A9B34740040E9E5 /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5705A2272A9A6F130040E9E5 /* Poppins-SemiBold.ttf */; };
 		5705A2652A9B35C50040E9E5 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A2642A9B35C50040E9E5 /* TabBar.swift */; };
-		5705A2672A9B3C0A0040E9E5 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A2662A9B3C0A0040E9E5 /* NotificationViewController.swift */; };
 		5705A2692A9B9E960040E9E5 /* SeeAllButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A2682A9B9E950040E9E5 /* SeeAllButton.swift */; };
 		5705A2712A9BC2210040E9E5 /* TrendingCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A2702A9BC2210040E9E5 /* TrendingCollectionView.swift */; };
 		5705A2752A9BC26D0040E9E5 /* TrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A2742A9BC26D0040E9E5 /* TrendingCell.swift */; };
@@ -82,7 +81,6 @@
 		5705A25B2A9B27F30040E9E5 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		5705A2602A9B30A80040E9E5 /* CustomRedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomRedButton.swift; sourceTree = "<group>"; };
 		5705A2642A9B35C50040E9E5 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
-		5705A2662A9B3C0A0040E9E5 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		5705A2682A9B9E950040E9E5 /* SeeAllButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllButton.swift; sourceTree = "<group>"; };
 		5705A2702A9BC2210040E9E5 /* TrendingCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCollectionView.swift; sourceTree = "<group>"; };
 		5705A2742A9BC26D0040E9E5 /* TrendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
@@ -227,7 +225,6 @@
 				0B7E02E12A9CCB0F00D48CE2 /* Search */,
 				5705A2362A9A72A60040E9E5 /* Create recipe */,
 				5705A2372A9A72AF0040E9E5 /* Profile page */,
-				5705A2662A9B3C0A0040E9E5 /* NotificationViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -598,7 +595,6 @@
 				5705A2262A9A64F20040E9E5 /* Fonts.swift in Sources */,
 				5705A20E2A9A14460040E9E5 /* AppDelegate.swift in Sources */,
 				5705A2652A9B35C50040E9E5 /* TabBar.swift in Sources */,
-				5705A2672A9B3C0A0040E9E5 /* NotificationViewController.swift in Sources */,
 				5705A2542A9A74290040E9E5 /* SeeAllViewController.swift in Sources */,
 				5705A27D2A9E7ADF0040E9E5 /* CookTimePickerView.swift in Sources */,
 				0BB05FA52A9DBDD900B6BC65 /* RecipeInfoForCell.swift in Sources */,
