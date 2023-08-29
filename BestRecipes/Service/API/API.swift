@@ -40,6 +40,8 @@ let networkManager = NetworkManager()
 
 struct RecipeAPI {
     
+    //MARK: - Загрузка изображений
+
     static func loadImageFromURL(urlString: String, completion: @escaping (UIImage?) -> Void) {
         guard let url = URL(string: urlString) else {
             completion(nil)
@@ -56,7 +58,7 @@ struct RecipeAPI {
     }
     
     
-//MARK: - Запросы
+//MARK: - Запросы данных
     
     // Для Trending
     static func fetchTrends() async throws -> RecipeResults {
@@ -79,7 +81,14 @@ struct RecipeAPI {
         let urlString = "\(url.MainUrl)\(adds.complexSearch)?query=\(requestForURL)&number=10&apiKey=\(apiKeySelect)"
         return try await networkManager.request(urlString: urlString)
     }
+    // Получение данных для нескольких ids: String
+    static func fetchFullInfoFromIdString(with ids: String) async throws -> [RecipeInfoForCell] {
+        let urlString = "\(url.MainUrl)\(adds.information)?ids=\(ids)&apiKey=\(apiKeySelect)"
+        return try await networkManager.request(urlString: urlString)
+    }
 }
+
+
 
 // Вот пример получения данных для Trending
 
@@ -96,6 +105,33 @@ struct RecipeAPI {
 //        }
 //    }
 //}
+
+// Новый Пример запроса для Trending
+
+//private func loadRecipes()  {
+//    var recipes: [Recipe] = []
+//    Task {
+//        do {
+//            let response = try await RecipeAPI.fetchTrends()
+//            recipes = response.results
+//            var recipesId: String = ""
+//            for number in 0...(recipes.count - 1) {
+//                recipesId += String(recipes[number].id) + ","
+//                let secondResponce =  try await RecipeAPI.fetchFullInfoFromIdString(with: recipesId)
+//                recipeFullInfo = secondResponce
+//            }
+//
+//        } catch {
+//            await MainActor.run(body: {
+//                print(error, error.localizedDescription)
+//            })
+//        }
+//    }
+//}
+
+
+
+
 
 
 
