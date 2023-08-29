@@ -36,7 +36,7 @@ class MainTabBarController: UITabBarController {
 
   private func setupItems() {
     
-    let customButtonController = UIViewController()
+    let customButtonController = CreateRecipeViewController()
     customButtonController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "add")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "add")?.withRenderingMode(.alwaysOriginal))
     customButtonController.tabBarItem.imageInsets = UIEdgeInsets(top: -20, left: 0, bottom: 20, right: 0)
 
@@ -46,7 +46,7 @@ class MainTabBarController: UITabBarController {
     let discover = DiscoverViewController()
     discover.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "bookmark")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "bookmarkSelect")?.withRenderingMode(.alwaysOriginal))
 
-    let notification = NotificationViewController()
+    let notification = UIViewController()
     notification.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "notification")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "notificationSelect")?.withRenderingMode(.alwaysOriginal))
 
     let profile = ProfilePageViewController()

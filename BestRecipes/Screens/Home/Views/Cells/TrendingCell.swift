@@ -11,7 +11,7 @@ import Kingfisher
 class TrendingCell: UICollectionViewCell {
 
   var liked: Bool = false
-  var currentRecipe: Recipe?
+  var currentRecipe: RecipeInfoForCell?
 
   static let identifier = "TrendingCell"
   let bookmarksManager = BookmarksManager.shared
@@ -50,7 +50,27 @@ class TrendingCell: UICollectionViewCell {
     return image
   }()
 
-  private let authorLabel = UILabel.makeLabelForCells(text: "By Zeelicious foods", font: .poppinsRegular(size: 12), textColor: .neutral50)
+  private let authorLabel = UILabel.makeLabelForCells(text: "By Zeelicious foods", font: .poppinsRegular(size: 12), textColor: .black)
+
+  private let minuteLabel = UILabel.makeLabelForCells(text: "15 min", font: .poppinsRegular(size: 12), textColor: .white)
+
+  lazy var minuteView: UIView = {
+      let view = UIView()
+      view.backgroundColor = UIColor(red: 0.19, green: 0.19, blue: 0.19, alpha: 0.3)
+      view.layer.cornerRadius = 8
+      view.translatesAutoresizingMaskIntoConstraints = false
+      return view
+  }()
+
+  private let likesLabel = UILabel.makeLabelForCells(text: "23 likes", font: .poppinsRegular(size: 12), textColor: .white)
+
+  lazy var likesView: UIView = {
+      let view = UIView()
+      view.backgroundColor = UIColor(red: 0.19, green: 0.19, blue: 0.19, alpha: 0.3)
+      view.layer.cornerRadius = 8
+      view.translatesAutoresizingMaskIntoConstraints = false
+      return view
+  }()
 
   lazy var whiteCircleView: UIView = {
       let view = UIView()
@@ -85,10 +105,15 @@ class TrendingCell: UICollectionViewCell {
     .cacheOriginalImage
   ]
 
-  public func configureCell(_ data: Recipe) {
+  let thumbsUpEmoji = "👍"
+
+  public func configureCell(_ data: RecipeInfoForCell) {
     DispatchQueue.main.async {
       self.titleLabel.text = data.title
       self.dishImageView.kf.setImage(with: URL(string: data.image), options: self.options)
+      self.authorLabel.text = data.sourceName
+      self.likesLabel.text = self.thumbsUpEmoji + " " + String(data.aggregateLikes)
+      self.minuteLabel.text = String(data.readyInMinutes) + " " + "min"
       self.currentRecipe = data
     }
   }
@@ -101,6 +126,12 @@ class TrendingCell: UICollectionViewCell {
 
     whiteCircleView.addSubview(favouriteButton)
     contentView.addSubview(whiteCircleView)
+
+    minuteView.addSubview(minuteLabel)
+    contentView.addSubview(minuteView)
+
+    likesView.addSubview(likesLabel)
+    contentView.addSubview(likesView)
   }
 
   //MARK: - Constraints
@@ -132,7 +163,24 @@ class TrendingCell: UICollectionViewCell {
 
       authorLabel.leadingAnchor.constraint(equalTo: authorImageView.trailingAnchor, constant: 10),
       authorLabel.trailingAnchor.constraint(equalTo: titleLabel.trailingAnchor, constant: -10),
-      authorLabel.centerYAnchor.constraint(equalTo: authorImageView.centerYAnchor)
+      authorLabel.centerYAnchor.constraint(equalTo: authorImageView.centerYAnchor),
+
+      minuteLabel.centerXAnchor.constraint(equalTo: minuteView.centerXAnchor),
+      minuteLabel.centerYAnchor.constraint(equalTo: minuteView.centerYAnchor),
+
+      likesLabel.centerXAnchor.constraint(equalTo: likesView.centerXAnchor),
+      likesLabel.centerYAnchor.constraint(equalTo: likesView.centerYAnchor),
+
+      minuteView.leadingAnchor.constraint(equalTo: dishImageView.leadingAnchor, constant: 10),
+      minuteView.bottomAnchor.constraint(equalTo: dishImageView.bottomAnchor, constant: -10),
+      minuteView.widthAnchor.constraint(equalToConstant: 45),
+      minuteView.heightAnchor.constraint(equalToConstant: 20),
+
+      likesView.leadingAnchor.constraint(equalTo: dishImageView.leadingAnchor, constant: 10),
+      likesView.topAnchor.constraint(equalTo: dishImageView.topAnchor, constant: 10),
+      likesView.widthAnchor.constraint(equalToConstant: 58),
+      likesView.heightAnchor.constraint(equalToConstant: 21),
+
     ])
   }
 }
