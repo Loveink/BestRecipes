@@ -10,12 +10,12 @@ import UIKit
 class HomeViewController: UIViewController {
   private let searchBar = SearchBar()
   private let collectionView = TrendingCollectionView()
-    
-   private let scrollView: UIScrollView = {
-        let scrollView = UIScrollView()
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        return scrollView
-    }()
+
+  private let scrollView: UIScrollView = {
+    let scrollView = UIScrollView()
+    scrollView.translatesAutoresizingMaskIntoConstraints = false
+    return scrollView
+  }()
 
   var mainLabel = UILabel.makeLabelForCells(text: "Get amazing recipes for cooking", font: .poppinsSemiBold(size: 24), textColor: .black)
   var trendingLabel = UILabel.makeLabelForCells(text: "Trending now 🔥", font: .poppinsSemiBold(size: 20), textColor: .black)
@@ -36,32 +36,32 @@ class HomeViewController: UIViewController {
     setupConstraints()
     loadTrendingRecipes()
   }
-    func setupScrollView() {
-        view.addSubview(scrollView)
-        scrollView.contentSize = CGSize(width: .zero, height: 1400)
-        scrollView.backgroundColor = .white
-    }
-    func setupSearchBar() {
-        searchBar.searchBar.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.addSubview(searchBar.view)
-    }
-    
-    func setupNameView() {
-        scrollView.addSubview(mainLabel)
-    }
-    
-    func setupCollectionView() {
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.addSubview(collectionView)
-        scrollView.addSubview(trendingLabel)
-        scrollView.addSubview(seeAllButtonTrend)
-    }
-    
+  func setupScrollView() {
+    view.addSubview(scrollView)
+    scrollView.contentSize = CGSize(width: .zero, height: 1400)
+    scrollView.backgroundColor = .white
+  }
+  func setupSearchBar() {
+    searchBar.searchBar.translatesAutoresizingMaskIntoConstraints = false
+    scrollView.addSubview(searchBar.view)
+  }
+
+  func setupNameView() {
+    scrollView.addSubview(mainLabel)
+  }
+
+  func setupCollectionView() {
+    collectionView.translatesAutoresizingMaskIntoConstraints = false
+    scrollView.addSubview(collectionView)
+    scrollView.addSubview(trendingLabel)
+    scrollView.addSubview(seeAllButtonTrend)
+  }
+
   
   private func setupConstraints() {
-      
-     
-      
+
+
+
     NSLayoutConstraint.activate([
       scrollView.topAnchor.constraint(equalTo: view.topAnchor),
       scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -96,6 +96,13 @@ class HomeViewController: UIViewController {
       do {
         let response = try await RecipeAPI.fetchTrends()
         self.collectionView.recipes = response.results
+        var recipesId: String = ""
+        for number in 0...( self.collectionView.recipes.count - 1) {
+          recipesId += String( self.collectionView.recipes[number].id) + ","
+          let secondResponce =  try await RecipeAPI.fetchFullInfoFromIdString(with: recipesId)
+          self.collectionView.recipeFullInfo = secondResponce
+        }
+
       } catch {
         await MainActor.run(body: {
           print(error, error.localizedDescription)

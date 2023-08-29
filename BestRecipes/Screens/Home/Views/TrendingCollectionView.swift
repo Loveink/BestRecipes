@@ -19,6 +19,14 @@ class TrendingCollectionView: UIView {
       }
     }
   }
+
+  var recipeFullInfo: [RecipeInfoForCell] = [] {
+    didSet {
+      DispatchQueue.main.async {
+        self.collectionView.reloadData()
+      }
+    }
+  }
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -58,21 +66,21 @@ class TrendingCollectionView: UIView {
 extension TrendingCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return recipes.count
+    return recipeFullInfo.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingCell.identifier, for: indexPath) as? TrendingCell else {
       return UICollectionViewCell()
     }
-    let selectedNews = recipes[indexPath.row]
-    if bookmarksManager.bookmarksArray.contains(selectedNews) {
-      cell.liked = true
-      cell.favouriteButton.setImage(UIImage(named: "bookmarkSelect"), for: .normal)
-    } else {
-      cell.favouriteButton.setImage(UIImage(named: "bookmark"), for: .normal)
-    }
-    cell.configureCell(recipes[indexPath.row])
+//    let selectedNews = recipeFullInfo[indexPath.row]
+//    if bookmarksManager.bookmarksArray.contains(selectedNews) {
+//      cell.liked = true
+//      cell.favouriteButton.setImage(UIImage(named: "bookmarkSelect"), for: .normal)
+//    } else {
+//      cell.favouriteButton.setImage(UIImage(named: "bookmark"), for: .normal)
+//    }
+    cell.configureCell(recipeFullInfo[indexPath.row])
     return cell
   }
   
