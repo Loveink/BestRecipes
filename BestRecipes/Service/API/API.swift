@@ -22,12 +22,18 @@ let networkManager = NetworkManager()
 
   // Свои ключи
 
-    enum apiKey {
-        static let key1 = "82c2d8b368364b64ba37c4f11aa55670"
-        static let key2 = "c0472158d42f45c9b91c7244460c36e1"
-    }
+enum apiKey {
+  static let key2 = "b4768be03cc34eecac9ddff5b5ec4f66"
+  static let key3 = "82c2d8b368364b64ba37c4f11aa55670"
+  static let key4 = "512b181445c643b29ffeab3ae46f3406"
+  static let key5 = "89470a21c8094205b62fa9d6f4fb7f75"
+  static let key6 = "06c6e6e34b5544f6a263f6825fa40fae"
+  static let key7 = "060fe2f88f7b4f9e9f5b21d90955989e"
+  static let key8 = "21e9db51c06e4d61bbd59d9ec120a3b7"
+  static let key9 = "ff6ba20005be4117a24fb55aa129b010"
+}
 
-    let apiKeySelect = apiKey.key2
+    let apiKeySelect = apiKey.key9
 
     enum adds {
         static let popularity = "&sort=popularity"
@@ -40,6 +46,8 @@ let networkManager = NetworkManager()
 
 struct RecipeAPI {
     
+    //MARK: - Загрузка изображений
+
     static func loadImageFromURL(urlString: String, completion: @escaping (UIImage?) -> Void) {
         guard let url = URL(string: urlString) else {
             completion(nil)
@@ -56,7 +64,7 @@ struct RecipeAPI {
     }
     
     
-//MARK: - Запросы
+//MARK: - Запросы данных
     
     // Для Trending
     static func fetchTrends() async throws -> RecipeResults {
@@ -79,7 +87,14 @@ struct RecipeAPI {
         let urlString = "\(url.MainUrl)\(adds.complexSearch)?query=\(requestForURL)&number=10&apiKey=\(apiKeySelect)"
         return try await networkManager.request(urlString: urlString)
     }
+    // Получение данных для нескольких ids: String
+    static func fetchFullInfoFromIdString(with ids: String) async throws -> [RecipeInfoForCell] {
+        let urlString = "\(url.MainUrl)\(adds.information)?ids=\(ids)&apiKey=\(apiKeySelect)"
+        return try await networkManager.request(urlString: urlString)
+    }
 }
+
+
 
 // Вот пример получения данных для Trending
 
@@ -96,6 +111,33 @@ struct RecipeAPI {
 //        }
 //    }
 //}
+
+// Новый Пример запроса для Trending
+
+//private func loadRecipes()  {
+//    var recipes: [Recipe] = []
+//    Task {
+//        do {
+//            let response = try await RecipeAPI.fetchTrends()
+//            recipes = response.results
+//            var recipesId: String = ""
+//            for number in 0...(recipes.count - 1) {
+//                recipesId += String(recipes[number].id) + ","
+//                let secondResponce =  try await RecipeAPI.fetchFullInfoFromIdString(with: recipesId)
+//                recipeFullInfo = secondResponce
+//            }
+//
+//        } catch {
+//            await MainActor.run(body: {
+//                print(error, error.localizedDescription)
+//            })
+//        }
+//    }
+//}
+
+
+
+
 
 
 
