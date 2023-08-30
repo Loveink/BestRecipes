@@ -45,6 +45,7 @@
 		5705A2772A9BC4A00040E9E5 /* BookmarkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A2762A9BC4A00040E9E5 /* BookmarkManager.swift */; };
 		5705A27B2A9E143A0040E9E5 /* ServingPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A27A2A9E143A0040E9E5 /* ServingPickerView.swift */; };
 		5705A27D2A9E7ADF0040E9E5 /* CookTimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A27C2A9E7ADF0040E9E5 /* CookTimePickerView.swift */; };
+		5705A27F2A9F495B0040E9E5 /* SlideModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A27E2A9F495B0040E9E5 /* SlideModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,7 @@
 		5705A2762A9BC4A00040E9E5 /* BookmarkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkManager.swift; sourceTree = "<group>"; };
 		5705A27A2A9E143A0040E9E5 /* ServingPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingPickerView.swift; sourceTree = "<group>"; };
 		5705A27C2A9E7ADF0040E9E5 /* CookTimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookTimePickerView.swift; sourceTree = "<group>"; };
+		5705A27E2A9F495B0040E9E5 /* SlideModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -330,6 +332,7 @@
 		5705A2382A9A72EC0040E9E5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				5705A27E2A9F495B0040E9E5 /* SlideModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				5705A2542A9A74290040E9E5 /* SeeAllViewController.swift in Sources */,
 				5705A27D2A9E7ADF0040E9E5 /* CookTimePickerView.swift in Sources */,
 				0BB05FA52A9DBDD900B6BC65 /* RecipeInfoForCell.swift in Sources */,
+				5705A27F2A9F495B0040E9E5 /* SlideModel.swift in Sources */,
 				5705A2222A9A16800040E9E5 /* CustomColors.swift in Sources */,
 				5705A25A2A9A749B0040E9E5 /* NetworkService.swift in Sources */,
 				5705A2712A9BC2210040E9E5 /* TrendingCollectionView.swift in Sources */,
