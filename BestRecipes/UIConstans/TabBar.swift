@@ -11,7 +11,6 @@ class MainTabBarController: UITabBarController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
     setupTabBar()
     setupItems()
   }
@@ -21,6 +20,7 @@ class MainTabBarController: UITabBarController {
       let backgroundImageView = UIImageView(image: backgroundImage)
       backgroundImageView.contentMode = .scaleAspectFill
       tabBar.addSubview(backgroundImageView)
+
       backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
       NSLayoutConstraint.activate([
         backgroundImageView.topAnchor.constraint(equalTo: tabBar.topAnchor),
