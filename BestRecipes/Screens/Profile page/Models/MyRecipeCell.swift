@@ -15,7 +15,6 @@ class MyRecipeCell: UICollectionViewCell {
 
   let bookmarksManager = BookmarksManager.shared
 
-
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupViews()
@@ -49,9 +48,7 @@ class MyRecipeCell: UICollectionViewCell {
       return view
   }()
 
-
   //MARK: - Functions
-  
   private func setupViews() {
     contentView.addSubview(dishImageView)
     contentView.addSubview(titleLabel)
