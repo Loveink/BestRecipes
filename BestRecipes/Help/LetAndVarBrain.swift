@@ -10,3 +10,4 @@ import UIKit
 
 var lastVisitedViewController: UIViewController?
 var titleOfView = ""
+var imageProfileViewSaved = UIImage(named: "ProfilePicture1")
