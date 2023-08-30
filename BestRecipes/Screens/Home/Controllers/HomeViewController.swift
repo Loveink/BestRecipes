@@ -23,9 +23,12 @@ class HomeViewController: UIViewController {
   var seeAllButtonTrend = SeeAllButton()
   var seeAllButtonRecipe = SeeAllButton()
   var seeAllButtonCreators = SeeAllButton()
-    
+
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    view.backgroundColor = .white
+    
     setupScrollView()
     setupSearchBar()
     setupNameView()
@@ -60,7 +63,6 @@ class HomeViewController: UIViewController {
 
 
     NSLayoutConstraint.activate([
-
       scrollView.topAnchor.constraint(equalTo: view.topAnchor),
       scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
