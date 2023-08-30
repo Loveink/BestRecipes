@@ -73,13 +73,13 @@ extension TrendingCollectionView: UICollectionViewDelegate, UICollectionViewData
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TrendingCell.identifier, for: indexPath) as? TrendingCell else {
       return UICollectionViewCell()
     }
-//    let selectedNews = recipeFullInfo[indexPath.row]
-//    if bookmarksManager.bookmarksArray.contains(selectedNews) {
-//      cell.liked = true
-//      cell.favouriteButton.setImage(UIImage(named: "bookmarkSelect"), for: .normal)
-//    } else {
-//      cell.favouriteButton.setImage(UIImage(named: "bookmark"), for: .normal)
-//    }
+    let selectedNews = recipeFullInfo[indexPath.row]
+    if bookmarksManager.bookmarksArray.contains(selectedNews) {
+      cell.liked = true
+      cell.favouriteButton.setImage(UIImage(named: "bookmarkSelect"), for: .normal)
+    } else {
+      cell.favouriteButton.setImage(UIImage(named: "bookmark"), for: .normal)
+    }
     cell.configureCell(recipeFullInfo[indexPath.row])
     return cell
   }

@@ -13,7 +13,6 @@ class CustomNavigationBar: UIViewController {
     let navigationBar = UINavigationBar()
     var textToShare = ""
 
-    
     var titleOfViewLabel: UILabel = {
         var label = UILabel()
         label.text = "Screen Name "
@@ -22,16 +21,13 @@ class CustomNavigationBar: UIViewController {
         label.font = UIFont.systemFont(ofSize: 25)
         return label
     }()
-    
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
-
     }
 
-    
+
     private func setupNavigationBar() {
         navigationBar.translatesAutoresizingMaskIntoConstraints = false
         titleOfViewLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -73,13 +69,11 @@ class CustomNavigationBar: UIViewController {
         let lastVC = lastVisitedViewController
         if lastVC is SearchViewController {
             dismiss(animated: true, completion: nil)
-        } else {
-            lastVC!.modalPresentationStyle = .fullScreen
-            present(lastVC!, animated: true, completion: nil)
-        }
-        
-       
-    }
+        } else if let navigationController = navigationController {
+          let homeViewController = MainTabBarController()
+          navigationController.setViewControllers([homeViewController], animated: true)
+      }
+  }
     
     @objc  func shareButtonAction() {
             textToShare += """
