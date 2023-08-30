@@ -33,7 +33,7 @@ enum apiKey {
   static let key9 = "ff6ba20005be4117a24fb55aa129b010"
 }
 
-    let apiKeySelect = apiKey.key8
+    let apiKeySelect = apiKey.key2
 
     enum adds {
         static let popularity = "&sort=popularity"
