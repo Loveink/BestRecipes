@@ -13,6 +13,7 @@ class HomeViewController: UIViewController {
 
   private let scrollView: UIScrollView = {
     let scrollView = UIScrollView()
+    
     scrollView.translatesAutoresizingMaskIntoConstraints = false
     return scrollView
   }()
@@ -23,6 +24,7 @@ class HomeViewController: UIViewController {
   var seeAllButtonTrend = SeeAllButton()
   var seeAllButtonRecipe = SeeAllButton()
   var seeAllButtonCreators = SeeAllButton()
+
 
   override func viewDidLoad() {
     super.viewDidLoad()
