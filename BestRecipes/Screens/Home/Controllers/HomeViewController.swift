@@ -13,16 +13,19 @@ class HomeViewController: UIViewController {
 
   private let scrollView: UIScrollView = {
     let scrollView = UIScrollView()
+    
     scrollView.translatesAutoresizingMaskIntoConstraints = false
     return scrollView
   }()
 
-  var mainLabel = UILabel.makeLabelForCells(text: "Get amazing recipes for cooking", font: .poppinsSemiBold(size: 24), textColor: .black)
-  var trendingLabel = UILabel.makeLabelForCells(text: "Trending now 🔥", font: .poppinsSemiBold(size: 20), textColor: .black)
+  var mainLabel = UILabel.makeLabelForCells(text: "Get amazing recipes for cooking", font: .poppinsSemiBold(size: 24), textColor: .neutral100)
+  var trendingLabel = UILabel.makeLabelForCells(text: "Trending now 🔥", font: .poppinsSemiBold(size: 20), textColor: .neutral100)
+  var categoryLabel = UILabel.makeLabelForCells(text: "Popular category", font: .poppinsSemiBold(size: 20), textColor: .neutral100)
 
   var seeAllButtonTrend = SeeAllButton()
   var seeAllButtonRecipe = SeeAllButton()
   var seeAllButtonCreators = SeeAllButton()
+
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -36,6 +39,7 @@ class HomeViewController: UIViewController {
     setupConstraints()
     loadTrendingRecipes()
   }
+
   func setupScrollView() {
     view.addSubview(scrollView)
     scrollView.contentSize = CGSize(width: .zero, height: 1400)

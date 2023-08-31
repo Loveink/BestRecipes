@@ -7,11 +7,15 @@
 
 import UIKit
 
-class MainTabBarController: UITabBarController {
+class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
+
+  private let notification = UIViewController()
 
   override func viewDidLoad() {
     super.viewDidLoad()
-
+    self.delegate = self
+    tabBar.barTintColor = .white
+    tabBar.barStyle = .black
     setupTabBar()
     setupItems()
   }
@@ -33,9 +37,14 @@ class MainTabBarController: UITabBarController {
     }
   }
 
+  func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+    if viewController ==  notification {
+      return false
+    }
+    return true
+  }
 
   private func setupItems() {
-    
     let customButtonController = CreateRecipeViewController()
     customButtonController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "add")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "add")?.withRenderingMode(.alwaysOriginal))
     customButtonController.tabBarItem.imageInsets = UIEdgeInsets(top: -20, left: 0, bottom: 20, right: 0)
@@ -46,8 +55,9 @@ class MainTabBarController: UITabBarController {
     let discover = DiscoverViewController()
     discover.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "bookmark")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "bookmarkSelect")?.withRenderingMode(.alwaysOriginal))
 
-    let notification = UIViewController()
+    let notification = OnboardingViewController()
     notification.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "notification")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "notificationSelect")?.withRenderingMode(.alwaysOriginal))
+    notification.view.isUserInteractionEnabled = false
 
     let profile = ProfilePageViewController()
     profile.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "profile")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "profileSelect")?.withRenderingMode(.alwaysOriginal))

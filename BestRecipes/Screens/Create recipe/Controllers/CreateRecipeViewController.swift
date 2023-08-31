@@ -8,16 +8,10 @@
 import UIKit
 
 class CreateRecipeViewController: UIViewController {
-  
-  private let titleLabel: UILabel = {
-    let label = UILabel()
-    label.text = "Create recipe"
-    label.font = .poppinsSemiBold(size: 24)
-    label.textColor = .black
-    label.translatesAutoresizingMaskIntoConstraints = false
-    return label
-  }()
-  
+
+  let navigationBar = CustomNavigationBar()
+  let collectionView = MyRecipeCollectionView()
+
   private let dishImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.image = UIImage(named: "image")
@@ -41,31 +35,49 @@ class CreateRecipeViewController: UIViewController {
   
   private let servingPicker = ServingPickerView()
   private let cookTimePicker = CookTimePickerView()
-  
+  var ingredientsLabel = UILabel.makeLabelForCells(text: "Ingredients", font: .poppinsSemiBold(size: 20), textColor: .neutral100)
+
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     view.backgroundColor = .white
+    setupNavBar()
     setupViews()
     setupConstraints()
   }
+
+  private func setupNavBar() {
+      navigationBar.titleOfViewLabel.text = "Create recipe"
+      navigationBar.titleOfViewLabel.font = .poppinsSemiBold(size: 24)
+      navigationBar.view.translatesAutoresizingMaskIntoConstraints = false
+      addChild(navigationBar)
+      view.addSubview(navigationBar.view)
+      navigationBar.didMove(toParent: self)
+  }
   
   private func setupViews() {
-    view.addSubview(titleLabel)
+
     view.addSubview(dishImageView)
     view.addSubview(nameTextField)
     view.addSubview(servingPicker)
     view.addSubview(cookTimePicker)
+    view.addSubview(ingredientsLabel)
+    view.addSubview(collectionView)
   }
   
   private func setupConstraints() {
     servingPicker.translatesAutoresizingMaskIntoConstraints = false
     cookTimePicker.translatesAutoresizingMaskIntoConstraints = false
+    collectionView.translatesAutoresizingMaskIntoConstraints = false
     
     NSLayoutConstraint.activate([
-      titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-      titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-      
-      dishImageView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+
+      navigationBar.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -40),
+      navigationBar.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      navigationBar.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      navigationBar.view.heightAnchor.constraint(equalToConstant: 50),
+
+      dishImageView.topAnchor.constraint(equalTo: navigationBar.view.bottomAnchor, constant: 10),
       dishImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       dishImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
       dishImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
@@ -76,13 +88,22 @@ class CreateRecipeViewController: UIViewController {
       
       servingPicker.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 20),
       servingPicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      servingPicker.heightAnchor.constraint(equalToConstant: 60),
+      servingPicker.heightAnchor.constraint(equalToConstant: 50),
       servingPicker.widthAnchor.constraint(equalTo: dishImageView.widthAnchor),
       
-      cookTimePicker.topAnchor.constraint(equalTo: servingPicker.bottomAnchor, constant: 20),
+      cookTimePicker.topAnchor.constraint(equalTo: servingPicker.bottomAnchor, constant: 10),
       cookTimePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      cookTimePicker.heightAnchor.constraint(equalToConstant: 60),
-      cookTimePicker.widthAnchor.constraint(equalTo: dishImageView.widthAnchor)
+      cookTimePicker.heightAnchor.constraint(equalToConstant: 50),
+      cookTimePicker.widthAnchor.constraint(equalTo: dishImageView.widthAnchor),
+
+      ingredientsLabel.topAnchor.constraint(equalTo: cookTimePicker.bottomAnchor, constant: 10),
+      ingredientsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+      ingredientsLabel.heightAnchor.constraint(equalToConstant: 40),
+
+      collectionView.topAnchor.constraint(equalTo: ingredientsLabel.bottomAnchor, constant: 10),
+      collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+      collectionView.widthAnchor.constraint(equalTo: dishImageView.widthAnchor)
     ])
   }
 }
