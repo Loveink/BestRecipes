@@ -37,6 +37,9 @@ class CreateRecipeViewController: UIViewController {
     textField.layer.borderWidth = 1.0
     textField.layer.borderColor = UIColor.black.cgColor
     textField.translatesAutoresizingMaskIntoConstraints = false
+    textField.returnKeyType = .done
+    textField.backgroundColor = .white
+      
     return textField
   }()
 
@@ -54,17 +57,24 @@ class CreateRecipeViewController: UIViewController {
         return button
     }()
   
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
     
   override func viewDidLoad() {
     super.viewDidLoad()
 
     tabBarController?.tabBar.isHidden = true
     view.backgroundColor = .white
+      nameTextField.delegate = self
+
     setupNavBar()
+      setupScrollView()
     setupViews()
     setupConstraints()
     setupDishImageAction()
-      
+      keyboard()
   }
 
   private func setupNavBar() {
@@ -84,70 +94,91 @@ class CreateRecipeViewController: UIViewController {
     }
   
   private func setupViews() {
+      view.addSubview(scrollView)
 
-    view.addSubview(dishImageView)
-      
-    view.addSubview(nameTextField)
-    view.addSubview(servingPicker)
-    view.addSubview(cookTimePicker)
-    view.addSubview(ingredientsLabel)
-
-    view.addSubview(collectionView)
+      scrollView.addSubview(dishImageView)
       dishImageView.addSubview(imageEdit)
-      view.addSubview(createButton)
+      scrollView.addSubview(nameTextField)
+      scrollView.addSubview(servingPicker)
+      scrollView.addSubview(cookTimePicker)
+      scrollView.addSubview(ingredientsLabel)
+      scrollView.addSubview(collectionView)
+      scrollView.addSubview(createButton)
 
 
   }
-  
+    
+    func setupScrollView() {
+        var height = view.frame.height
+        if height < 720 {
+            height = 750
+        } else {
+            height = view.frame.height
+        }
+        scrollView.contentSize = CGSize(width: .zero, height: height)
+        scrollView.backgroundColor = .white
+    }
+    
+
   private func setupConstraints() {
+      scrollView.translatesAutoresizingMaskIntoConstraints = false
     servingPicker.translatesAutoresizingMaskIntoConstraints = false
     cookTimePicker.translatesAutoresizingMaskIntoConstraints = false
     collectionView.translatesAutoresizingMaskIntoConstraints = false
       createButton.translatesAutoresizingMaskIntoConstraints = false
     
     NSLayoutConstraint.activate([
-
+     
+        
         navigationBar.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
         navigationBar.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
         navigationBar.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
         navigationBar.view.heightAnchor.constraint(equalToConstant: 50),
-
-        createButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-        createButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-        createButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-        createButton.heightAnchor.constraint(equalToConstant: 56),
         
-      dishImageView.topAnchor.constraint(equalTo: navigationBar.view.bottomAnchor, constant: 10),
+        scrollView.topAnchor.constraint(equalTo: navigationBar.view.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        scrollView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.bottomAnchor),
+
+        
+        
+        dishImageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 5),
       dishImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       dishImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
       dishImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
         dishImageView.heightAnchor.constraint(equalToConstant: 200),
-
-      nameTextField.topAnchor.constraint(equalTo: dishImageView.bottomAnchor, constant: 20),
-      nameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-      nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
         
         imageEdit.rightAnchor.constraint(equalTo: dishImageView.rightAnchor, constant:  -10),
         imageEdit.topAnchor.constraint(equalTo: dishImageView.topAnchor,constant: 10),
         
-      servingPicker.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 20),
+      nameTextField.topAnchor.constraint(equalTo: dishImageView.bottomAnchor, constant: 5),
+      nameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+      nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+        nameTextField.heightAnchor.constraint(equalToConstant: 44),
+        
+      servingPicker.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 5),
       servingPicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      servingPicker.heightAnchor.constraint(equalToConstant: 50),
+      servingPicker.heightAnchor.constraint(equalToConstant: 44),
       servingPicker.widthAnchor.constraint(equalTo: dishImageView.widthAnchor),
 
-      cookTimePicker.topAnchor.constraint(equalTo: servingPicker.bottomAnchor, constant: 10),
+      cookTimePicker.topAnchor.constraint(equalTo: servingPicker.bottomAnchor, constant: 5),
       cookTimePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      cookTimePicker.heightAnchor.constraint(equalToConstant: 50),
+      cookTimePicker.heightAnchor.constraint(equalToConstant: 44),
       cookTimePicker.widthAnchor.constraint(equalTo: dishImageView.widthAnchor),
 
-      ingredientsLabel.topAnchor.constraint(equalTo: cookTimePicker.bottomAnchor, constant: 10),
       ingredientsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
       ingredientsLabel.heightAnchor.constraint(equalToConstant: 40),
-
-        collectionView.topAnchor.constraint(equalTo: ingredientsLabel.bottomAnchor, constant: 10),
+      ingredientsLabel.topAnchor.constraint(equalTo: cookTimePicker.bottomAnchor, constant: 5),
+        
+        collectionView.topAnchor.constraint(equalTo: ingredientsLabel.bottomAnchor, constant:  5),
         collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-        collectionView.bottomAnchor.constraint(equalTo: createButton.topAnchor),
-        collectionView.widthAnchor.constraint(equalTo: dishImageView.widthAnchor)
+        collectionView.widthAnchor.constraint(equalTo: dishImageView.widthAnchor),
+        collectionView.heightAnchor.constraint(equalToConstant: 220),
+        
+        createButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+        createButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+        createButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+        createButton.heightAnchor.constraint(equalToConstant: 56)
 
     ])
   }
@@ -158,6 +189,59 @@ class CreateRecipeViewController: UIViewController {
             imagePicker.sourceType = .photoLibrary
             present(imagePicker, animated: true, completion: nil)
         }
+    
+    func addButtonLogic() {
+    
+        
+    }
+    
+    private func removeViews() {
+        dishImageView.removeFromSuperview()
+       nameTextField.removeFromSuperview()
+        servingPicker.removeFromSuperview()
+        cookTimePicker.removeFromSuperview()
+        ingredientsLabel.removeFromSuperview()
+        createButton.removeFromSuperview()
+//        scrollView.addSubview(collectionView)
+    }
+    
+    func setupNewConstrains() {
+        NSLayoutConstraint.activate([
+        collectionView.topAnchor.constraint(equalTo: navigationBar.view.bottomAnchor, constant: 5),
+        collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+        collectionView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor)
+        ])
+    }
+    
+    func keyboard() {
+        // Подписываемся на уведомления о появлении и скрытии клавиатуры
+               NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+               NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+
+    @objc func keyboardWillShow(_ notification: Notification) {
+        if !nameTextField.isFirstResponder {
+            UIView.animate(withDuration: 0.3) {
+                self.removeViews()
+                self.setupNewConstrains()
+            }
+        }
+        
+    }
+
+    @objc func keyboardWillHide(_ notification: Notification) {
+
+        if !nameTextField.isFirstResponder {
+            collectionView.removeFromSuperview()
+
+            UIView.animate(withDuration: 0.3) {
+                self.setupViews()
+                self.setupConstraints()
+            }
+        }
+    }
     
 }
 
@@ -179,53 +263,18 @@ extension CreateRecipeViewController: UIImagePickerControllerDelegate, UINavigat
         picker.dismiss(animated: true, completion: nil)
     }
     
-    
-//    func saveImageToCoreData(_ image:UIImage) {
-//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-//                    return
-//                }
-//                context = appDelegate.persistentContainer.viewContext
-//
-//                // Сохранение изображения
-//
-//                    if let imageData = image.pngData() {
-//                        let recipe = RecepiS(context: context)
-//                        recipe.imageRecipe = imageData
-//
-//                        do {
-//                            try context.save()
-//                            print("Изображение успешно сохранено")
-//                        } catch {
-//                            print("Ошибка при сохранении: \(error)")
-//                        }
-//                    }
-//
-//            }
    
-//    func getImageFromCoreData() {
-//
-//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-//                   return
-//               }
-//               context = appDelegate.persistentContainer.viewContext
-//
-//        let fetchRequest: NSFetchRequest<RecepiS> = RecepiS.fetchRequest()
-//
-//                do {
-//                    savedRecipes = try context.fetch(fetchRequest)
-//                    print("Количество сохраненных рецептов: \(savedRecipes.count)")
-//
-//                    for recipe in savedRecipes {
-//                        if let image = recipe.imageRecipe as? Data {
-//                            if let uiImage = UIImage(data: image) {
-//                                imageView.image = uiImage
-//                                break
-//                            }
-//                        }
-//                    }
-//                } catch {
-//                    print("Ошибка при выполнении запроса: \(error)")
-//                }
-//            }
-        
+    
+}
+
+extension CreateRecipeViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        nameTextField.resignFirstResponder()
+           return true
+       }
+    
+
+
+   
 }

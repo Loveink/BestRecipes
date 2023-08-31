@@ -7,6 +7,9 @@
 
 import UIKit
 
+var rowDataArray: [RowData] = []
+
+
 protocol MyRecipeCollectionCellDelegate: AnyObject {
   func selectButtonTapped(at indexPath: IndexPath)
   func textField1DidChange(at indexPath: IndexPath, newValue: String)
@@ -23,7 +26,6 @@ class MyRecipeCollectionView: UIView {
     return collectionView
   }()
   
-  var rowDataArray: [RowData] = []
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -104,13 +106,23 @@ extension MyRecipeCollectionView: MyRecipeCollectionCellDelegate {
       rowDataArray.insert(blancDataRow, at: selectedRow + 1)
     }
     collectionView.reloadData()
+      print(rowDataArray)
+      print(indexPath.row)
+
   }
   
   func textField1DidChange(at indexPath: IndexPath, newValue: String) {
-    rowDataArray[indexPath.row].textField1Text = newValue
+      if (0...rowDataArray.count).contains(indexPath.row) {
+          rowDataArray[indexPath.row].textField1Text = newValue
+          print(rowDataArray)
+      }
+  
   }
   
   func textField2DidChange(at indexPath: IndexPath, newValue: String) {
+      if (0...rowDataArray.count).contains(indexPath.row) {
     rowDataArray[indexPath.row].textField2Text = newValue
+          print(rowDataArray)
+      }
   }
 }

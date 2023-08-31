@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MyRecipeCollectionCell: UICollectionViewCell {
+class MyRecipeCollectionCell: UICollectionViewCell, UITextFieldDelegate {
   
   var delegate: MyRecipeCollectionCellDelegate?
   var indexPath: IndexPath?
@@ -19,7 +19,7 @@ class MyRecipeCollectionCell: UICollectionViewCell {
     textField.layer.borderWidth = 1.0
     textField.layer.cornerRadius = 8
     textField.layer.borderColor = UIColor.gray.cgColor
-    
+      textField.returnKeyType = .done
     let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
     textField.leftView = paddingView
     textField.leftViewMode = .always
@@ -34,7 +34,7 @@ class MyRecipeCollectionCell: UICollectionViewCell {
     textField.layer.borderWidth = 1.0
     textField.layer.cornerRadius = 8
     textField.layer.borderColor = UIColor.gray.cgColor
-    
+      textField.returnKeyType = .done
     let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
     textField.leftView = paddingView
     textField.leftViewMode = .always
@@ -64,25 +64,28 @@ class MyRecipeCollectionCell: UICollectionViewCell {
   }
   
   private func setupUI() {
+  
     addSubview(textField1)
     addSubview(textField2)
     addSubview(selectButton)
-    
+      
+      textField1.delegate = self
+      textField2.delegate = self
+      
     NSLayoutConstraint.activate([
       textField1.topAnchor.constraint(equalTo: topAnchor),
       textField1.leadingAnchor.constraint(equalTo: leadingAnchor),
-      textField1.widthAnchor.constraint(equalToConstant: 200),
+      textField1.trailingAnchor.constraint(equalTo: textField2.leadingAnchor, constant: -20),
       textField1.bottomAnchor.constraint(equalTo: bottomAnchor),
-      
+      selectButton.topAnchor.constraint(equalTo: topAnchor),
+      selectButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+      selectButton.heightAnchor.constraint(equalToConstant: 24),
+      selectButton.widthAnchor.constraint(equalToConstant: 24),
+      selectButton.bottomAnchor.constraint(equalTo: bottomAnchor),
       textField2.topAnchor.constraint(equalTo: topAnchor),
-      textField2.leadingAnchor.constraint(equalTo: textField1.trailingAnchor, constant: 20),
       textField2.widthAnchor.constraint(equalToConstant: 100),
       textField2.bottomAnchor.constraint(equalTo: bottomAnchor),
-      
-      selectButton.topAnchor.constraint(equalTo: topAnchor),
-      selectButton.leadingAnchor.constraint(equalTo: textField2.trailingAnchor, constant: 10),
-      selectButton.trailingAnchor.constraint(equalTo: trailingAnchor),
-      selectButton.bottomAnchor.constraint(equalTo: bottomAnchor)
+      textField2.trailingAnchor.constraint(equalTo: selectButton.leadingAnchor)
     ])
   }
   
@@ -97,4 +100,10 @@ class MyRecipeCollectionCell: UICollectionViewCell {
   @objc private func textField2DidChange(_ textField: UITextField) {
     delegate?.textField2DidChange(at: indexPath!, newValue: textField.text ?? "")
   }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+           textField1.resignFirstResponder()
+           textField2.resignFirstResponder() // Закрываем клавиатуру
+           return true
+       }
 }
