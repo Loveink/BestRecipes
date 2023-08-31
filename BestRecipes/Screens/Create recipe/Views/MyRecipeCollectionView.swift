@@ -94,7 +94,7 @@ extension MyRecipeCollectionView: UICollectionViewDelegateFlowLayout {
 extension MyRecipeCollectionView: MyRecipeCollectionCellDelegate {
   func selectButtonTapped(at indexPath: IndexPath) {
     let selectedRow = indexPath.row
-    var rowData = rowDataArray[selectedRow]
+    let rowData = rowDataArray[selectedRow]
     
     if !rowData.isSelected {
       if let indexToRemove = rowDataArray.firstIndex(of: rowData) {
