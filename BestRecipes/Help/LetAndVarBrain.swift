@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-import CoreData
 
 var lastVisitedViewController: UIViewController?
 var titleOfView = ""
+var imageProfileViewSaved = UIImage(named: "ProfilePicture1")
