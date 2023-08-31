@@ -43,7 +43,6 @@ class MyRecipeCollectionView: UIView {
   
   private func generateInitialData() {
     rowDataArray = [
-      RowData(textField1Text: "pasta", textField2Text: "250gr", isSelected: false),
       RowData(textField1Text: "", textField2Text: "", isSelected: true)
     ]
   }
@@ -101,7 +100,7 @@ extension MyRecipeCollectionView: MyRecipeCollectionCellDelegate {
         rowDataArray.remove(at: indexToRemove)
       }
     } else {
-      let blancDataRow = RowData(textField1Text: "", textField2Text: "", isSelected: true)
+      let blancDataRow = RowData(textField1Text: "", textField2Text: "", isSelected: false)
       rowDataArray.insert(blancDataRow, at: selectedRow + 1)
     }
     collectionView.reloadData()
