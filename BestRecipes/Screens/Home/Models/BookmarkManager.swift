@@ -15,13 +15,13 @@ final class BookmarksManager {
     private let defaults = UserDefaults.standard
     private let bookmarksKey = "bookmarks"
 
-    var bookmarksArray: [Recipe] {
+    var bookmarksArray: [RecipeInfoForCell] {
         get {
             guard let data = defaults.data(forKey: bookmarksKey) else {
                 return []
             }
             do {
-                let savedBookmarks = try JSONDecoder().decode([Recipe].self, from: data)
+                let savedBookmarks = try JSONDecoder().decode([RecipeInfoForCell].self, from: data)
                 return savedBookmarks
             } catch {
                 print("Error decoding bookmarks: \(error)")
@@ -39,11 +39,11 @@ final class BookmarksManager {
     }
 
     //MARK: - Functions
-    func getBookmarks() -> [Recipe] {
+    func getBookmarks() -> [RecipeInfoForCell] {
         return bookmarksArray
     }
 
-    func saveBookmarks(_ dataToSave: [Recipe]) {
+    func saveBookmarks(_ dataToSave: [RecipeInfoForCell]) {
         do {
             let savedNews = try JSONEncoder().encode(dataToSave)
             defaults.set(savedNews, forKey: "bookmarks")
