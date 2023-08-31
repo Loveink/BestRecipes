@@ -55,6 +55,9 @@
 		57FA898A2A9FEF2E00BBBECB /* MyRecipeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FA89892A9FEF2E00BBBECB /* MyRecipeCollectionView.swift */; };
 		57FA89922AA0926600BBBECB /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FA89912AA0926600BBBECB /* RecipeDetailView.swift */; };
 		57FA89942AA0926B00BBBECB /* CustomCellRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FA89932AA0926B00BBBECB /* CustomCellRecipe.swift */; };
+		E7CDA1C82A9FD2E900E866EE /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CDA1C72A9FD2E900E866EE /* View.swift */; };
+		E7CDA1D02AA0A8B700E866EE /* DiscoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CDA1CF2AA0A8B700E866EE /* DiscoverCell.swift */; };
+		E7CDA1D22AA0A8C300E866EE /* DiscoverCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CDA1D12AA0A8C300E866EE /* DiscoverCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +110,9 @@
 		57FA89892A9FEF2E00BBBECB /* MyRecipeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipeCollectionView.swift; sourceTree = "<group>"; };
 		57FA89912AA0926600BBBECB /* RecipeDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
 		57FA89932AA0926B00BBBECB /* CustomCellRecipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellRecipe.swift; sourceTree = "<group>"; };
+		E7CDA1C72A9FD2E900E866EE /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		E7CDA1CF2AA0A8B700E866EE /* DiscoverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscoverCell.swift; path = BestRecipes/Screens/Discover/DiscoverCell.swift; sourceTree = SOURCE_ROOT; };
+		E7CDA1D12AA0A8C300E866EE /* DiscoverCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscoverCollectionView.swift; path = BestRecipes/Screens/Discover/DiscoverCollectionView.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +214,7 @@
 			children = (
 				5705A2252A9A64F20040E9E5 /* Fonts.swift */,
 				5705A2212A9A16800040E9E5 /* CustomColors.swift */,
+				E7CDA1C72A9FD2E900E866EE /* View.swift */,
 				5705A25B2A9B27F30040E9E5 /* Label.swift */,
 				5705A2642A9B35C50040E9E5 /* TabBar.swift */,
 				0B7E02EB2A9CCD6D00D48CE2 /* NavBar.swift */,
@@ -441,6 +448,8 @@
 		5705A2422A9A73500040E9E5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E7CDA1CF2AA0A8B700E866EE /* DiscoverCell.swift */,
+				E7CDA1D12AA0A8C300E866EE /* DiscoverCollectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -627,7 +636,10 @@
 				5705A2582A9A74520040E9E5 /* ProfilePageViewController.swift in Sources */,
 				5705A27B2A9E143A0040E9E5 /* ServingPickerView.swift in Sources */,
 				5705A2692A9B9E960040E9E5 /* SeeAllButton.swift in Sources */,
+				E7CDA1C82A9FD2E900E866EE /* View.swift in Sources */,
+				E7CDA1D02AA0A8B700E866EE /* DiscoverCell.swift in Sources */,
 				0B7E02F02A9CCDB500D48CE2 /* SearchCell.swift in Sources */,
+				E7CDA1D22AA0A8C300E866EE /* DiscoverCollectionView.swift in Sources */,
 				0B201BCD2AA066BA00308C19 /* DataModel.xcdatamodeld in Sources */,
 				57FA89942AA0926B00BBBECB /* CustomCellRecipe.swift in Sources */,
 				5705A2752A9BC26D0040E9E5 /* TrendingCell.swift in Sources */,
