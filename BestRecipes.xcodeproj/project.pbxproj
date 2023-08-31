@@ -55,6 +55,7 @@
 		57FA898A2A9FEF2E00BBBECB /* MyRecipeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FA89892A9FEF2E00BBBECB /* MyRecipeCollectionView.swift */; };
 		57FA89922AA0926600BBBECB /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FA89912AA0926600BBBECB /* RecipeDetailView.swift */; };
 		57FA89942AA0926B00BBBECB /* CustomCellRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FA89932AA0926B00BBBECB /* CustomCellRecipe.swift */; };
+		57FA899E2AA1060A00BBBECB /* ShopingListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FA899D2AA1060A00BBBECB /* ShopingListViewController.swift */; };
 		E7CDA1C82A9FD2E900E866EE /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CDA1C72A9FD2E900E866EE /* View.swift */; };
 		E7CDA1D02AA0A8B700E866EE /* DiscoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CDA1CF2AA0A8B700E866EE /* DiscoverCell.swift */; };
 		E7CDA1D22AA0A8C300E866EE /* DiscoverCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CDA1D12AA0A8C300E866EE /* DiscoverCollectionView.swift */; };
@@ -110,6 +111,7 @@
 		57FA89892A9FEF2E00BBBECB /* MyRecipeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipeCollectionView.swift; sourceTree = "<group>"; };
 		57FA89912AA0926600BBBECB /* RecipeDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
 		57FA89932AA0926B00BBBECB /* CustomCellRecipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCellRecipe.swift; sourceTree = "<group>"; };
+		57FA899D2AA1060A00BBBECB /* ShopingListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopingListViewController.swift; sourceTree = "<group>"; };
 		E7CDA1C72A9FD2E900E866EE /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		E7CDA1CF2AA0A8B700E866EE /* DiscoverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscoverCell.swift; path = BestRecipes/Screens/Discover/DiscoverCell.swift; sourceTree = SOURCE_ROOT; };
 		E7CDA1D12AA0A8C300E866EE /* DiscoverCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscoverCollectionView.swift; path = BestRecipes/Screens/Discover/DiscoverCollectionView.swift; sourceTree = SOURCE_ROOT; };
@@ -261,6 +263,7 @@
 				5705A2352A9A72960040E9E5 /* See all */,
 				0B7E02E12A9CCB0F00D48CE2 /* Search */,
 				5705A2362A9A72A60040E9E5 /* Create recipe */,
+				57FA89992AA105AA00BBBECB /* ShopList */,
 				5705A2372A9A72AF0040E9E5 /* Profile page */,
 			);
 			path = Screens;
@@ -545,6 +548,38 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		57FA89992AA105AA00BBBECB /* ShopList */ = {
+			isa = PBXGroup;
+			children = (
+				57FA899A2AA105CA00BBBECB /* Models */,
+				57FA899B2AA105D900BBBECB /* Views */,
+				57FA899C2AA105DF00BBBECB /* Controllers */,
+			);
+			path = ShopList;
+			sourceTree = "<group>";
+		};
+		57FA899A2AA105CA00BBBECB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		57FA899B2AA105D900BBBECB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		57FA899C2AA105DF00BBBECB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				57FA899D2AA1060A00BBBECB /* ShopingListViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -669,6 +704,7 @@
 				57FA898A2A9FEF2E00BBBECB /* MyRecipeCollectionView.swift in Sources */,
 				0B7E02E32A9CCC0800D48CE2 /* RecipeResultsModel.swift in Sources */,
 				0B7E02D42A9B96DC00D48CE2 /* JASON.swift in Sources */,
+				57FA899E2AA1060A00BBBECB /* ShopingListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
