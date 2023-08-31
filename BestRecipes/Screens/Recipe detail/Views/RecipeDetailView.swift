@@ -9,7 +9,7 @@ import UIKit
 
 class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var ingridients = ["Тартилия", "Лук", "Помидор", "Огурцы", "Курица", "Сыр","Цветная капуста", "Соус", "МАслины"]
+    var ingridients = ["Тартилия", "Лук", "Помидор", "Огурцы", "Курица"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,7 +17,8 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
         tableView.delegate = self
         subview()
         setupConstraints()
-        tableView.register(CustomCellRecipe.self, forCellReuseIdentifier: "CustomCell")
+        tableView.register(CustomCellRecipe.self, forCellReuseIdentifier: "CustomCellRecipe")
+        tableView.separatorStyle = .none
     }
     
     
@@ -31,6 +32,7 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
         stackView.addArrangedSubview(textLabel)
         stackView.addArrangedSubview(imageFood)
         stackView.addArrangedSubview(recipeLabel)
+        stackView.addArrangedSubview(horizontalStackView)
         stackView.addArrangedSubview(tableView)
         
         
@@ -40,44 +42,61 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
     
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
-        //        stackView.backgroundColor = .red
         stackView.axis = .vertical
         stackView.alignment = .fill
-        stackView.spacing = 12
+        stackView.spacing = 10
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
+    }()
+    private lazy var horizontalStackView: UIStackView = {
+        let horizontalStackView = UIStackView()
+        horizontalStackView.axis = .horizontal
+        horizontalStackView.addArrangedSubview(ingridentsLabel)
+        horizontalStackView.addArrangedSubview(itemLabel)
+        return horizontalStackView
     }()
     
     private lazy var textLabel: UILabel = {
         let textLabel = UILabel()
         textLabel.text = "Шаурма"
-        textLabel.textAlignment = .natural
-        textLabel.font = .systemFont(ofSize: 24)
+        textLabel.textAlignment = .center
+        textLabel.font = .poppinsRegular(size: 24)
         return textLabel
     }()
     
     private lazy var imageFood: UIImageView = {
         let imageFood = UIImageView()
-        //        imageFood.backgroundColor = .green
         imageFood.image = UIImage(named: "image")
         imageFood.contentMode = .scaleAspectFit
-        imageFood.heightAnchor.constraint(equalToConstant: 206).isActive = true
+//        imageFood.heightAnchor.constraint(equalToConstant: 206).isActive = true
         return imageFood
     }()
     
     private lazy var recipeLabel: UILabel = {
         let recipeLabel = UILabel()
-        //        recipeLabel.backgroundColor = .blue
-        recipeLabel.text = " Подготовь ингредиенты: 1. Маринованное мясо (курица, говядина или баранина) - нарежь его тонкими полосками и предварительно промаринуй с специями. 2. Овощи (помидоры, огурцы, лук, зелень) - нарежь их полосками или кубиками.3. Соусы (майонез, кетчуп, чесночный соус) - приготовь заранее."
-        recipeLabel.font = .systemFont(ofSize: 17)
+        recipeLabel.text = "Подготовь ингредиенты: 1. Маринованное мясо (курица, говядина или баранина) - нарежь его тонкими полосками и предварительно промаринуй с специями. 2. Овощи (помидоры, огурцы, лук, зелень) - нарежь их полосками или кубиками.."
+        recipeLabel.font = .poppinsRegular(size: 17)
         recipeLabel.numberOfLines = 0
         return recipeLabel
     }()
     
+    private lazy var ingridentsLabel: UILabel = {
+        let ingridentsLabel = UILabel()
+        ingridentsLabel.text = "ingridents"
+        ingridentsLabel.font = .poppinsRegular(size: 15)
+        return ingridentsLabel
+    } ()
+    
+    private lazy var itemLabel: UILabel = {
+        let itemLabel = UILabel()
+        itemLabel.text = "5 items"
+        itemLabel.font = .poppinsRegular(size: 15)
+        
+        return itemLabel
+    } ()
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
-//        tableView.sectionHeaderHeight = 20
-        tableView.separatorStyle = .singleLine
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -102,18 +121,19 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
     //MARK: - TableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return ingridients.count
+        return 5
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCell", for: indexPath) as! CustomCellRecipe
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCellRecipe", for: indexPath) as! CustomCellRecipe
         
         // Настройте данные вашей кастомной ячейки
-        cell.roundImageView.image = UIImage(named: "yourImageName")
-        cell.leftTextLabel.text = "Left Text"
-        cell.rightTextLabel.text = "Right Text"
+        cell.dishImageView.image = UIImage(named: "image")
+        cell.titleLbl.text = "Left Text"
+        cell.descriptionLbl.text = "Right text"
         
         return cell
     }
 }
+
