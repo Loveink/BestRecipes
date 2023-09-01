@@ -5,11 +5,16 @@
 //  Created by Александра Савчук on 29.08.2023.
 //
 
+
+
+
 import UIKit
+
+var rowDataPikers = RowDataPiker()
 
 class ServingPickerView: UIView {
   
-  let pickerData = Array(1...10).map { String(format: "%02d", $0) }
+  let pickerData = Array(1...10).map { String(format: "%01d", $0) }
   
   private let imageView: UIImageView = {
     let imageView = UIImageView(image: UIImage(systemName: "person.2.fill"))
@@ -22,7 +27,7 @@ class ServingPickerView: UIView {
   
   private let label = UILabel.makeLabel(text: "Serves", font: .poppinsSemiBold(size: 16), textColor: .black)
   
-  private let labelServes = UILabel.makeLabel(text: "01", font: .poppinsRegular(size: 16), textColor: .neutral50)
+  private let labelServes = UILabel.makeLabel(text: "1", font: .poppinsRegular(size: 16), textColor: .neutral50)
   
   private lazy var picker: UIPickerView = {
     let picker = UIPickerView()
@@ -120,6 +125,8 @@ extension ServingPickerView: UIPickerViewDataSource, UIPickerViewDelegate {
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     let selectedValue = pickerData[row]
     updateLabelServes(with: selectedValue)
+      rowDataPikers.serving = selectedValue
+
     picker.isHidden = true
   }
 }

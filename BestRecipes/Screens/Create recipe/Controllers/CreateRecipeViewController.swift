@@ -6,6 +6,11 @@
 //  Created by Александра Савчук on 26.08.2023.
 //
 
+
+protocol CreateRecipeViewControllerDelegate {
+    func isNewTexFieldAdded()
+}
+
 import UIKit
 
 class CreateRecipeViewController: UIViewController {
@@ -15,39 +20,39 @@ class CreateRecipeViewController: UIViewController {
     private let collectionView = MyRecipeCollectionView()
     private let imagePicker = UIImagePickerController()
     
-  private let imageEdit = UIImageView.init(image: UIImage(named: "Edit"))
-
-  private var dishImageView: UIImageView = {
-    let imageView = UIImageView()
-      imageView.image = UIImage(named: "ProfilePictureEdit")
-      imageView.contentMode = .scaleAspectFill
-      imageView.clipsToBounds = true
-      imageView.isUserInteractionEnabled = true
-      imageView.layer.borderColor = UIColor.lightGray.cgColor
-      imageView.layer.borderWidth = 2
-      imageView.layer.cornerRadius = 20
-    imageView.translatesAutoresizingMaskIntoConstraints = false
-    return imageView
-  }()
-
-  private let nameTextField: UITextField = {
-    let textField = UITextField()
-    textField.placeholder = "Recipe Name"
-    textField.borderStyle = .roundedRect
-    textField.layer.cornerRadius = 10
-    textField.layer.borderWidth = 1.0
-    textField.layer.borderColor = UIColor.red.cgColor
-    textField.translatesAutoresizingMaskIntoConstraints = false
-    textField.returnKeyType = .done
-    textField.backgroundColor = .white
-      
-    return textField
-  }()
-
-  private let servingPicker = ServingPickerView()
-  private let cookTimePicker = CookTimePickerView()
-  private let ingredientsLabel = UILabel.makeLabelForCells(text: "Ingredients", font: .poppinsSemiBold(size: 20), textColor: .neutral100)
- 
+    private let imageEdit = UIImageView.init(image: UIImage(named: "Edit"))
+    
+    private var dishImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "ProfilePictureEdit")
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
+        imageView.layer.borderColor = UIColor.lightGray.cgColor
+        imageView.layer.borderWidth = 2
+        imageView.layer.cornerRadius = 20
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    private let nameTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Recipe Name"
+        textField.borderStyle = .roundedRect
+        textField.layer.cornerRadius = 10
+        textField.layer.borderWidth = 1.0
+        textField.layer.borderColor = UIColor.red.cgColor
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.returnKeyType = .done
+        textField.backgroundColor = .white
+        
+        return textField
+    }()
+    
+    private let servingPicker = ServingPickerView()
+    private let cookTimePicker = CookTimePickerView()
+    private let ingredientsLabel = UILabel.makeLabelForCells(text: "Ingredients", font: .poppinsSemiBold(size: 20), textColor: .neutral100)
+    
     private let createButton: UIButton = {
         let button = UIButton()
         button.setTitle("Create recipe", for: .normal)
@@ -58,41 +63,41 @@ class CreateRecipeViewController: UIViewController {
         button.isEnabled = false
         return button
     }()
-  
+    
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         return scrollView
     }()
     
-  override func viewDidLoad() {
-    super.viewDidLoad()
-
-    tabBarController?.tabBar.isHidden = true
-    view.backgroundColor = .white
-      nameTextField.delegate = self
-    setupNavBar()
-      setupScrollView()
-    setupViews()
-    setupConstraints()
-    setupDishImageAction()
-      keyboard()
-      
-//      collectionView.delegate = self
-      
-      
-      createButton.addTarget(self, action: #selector(addButtonLogic), for: .touchUpInside)
-      
-      nameTextField.addTarget(self, action: #selector(nameTextFieldEmpty), for: .editingChanged)
-  }
-
-  private func setupNavBar() {
-      navigationBar.titleOfViewLabel.text = "Create recipe"
-      navigationBar.titleOfViewLabel.font = .poppinsSemiBold(size: 24)
-      navigationBar.view.translatesAutoresizingMaskIntoConstraints = false
-      addChild(navigationBar)
-      view.addSubview(navigationBar.view)
-      navigationBar.didMove(toParent: self)
-  }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tabBarController?.tabBar.isHidden = true
+        view.backgroundColor = .white
+        nameTextField.delegate = self
+        setupNavBar()
+        setupScrollView()
+        setupViews()
+        setupConstraints()
+        setupDishImageAction()
+        keyboard()
+        
+        collectionView.delegate = self
+        
+        
+        createButton.addTarget(self, action: #selector(addButtonLogic), for: .touchUpInside)
+        
+        nameTextField.addTarget(self, action: #selector(nameTextFieldEmpty), for: .editingChanged)
+    }
+    
+    private func setupNavBar() {
+        navigationBar.titleOfViewLabel.text = "Create recipe"
+        navigationBar.titleOfViewLabel.font = .poppinsSemiBold(size: 24)
+        navigationBar.view.translatesAutoresizingMaskIntoConstraints = false
+        addChild(navigationBar)
+        view.addSubview(navigationBar.view)
+        navigationBar.didMove(toParent: self)
+    }
     
     private func setupDishImageAction() {
         imagePicker.sourceType = .photoLibrary
@@ -100,141 +105,143 @@ class CreateRecipeViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
         dishImageView.addGestureRecognizer(tapGesture)
     }
-  
-  private func setupViews() {
-      view.addSubview(scrollView)
-
-      scrollView.addSubview(dishImageView)
-      dishImageView.addSubview(imageEdit)
-      scrollView.addSubview(nameTextField)
-      scrollView.addSubview(servingPicker)
-      scrollView.addSubview(cookTimePicker)
-      scrollView.addSubview(ingredientsLabel)
-      scrollView.addSubview(collectionView)
-      scrollView.addSubview(createButton)
-
-
-  }
+    
+    private func setupViews() {
+        view.addSubview(scrollView)
+        
+        scrollView.addSubview(dishImageView)
+        dishImageView.addSubview(imageEdit)
+        scrollView.addSubview(nameTextField)
+        scrollView.addSubview(servingPicker)
+        scrollView.addSubview(cookTimePicker)
+        scrollView.addSubview(ingredientsLabel)
+        scrollView.addSubview(collectionView)
+        scrollView.addSubview(createButton)
+        
+        
+    }
     
     func setupScrollView() {
         var height = view.frame.height
         if height < 720 {
             height = 750
         } else {
-            height = view.frame.height
+            height = view.frame.height - 100
         }
         scrollView.contentSize = CGSize(width: .zero, height: height)
         scrollView.backgroundColor = .white
     }
     
-
-  private func setupConstraints() {
-      scrollView.translatesAutoresizingMaskIntoConstraints = false
-    servingPicker.translatesAutoresizingMaskIntoConstraints = false
-    cookTimePicker.translatesAutoresizingMaskIntoConstraints = false
-    collectionView.translatesAutoresizingMaskIntoConstraints = false
-      createButton.translatesAutoresizingMaskIntoConstraints = false
+    private func setupConstraints() {
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        servingPicker.translatesAutoresizingMaskIntoConstraints = false
+        cookTimePicker.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        createButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
     
-    NSLayoutConstraint.activate([
-     
-        
-        navigationBar.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-        navigationBar.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-        navigationBar.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        navigationBar.view.heightAnchor.constraint(equalToConstant: 50),
-        
-        scrollView.topAnchor.constraint(equalTo: navigationBar.view.bottomAnchor),
+            navigationBar.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            navigationBar.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            navigationBar.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            navigationBar.view.heightAnchor.constraint(equalToConstant: 50),
+            
+            scrollView.topAnchor.constraint(equalTo: navigationBar.view.bottomAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        scrollView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.bottomAnchor),
-
-        
-        
-        dishImageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 5),
-      dishImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      dishImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-      dishImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-        dishImageView.heightAnchor.constraint(equalToConstant: 200),
-        
-        imageEdit.rightAnchor.constraint(equalTo: dishImageView.rightAnchor, constant:  -10),
-        imageEdit.topAnchor.constraint(equalTo: dishImageView.topAnchor,constant: 10),
-        
-      nameTextField.topAnchor.constraint(equalTo: dishImageView.bottomAnchor, constant: 5),
-      nameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-      nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-        nameTextField.heightAnchor.constraint(equalToConstant: 44),
-        
-      servingPicker.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 5),
-      servingPicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      servingPicker.heightAnchor.constraint(equalToConstant: 44),
-      servingPicker.widthAnchor.constraint(equalTo: dishImageView.widthAnchor),
-
-      cookTimePicker.topAnchor.constraint(equalTo: servingPicker.bottomAnchor, constant: 5),
-      cookTimePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-      cookTimePicker.heightAnchor.constraint(equalToConstant: 44),
-      cookTimePicker.widthAnchor.constraint(equalTo: dishImageView.widthAnchor),
-
-      ingredientsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-      ingredientsLabel.heightAnchor.constraint(equalToConstant: 40),
-      ingredientsLabel.topAnchor.constraint(equalTo: cookTimePicker.bottomAnchor, constant: 5),
-        
-        collectionView.topAnchor.constraint(equalTo: ingredientsLabel.bottomAnchor, constant:  5),
-        collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-        collectionView.widthAnchor.constraint(equalTo: dishImageView.widthAnchor),
-        collectionView.heightAnchor.constraint(equalToConstant: 220),
-        
-        createButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-        createButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
-        createButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-        createButton.heightAnchor.constraint(equalToConstant: 56)
-
-    ])
-  }
+            scrollView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.bottomAnchor),
+            
+            dishImageView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 5),
+            dishImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            dishImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            dishImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            dishImageView.heightAnchor.constraint(equalToConstant: 200),
+            
+            imageEdit.rightAnchor.constraint(equalTo: dishImageView.rightAnchor, constant:  -10),
+            imageEdit.topAnchor.constraint(equalTo: dishImageView.topAnchor,constant: 10),
+            
+            nameTextField.topAnchor.constraint(equalTo: dishImageView.bottomAnchor, constant: 5),
+            nameTextField.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            nameTextField.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            nameTextField.heightAnchor.constraint(equalToConstant: 44),
+            
+            servingPicker.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: 5),
+            servingPicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            servingPicker.heightAnchor.constraint(equalToConstant: 44),
+            servingPicker.widthAnchor.constraint(equalTo: dishImageView.widthAnchor),
+            
+            cookTimePicker.topAnchor.constraint(equalTo: servingPicker.bottomAnchor, constant: 5),
+            cookTimePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            cookTimePicker.heightAnchor.constraint(equalToConstant: 44),
+            cookTimePicker.widthAnchor.constraint(equalTo: dishImageView.widthAnchor),
+            
+            ingredientsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            ingredientsLabel.heightAnchor.constraint(equalToConstant: 40),
+            ingredientsLabel.topAnchor.constraint(equalTo: cookTimePicker.bottomAnchor, constant: 5),
+            
+            collectionView.topAnchor.constraint(equalTo: ingredientsLabel.bottomAnchor, constant:  5),
+            collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            collectionView.widthAnchor.constraint(equalTo: dishImageView.widthAnchor),
+            collectionView.heightAnchor.constraint(equalToConstant: 220),
+            
+            createButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            createButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
+            createButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10),
+            createButton.heightAnchor.constraint(equalToConstant: 56)
+            
+        ])
+    }
     
     @objc func imageTapped() {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = .photoLibrary
-            present(imagePicker, animated: true, completion: nil)
-        }
+        let imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.sourceType = .photoLibrary
+        present(imagePicker, animated: true, completion: nil)
+    }
     
     @objc func addButtonLogic() {
         print("ADD")
+        print(rowDataPikers.serving)
+        print(rowDataPikers.cookTime)
+        
+        
+        rowDataPikers = RowDataPiker() // В в самом конце после сохранения 
+       
 
     }
     
     func ifAddButtonAvailable() {
-        var isTextInCell = false
+        if let text = nameTextField.text, text.isEmpty {
+            return
+        }
+
         for i in 0...rowDataArray.count - 1  {
             if  rowDataArray[i].isField1 && rowDataArray[i].isField2 {
-                isTextInCell = true
                 createButton.isEnabled = true
             } else {
-                isTextInCell = false
                 createButton.isEnabled = false
                 break
             }
         }
     }
-    
-    
+
     private func removeViews() {
         dishImageView.removeFromSuperview()
-       nameTextField.removeFromSuperview()
+        nameTextField.removeFromSuperview()
         servingPicker.removeFromSuperview()
         cookTimePicker.removeFromSuperview()
         ingredientsLabel.removeFromSuperview()
         createButton.removeFromSuperview()
-//        scrollView.addSubview(collectionView)
+        //        scrollView.addSubview(collectionView)
     }
     
     func setupNewConstrains() {
         NSLayoutConstraint.activate([
-        collectionView.topAnchor.constraint(equalTo: navigationBar.view.bottomAnchor, constant: 5),
-        collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
-        collectionView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor)
+            collectionView.topAnchor.constraint(equalTo: navigationBar.view.bottomAnchor, constant: 5),
+            collectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            collectionView.bottomAnchor.constraint(equalTo: view.keyboardLayoutGuide.topAnchor)
         ])
     }
     
@@ -242,6 +249,7 @@ class CreateRecipeViewController: UIViewController {
         
         if let text = nameTextField.text, text.isEmpty {
             nameTextField.layer.borderColor = UIColor.red.cgColor
+            createButton.isEnabled = false
         } else {
             nameTextField.layer.borderColor = UIColor.systemGreen.cgColor
         }
@@ -250,10 +258,10 @@ class CreateRecipeViewController: UIViewController {
     
     func keyboard() {
         // Подписываемся на уведомления о появлении и скрытии клавиатуры
-               NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-               NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
-
+    
     @objc func keyboardWillShow(_ notification: Notification) {
         if !nameTextField.isFirstResponder {
             UIView.animate(withDuration: 0.3) {
@@ -263,24 +271,18 @@ class CreateRecipeViewController: UIViewController {
         }
         
     }
-
+    
     @objc func keyboardWillHide(_ notification: Notification) {
         if !nameTextField.isFirstResponder {
             collectionView.removeFromSuperview()
-
+            
             UIView.animate(withDuration: 0.3) {
                 self.setupViews()
                 self.setupConstraints()
             }
         }
         ifAddButtonAvailable()
-
     }
-    
-    
-    
-    
-    
 }
 
 extension CreateRecipeViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -288,49 +290,29 @@ extension CreateRecipeViewController: UIImagePickerControllerDelegate, UINavigat
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let selectedImage = info[.originalImage] as? UIImage {
             dishImageView.image = selectedImage
-            
-//            saveImageToCoreData(selectedImage)
+            //            saveImageToCoreData(selectedImage)
             // Выбранное изображение доступно в переменной selectedImage
             // Выполните здесь нужные действия с изображением, например, сохраните его или отобразите в вашем интерфейсе
         }
-        
         picker.dismiss(animated: true, completion: nil)
     }
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
- 
 }
 
 extension CreateRecipeViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         nameTextField.resignFirstResponder()
-           return true
-       }
-  
-    
-    
+        return true
+    }
 }
 
-//extension CreateRecipeViewController: MyRecipeCollectionViewDelegate {
-//    func buttonIsEnable(_ IsEnable1: Bool, _ IsEnable2: Bool) {
-//        if IsEnable1 && IsEnable2 {
-//            
-//            isTextInCell = true
-//            
-//        } else {
-//            isTextInCell = false
-//        }
-//        ifAddButtonAvailable()
-//    }
-//    
-//    
-//   
-//    
-//    
-//}
-
-
-
+extension CreateRecipeViewController: CreateRecipeViewControllerDelegate {
+    func isNewTexFieldAdded() {
+        createButton.isEnabled = false
+        ifAddButtonAvailable()
+    }
+}

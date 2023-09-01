@@ -115,12 +115,14 @@ extension CookTimePickerView: UIPickerViewDataSource, UIPickerViewDelegate {
   
   func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
     let value = pickerData[row]
-    return "\(value) min"
+      return "\(value) min"
   }
   
   func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
     let selectedValue = pickerData[row]
     let selectedValueString = String(selectedValue) + " min"
+      rowDataPikers.cookTime = selectedValueString
+
     updateLabelServes(with: selectedValueString)
     picker.isHidden = true
   }

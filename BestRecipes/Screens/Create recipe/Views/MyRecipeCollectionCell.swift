@@ -7,16 +7,11 @@
 
 import UIKit
 
-//protocol MyTextFieldCellDelegate: AnyObject {
-//    func textField1IsEmpty(_ isEmpty: Bool)
-//    func textField2IsEmpty(_ isEmpty: Bool)
-//}
 
 
 class MyRecipeCollectionCell: UICollectionViewCell, UITextFieldDelegate {
   
   var collectionDelegate: MyRecipeCollectionCellDelegate?
-//  var textFielDelegate: MyTextFieldCellDelegate?
     
   var indexPath: IndexPath?
   
@@ -63,7 +58,7 @@ class MyRecipeCollectionCell: UICollectionViewCell, UITextFieldDelegate {
     super.init(frame: frame)
     setupUI()
     
-    textField1.addTarget(self, action: #selector(textField1DidChange(_:)), for: .editingChanged)
+    textField1.addTarget(self, action: #selector(textField1DidChange(_:)), for: .allEvents)
     textField2.addTarget(self, action: #selector(textField2DidChange(_:)), for: .editingChanged)
     selectButton.addTarget(self, action: #selector(selectButtonTapped(_:)), for: .touchUpInside)
   }
@@ -102,17 +97,20 @@ class MyRecipeCollectionCell: UICollectionViewCell, UITextFieldDelegate {
   }
   
   @objc private func selectButtonTapped(_ sender: UIButton) {
-      collectionDelegate?.selectButtonTapped(at: indexPath!)
+      collectionDelegate?.selectButtonTapped(at: sender.tag)
   }
   
     @objc private func textField1DidChange(_ textField: UITextField) {
         collectionDelegate?.textField1DidChange(at: indexPath!, newValue: textField.text ?? "")
         isTexField1Empty()
+        print(rowDataArray)
     }
   
   @objc private func textField2DidChange(_ textField: UITextField) {
       collectionDelegate?.textField2DidChange(at: indexPath!, newValue: textField.text ?? "")
       isTexField2Empty()
+      print(rowDataArray)
+
   }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

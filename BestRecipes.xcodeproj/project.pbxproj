@@ -50,7 +50,7 @@
 		5705A27B2A9E143A0040E9E5 /* ServingPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A27A2A9E143A0040E9E5 /* ServingPickerView.swift */; };
 		5705A27D2A9E7ADF0040E9E5 /* CookTimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A27C2A9E7ADF0040E9E5 /* CookTimePickerView.swift */; };
 		5705A27F2A9F495B0040E9E5 /* SlideModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A27E2A9F495B0040E9E5 /* SlideModel.swift */; };
-		57FA89862A9FEE8000BBBECB /* RowData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FA89852A9FEE8000BBBECB /* RowData.swift */; };
+		57FA89862A9FEE8000BBBECB /* RowDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FA89852A9FEE8000BBBECB /* RowDataCell.swift */; };
 		57FA89882A9FEEA900BBBECB /* MyRecipeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FA89872A9FEEA900BBBECB /* MyRecipeCollectionCell.swift */; };
 		57FA898A2A9FEF2E00BBBECB /* MyRecipeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FA89892A9FEF2E00BBBECB /* MyRecipeCollectionView.swift */; };
 		57FA89922AA0926600BBBECB /* RecipeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FA89912AA0926600BBBECB /* RecipeDetailView.swift */; };
@@ -102,7 +102,7 @@
 		5705A27A2A9E143A0040E9E5 /* ServingPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServingPickerView.swift; sourceTree = "<group>"; };
 		5705A27C2A9E7ADF0040E9E5 /* CookTimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookTimePickerView.swift; sourceTree = "<group>"; };
 		5705A27E2A9F495B0040E9E5 /* SlideModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideModel.swift; sourceTree = "<group>"; };
-		57FA89852A9FEE8000BBBECB /* RowData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowData.swift; sourceTree = "<group>"; };
+		57FA89852A9FEE8000BBBECB /* RowDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowDataCell.swift; sourceTree = "<group>"; };
 		57FA89872A9FEEA900BBBECB /* MyRecipeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipeCollectionCell.swift; sourceTree = "<group>"; };
 		57FA89892A9FEF2E00BBBECB /* MyRecipeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipeCollectionView.swift; sourceTree = "<group>"; };
 		57FA89912AA0926600BBBECB /* RecipeDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeDetailView.swift; sourceTree = "<group>"; };
@@ -515,7 +515,7 @@
 		5705A24B2A9A737A0040E9E5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				57FA89852A9FEE8000BBBECB /* RowData.swift */,
+				57FA89852A9FEE8000BBBECB /* RowDataCell.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -635,7 +635,7 @@
 				5705A2502A9A73EF0040E9E5 /* DiscoverViewController.swift in Sources */,
 				5705A2262A9A64F20040E9E5 /* Fonts.swift in Sources */,
 				5705A20E2A9A14460040E9E5 /* AppDelegate.swift in Sources */,
-				57FA89862A9FEE8000BBBECB /* RowData.swift in Sources */,
+				57FA89862A9FEE8000BBBECB /* RowDataCell.swift in Sources */,
 				5705A2652A9B35C50040E9E5 /* TabBar.swift in Sources */,
 				5705A2542A9A74290040E9E5 /* SeeAllViewController.swift in Sources */,
 				5705A27D2A9E7ADF0040E9E5 /* CookTimePickerView.swift in Sources */,

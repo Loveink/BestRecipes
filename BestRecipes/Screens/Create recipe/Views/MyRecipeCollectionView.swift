@@ -7,27 +7,22 @@
 
 import UIKit
 
-var rowDataArray: [RowData] = []
+var rowDataArray: [RowDataCell] = []
 
 
 protocol MyRecipeCollectionCellDelegate: AnyObject {
-  func selectButtonTapped(at indexPath: IndexPath)
+  func selectButtonTapped(at indexPath: Int)
   func textField1DidChange(at indexPath: IndexPath, newValue: String)
   func textField2DidChange(at indexPath: IndexPath, newValue: String)
 }
 
-//protocol MyRecipeCollectionViewDelegate: AnyObject {
-//    func buttonIsEnable(_ IsEnable1: Bool, _ IsEnable2: Bool)
-//
-//}
 
 class MyRecipeCollectionView: UIView {
   
-//    var delegate: MyRecipeCollectionViewDelegate?
     
     var isButtonEnable1 = false
     var isButtonEnable2 = false
-
+    var delegate: CreateRecipeViewControllerDelegate?
 
   let collectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
@@ -57,7 +52,7 @@ class MyRecipeCollectionView: UIView {
   
   private func generateInitialData() {
     rowDataArray = [
-      RowData(textField1Text: "", textField2Text: "", isSelected: true)
+      RowDataCell(textField1Text: "", textField2Text: "", isSelected: true)
     ]
   }
   
@@ -89,12 +84,24 @@ extension MyRecipeCollectionView: UICollectionViewDelegate, UICollectionViewData
     cell.textField1.text = rowData.textField1Text
     cell.textField2.text = rowData.textField2Text
     cell.selectButton.isSelected = rowData.isSelected
-    
-    cell.selectButton.tag = indexPath.row
-    cell.indexPath = indexPath
-      cell.collectionDelegate = self
-//      cell.textFielDelegate = self
-//      delegate?.buttonIsEnable(false, false)
+  
+    cell.selectButton.tag = indexPath.item
+      cell.indexPath = indexPath
+    cell.collectionDelegate = self
+      
+      if let text = cell.textField1.text, text.isEmpty {
+          cell.textField1.layer.borderColor = UIColor.red.cgColor
+
+      } else {
+          cell.textField1.layer.borderColor = UIColor.systemGreen.cgColor
+      }
+      
+      if let text = cell.textField2.text, text.isEmpty {
+          cell.textField2.layer.borderColor = UIColor.red.cgColor
+
+      } else {
+          cell.textField2.layer.borderColor = UIColor.systemGreen.cgColor
+      }
 
     return cell
   }
@@ -107,21 +114,19 @@ extension MyRecipeCollectionView: UICollectionViewDelegateFlowLayout {
 }
 
 extension MyRecipeCollectionView: MyRecipeCollectionCellDelegate {
-  func selectButtonTapped(at indexPath: IndexPath) {
-    let selectedRow = indexPath.row
-    let rowData = rowDataArray[selectedRow]
-    
-    if !rowData.isSelected {
-      if let indexToRemove = rowDataArray.firstIndex(of: rowData) {
-        rowDataArray.remove(at: indexToRemove)
-      }
+  func selectButtonTapped(at indexPath: Int) {
+  
+    if indexPath != 0 {
+        rowDataArray.remove(at: indexPath)
     } else {
-      let blancDataRow = RowData(textField1Text: "", textField2Text: "", isSelected: false, isField1: false, isField2: false)
-      rowDataArray.insert(blancDataRow, at: selectedRow + 1)
+      let blancDataRow = RowDataCell(textField1Text: "", textField2Text: "", isSelected: false, isField1: false, isField2: false)
+        rowDataArray.insert(blancDataRow, at: rowDataArray.count)
+        
     }
-    collectionView.reloadData()
+      delegate?.isNewTexFieldAdded()
+
+      collectionView.reloadData()
       print(rowDataArray)
-      print(indexPath.row)
 
   }
   
@@ -135,9 +140,8 @@ extension MyRecipeCollectionView: MyRecipeCollectionCellDelegate {
               rowDataArray[indexPath.row].isField1 = false
           }
           
-          print(rowDataArray)
+//          print(rowDataArray)
 
-//          delegate?.buttonIsEnable(isButtonEnable1, isButtonEnable2)
 
       }
   
@@ -155,19 +159,7 @@ extension MyRecipeCollectionView: MyRecipeCollectionCellDelegate {
           
           
           
-//          delegate?.buttonIsEnable(isButtonEnable1, isButtonEnable2)
       }
   }
 }
 
-//extension MyRecipeCollectionView: MyTextFieldCellDelegate {
-//
-//        func textField1IsEmpty(_ isEmpty: Bool) {
-//             isButtonEnable1 = !isEmpty
-//
-//        }
-//
-//        func textField2IsEmpty(_ isEmpty: Bool) {
-//             isButtonEnable2 = !isEmpty
-//        }
-//    }
