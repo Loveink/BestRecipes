@@ -18,7 +18,7 @@ class CustomNavigationBar: UIViewController {
         label.text = "Screen Name "
         label.textColor = .black
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 25)
+        label.font = .poppinsSemiBold(size: 24)
         return label
     }()
 
