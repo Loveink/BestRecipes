@@ -32,6 +32,9 @@ class CustomNavigationBar: UIViewController {
         navigationBar.translatesAutoresizingMaskIntoConstraints = false
         titleOfViewLabel.translatesAutoresizingMaskIntoConstraints = false
         
+        navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+        navigationBar.shadowImage = UIImage()
+        
         navigationBar.backgroundColor = .white
         navigationBar.barTintColor = .white
         navigationBar.tintColor = .black
@@ -69,10 +72,9 @@ class CustomNavigationBar: UIViewController {
         let lastVC = lastVisitedViewController
         if lastVC is SearchViewController {
             dismiss(animated: true, completion: nil)
-        } else if let navigationController = navigationController {
-          let homeViewController = MainTabBarController()
-          navigationController.setViewControllers([homeViewController], animated: true)
-      }
+        } else if lastVC is HomeViewController {
+            self.navigationController?.popViewController(animated: true)
+        }
   }
     
     @objc  func shareButtonAction() {
