@@ -20,20 +20,18 @@ let networkManager = NetworkManager()
         static let MainUrl = "https://api.spoonacular.com/recipes/"
     }
 
-  // Свои ключи
+let apiKey = [
+"de4f664533584529b9a71b334b628900",
+"a29eb5640b5c4435ad8ec2ef72759fe5",
+"a63ec13f2c7a473f9a9ec94e8d190e5c",
+"ce1dcc3c21614ac29f4f314e25f37a4f",
+"cbab9c65a56b431b843893b723acaa5d",
+"3edc89e90aad46d8a1806b89c284c359",
+"f23bfe6f20de46ef81114161e0e58ae6",
+"466a1187dd1a443d8e67d4da587ca850"
+]
 
-enum apiKey {
-  static let key2 = "5bcb58f5df0343c2b1670804076fee20"
-  static let key3 = "929fcbb8f426404db8c5e1851818dfea"
-  static let key4 = "3e206b1f2c3345ef948741b8ff3bbc4d"
-  static let key5 = "0c2ed2c3dfb740bbb1ea235170e87c73"
-  static let key6 = "bb8f3cb319be42178e0dd928aa576993"
-  static let key7 = "a48b4a5a2d04465e907baec66822adf0"
-  static let key8 = "bcebdf6dd5cf483d8246687cc3300687"
-  static let key9 = "f6995d0a20a24616bb50c8250ab4353a"
-}
-
-  let apiKeySelect = apiKey.key8
+var apiKeySelect = apiKey[0]
 
     enum adds {
         static let popularity = "&sort=popularity"
@@ -71,6 +69,7 @@ struct RecipeAPI {
         let urlString = "\(url.MainUrl)\(adds.complexSearch)?apiKey=\(apiKeySelect)\(adds.popularity)"
         return try await networkManager.request(urlString: urlString)
     }
+
     // Для See all
     static func fetchTrendsAll() async throws -> RecipeResults {
         let urlString = "\(url.MainUrl)\(adds.complexSearch)?apiKey=\(apiKeySelect)\(adds.popularity)\(adds.number)"
@@ -92,6 +91,11 @@ struct RecipeAPI {
         let urlString = "\(url.MainUrl)\(adds.information)?ids=\(ids)&apiKey=\(apiKeySelect)"
         return try await networkManager.request(urlString: urlString)
     }
+
+  static func fetchCuisine(with request: String) async throws -> RecipeResults {
+      let urlString = "\(url.MainUrl)\(adds.complexSearch)?cuisine=\(request)&number=10&apiKey=\(apiKeySelect)"
+      return try await networkManager.request(urlString: urlString)
+  }
 }
 
 

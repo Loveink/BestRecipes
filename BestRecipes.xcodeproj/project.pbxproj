@@ -51,6 +51,9 @@
 		5705A27D2A9E7ADF0040E9E5 /* CookTimePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A27C2A9E7ADF0040E9E5 /* CookTimePickerView.swift */; };
 		5705A27F2A9F495B0040E9E5 /* SlideModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A27E2A9F495B0040E9E5 /* SlideModel.swift */; };
 		570C97552AA23C0D009645AB /* RowDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570C97542AA23C0D009645AB /* RowDataCell.swift */; };
+		570C97512AA22FD5009645AB /* RecentCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570C97502AA22FD5009645AB /* RecentCollectionView.swift */; };
+		570C97532AA22FE8009645AB /* СuisineCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570C97522AA22FE8009645AB /* СuisineCollectionView.swift */; };
+		570C97572AA26982009645AB /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570C97562AA26982009645AB /* ResultsViewController.swift */; };
 		576C55A12AA1F145003D5317 /* RecentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576C55A02AA1F145003D5317 /* RecentCell.swift */; };
 		576C55A32AA1F16B003D5317 /* СuisineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576C55A22AA1F16B003D5317 /* СuisineCell.swift */; };
 		57FA89882A9FEEA900BBBECB /* MyRecipeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FA89872A9FEEA900BBBECB /* MyRecipeCollectionCell.swift */; };
@@ -113,6 +116,9 @@
 		5705A27C2A9E7ADF0040E9E5 /* CookTimePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CookTimePickerView.swift; sourceTree = "<group>"; };
 		5705A27E2A9F495B0040E9E5 /* SlideModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlideModel.swift; sourceTree = "<group>"; };
 		570C97542AA23C0D009645AB /* RowDataCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowDataCell.swift; sourceTree = "<group>"; };
+		570C97502AA22FD5009645AB /* RecentCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCollectionView.swift; sourceTree = "<group>"; };
+		570C97522AA22FE8009645AB /* СuisineCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СuisineCollectionView.swift"; sourceTree = "<group>"; };
+		570C97562AA26982009645AB /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		576C55A02AA1F145003D5317 /* RecentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCell.swift; sourceTree = "<group>"; };
 		576C55A22AA1F16B003D5317 /* СuisineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СuisineCell.swift"; sourceTree = "<group>"; };
 		57FA89872A9FEEA900BBBECB /* MyRecipeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipeCollectionCell.swift; sourceTree = "<group>"; };
@@ -406,6 +412,7 @@
 			isa = PBXGroup;
 			children = (
 				5705A2112A9A14460040E9E5 /* HomeViewController.swift */,
+				570C97562AA26982009645AB /* ResultsViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -458,6 +465,7 @@
 				57FA89AC2AA1C3E000BBBECB /* CategoriesCollectionView.swift */,
 				57FA89AB2AA1C3E000BBBECB /* CategoriesNames.swift */,
 				5705A2702A9BC2210040E9E5 /* TrendingCollectionView.swift */,
+				570C97522AA22FE8009645AB /* СuisineCollectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -706,6 +714,7 @@
 				5705A2652A9B35C50040E9E5 /* TabBar.swift in Sources */,
 				5705A2542A9A74290040E9E5 /* SeeAllViewController.swift in Sources */,
 				5705A27D2A9E7ADF0040E9E5 /* CookTimePickerView.swift in Sources */,
+				570C97572AA26982009645AB /* ResultsViewController.swift in Sources */,
 				0BB05FA52A9DBDD900B6BC65 /* RecipeInfoForCell.swift in Sources */,
 				5705A27F2A9F495B0040E9E5 /* SlideModel.swift in Sources */,
 				57FA89AA2AA1C3D600BBBECB /* CategoryCell.swift in Sources */,

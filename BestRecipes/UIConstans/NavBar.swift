@@ -67,7 +67,7 @@ class CustomNavigationBar: UIViewController {
     
     @objc  func backButtonAction() {
         let lastVC = lastVisitedViewController
-        if lastVC is SearchViewController {
+        if lastVC is SearchViewController || lastVC is HomeViewController {
             dismiss(animated: true, completion: nil)
         } else if let navigationController = navigationController {
           let homeViewController = MainTabBarController()
