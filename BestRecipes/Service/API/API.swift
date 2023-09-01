@@ -23,17 +23,17 @@ let networkManager = NetworkManager()
   // Свои ключи
 
 enum apiKey {
-  static let key2 = "b4768be03cc34eecac9ddff5b5ec4f66"
-  static let key3 = "82c2d8b368364b64ba37c4f11aa55670"
-  static let key4 = "512b181445c643b29ffeab3ae46f3406"
-  static let key5 = "89470a21c8094205b62fa9d6f4fb7f75"
-  static let key6 = "06c6e6e34b5544f6a263f6825fa40fae"
-  static let key7 = "060fe2f88f7b4f9e9f5b21d90955989e"
-  static let key8 = "21e9db51c06e4d61bbd59d9ec120a3b7"
-  static let key9 = "ff6ba20005be4117a24fb55aa129b010"
+  static let key2 = "5bcb58f5df0343c2b1670804076fee20"
+  static let key3 = "929fcbb8f426404db8c5e1851818dfea"
+  static let key4 = "3e206b1f2c3345ef948741b8ff3bbc4d"
+  static let key5 = "0c2ed2c3dfb740bbb1ea235170e87c73"
+  static let key6 = "bb8f3cb319be42178e0dd928aa576993"
+  static let key7 = "a48b4a5a2d04465e907baec66822adf0"
+  static let key8 = "bcebdf6dd5cf483d8246687cc3300687"
+  static let key9 = "f6995d0a20a24616bb50c8250ab4353a"
 }
 
-    let apiKeySelect = apiKey.key5
+  let apiKeySelect = apiKey.key8
 
     enum adds {
         static let popularity = "&sort=popularity"
