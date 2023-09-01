@@ -7,17 +7,23 @@
 
 import UIKit
 
-var rowDataArray: [RowData] = []
+var rowDataArray: [RowDataCell] = []
 
 
 protocol MyRecipeCollectionCellDelegate: AnyObject {
-  func selectButtonTapped(at indexPath: IndexPath)
+  func selectButtonTapped(at indexPath: Int)
   func textField1DidChange(at indexPath: IndexPath, newValue: String)
   func textField2DidChange(at indexPath: IndexPath, newValue: String)
 }
 
+
 class MyRecipeCollectionView: UIView {
   
+    
+    var isButtonEnable1 = false
+    var isButtonEnable2 = false
+    var delegate: CreateRecipeViewControllerDelegate?
+
   let collectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .vertical
@@ -41,11 +47,12 @@ class MyRecipeCollectionView: UIView {
     backgroundColor = .white
     setupCollectionView()
     generateInitialData()
+
   }
   
   private func generateInitialData() {
     rowDataArray = [
-      RowData(textField1Text: "", textField2Text: "", isSelected: true)
+      RowDataCell(textField1Text: "", textField2Text: "", isSelected: true)
     ]
   }
   
@@ -77,11 +84,25 @@ extension MyRecipeCollectionView: UICollectionViewDelegate, UICollectionViewData
     cell.textField1.text = rowData.textField1Text
     cell.textField2.text = rowData.textField2Text
     cell.selectButton.isSelected = rowData.isSelected
-    
-    cell.selectButton.tag = indexPath.row
-    cell.indexPath = indexPath
-    cell.delegate = self
-    
+  
+    cell.selectButton.tag = indexPath.item
+      cell.indexPath = indexPath
+    cell.collectionDelegate = self
+      
+      if let text = cell.textField1.text, text.isEmpty {
+          cell.textField1.layer.borderColor = UIColor.red.cgColor
+
+      } else {
+          cell.textField1.layer.borderColor = UIColor.systemGreen.cgColor
+      }
+      
+      if let text = cell.textField2.text, text.isEmpty {
+          cell.textField2.layer.borderColor = UIColor.red.cgColor
+
+      } else {
+          cell.textField2.layer.borderColor = UIColor.systemGreen.cgColor
+      }
+
     return cell
   }
 }
@@ -93,28 +114,35 @@ extension MyRecipeCollectionView: UICollectionViewDelegateFlowLayout {
 }
 
 extension MyRecipeCollectionView: MyRecipeCollectionCellDelegate {
-  func selectButtonTapped(at indexPath: IndexPath) {
-    let selectedRow = indexPath.row
-    let rowData = rowDataArray[selectedRow]
-    
-    if !rowData.isSelected {
-      if let indexToRemove = rowDataArray.firstIndex(of: rowData) {
-        rowDataArray.remove(at: indexToRemove)
-      }
+  func selectButtonTapped(at indexPath: Int) {
+  
+    if indexPath != 0 {
+        rowDataArray.remove(at: indexPath)
     } else {
-      let blancDataRow = RowData(textField1Text: "", textField2Text: "", isSelected: false)
-      rowDataArray.insert(blancDataRow, at: selectedRow + 1)
+      let blancDataRow = RowDataCell(textField1Text: "", textField2Text: "", isSelected: false, isField1: false, isField2: false)
+        rowDataArray.insert(blancDataRow, at: rowDataArray.count)
+        
     }
-    collectionView.reloadData()
+      delegate?.isNewTexFieldAdded()
+
+      collectionView.reloadData()
       print(rowDataArray)
-      print(indexPath.row)
 
   }
   
   func textField1DidChange(at indexPath: IndexPath, newValue: String) {
       if (0...rowDataArray.count).contains(indexPath.row) {
           rowDataArray[indexPath.row].textField1Text = newValue
-          print(rowDataArray)
+          
+          if !newValue.isEmpty {
+              rowDataArray[indexPath.row].isField1 = true
+          } else {
+              rowDataArray[indexPath.row].isField1 = false
+          }
+          
+//          print(rowDataArray)
+
+
       }
   
   }
@@ -122,7 +150,16 @@ extension MyRecipeCollectionView: MyRecipeCollectionCellDelegate {
   func textField2DidChange(at indexPath: IndexPath, newValue: String) {
       if (0...rowDataArray.count).contains(indexPath.row) {
     rowDataArray[indexPath.row].textField2Text = newValue
-          print(rowDataArray)
+          
+          if !newValue.isEmpty {
+              rowDataArray[indexPath.row].isField2 = true
+          } else {
+              rowDataArray[indexPath.row].isField2 = false
+          }
+          
+          
+          
       }
   }
 }
+
