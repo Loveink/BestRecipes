@@ -243,6 +243,6 @@ extension HomeViewController: CollectionCuisineDidSelectProtocol {
     func fetchCuisine(cuisine: String) {
         let resultsViewController = ResultsViewController(cuisine: cuisine)
         self.present(resultsViewController, animated: true, completion: nil)
-        lastVisitedViewController = HomeViewController()
+        lastVisitedViewController = SearchViewController()
     }
 }

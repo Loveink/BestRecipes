@@ -463,6 +463,7 @@
 			children = (
 				5705A2732A9BC24A0040E9E5 /* Cells */,
 				57FA89AC2AA1C3E000BBBECB /* CategoriesCollectionView.swift */,
+				570C97502AA22FD5009645AB /* RecentCollectionView.swift */,
 				57FA89AB2AA1C3E000BBBECB /* CategoriesNames.swift */,
 				5705A2702A9BC2210040E9E5 /* TrendingCollectionView.swift */,
 				570C97522AA22FE8009645AB /* СuisineCollectionView.swift */,
@@ -712,6 +713,7 @@
 				576C55A12AA1F145003D5317 /* RecentCell.swift in Sources */,
 				5705A20E2A9A14460040E9E5 /* AppDelegate.swift in Sources */,
 				5705A2652A9B35C50040E9E5 /* TabBar.swift in Sources */,
+				570C97532AA22FE8009645AB /* СuisineCollectionView.swift in Sources */,
 				5705A2542A9A74290040E9E5 /* SeeAllViewController.swift in Sources */,
 				5705A27D2A9E7ADF0040E9E5 /* CookTimePickerView.swift in Sources */,
 				570C97572AA26982009645AB /* ResultsViewController.swift in Sources */,
@@ -724,6 +726,7 @@
 				0B62E6E52A9FC8F000AE3CC2 /* ImageSelectionViewController.swift in Sources */,
 				0B62E6E82A9FC91E00AE3CC2 /* MyRecipeCell.swift in Sources */,
 				5705A2772A9BC4A00040E9E5 /* BookmarkManager.swift in Sources */,
+				570C97512AA22FD5009645AB /* RecentCollectionView.swift in Sources */,
 				5705A2612A9B30A80040E9E5 /* CustomRedButton.swift in Sources */,
 				0B201BCC2AA066BA00308C19 /* GetImageFromCoreData.swift in Sources */,
 				0B7E02EE2A9CCD9400D48CE2 /* SearchViewController.swift in Sources */,
