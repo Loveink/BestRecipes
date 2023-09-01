@@ -14,8 +14,7 @@ protocol CreateRecipeViewControllerDelegate {
 import UIKit
 
 class CreateRecipeViewController: UIViewController {
-    
-    
+
     private let navigationBar = CustomNavigationBar()
     private let collectionView = MyRecipeCollectionView()
     private let imagePicker = UIImagePickerController()
@@ -315,4 +314,19 @@ extension CreateRecipeViewController: CreateRecipeViewControllerDelegate {
         createButton.isEnabled = false
         ifAddButtonAvailable()
     }
+
+    picker.dismiss(animated: true, completion: nil)
+  }
+
+  func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    picker.dismiss(animated: true, completion: nil)
+  }
+}
+
+extension CreateRecipeViewController: UITextFieldDelegate {
+
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    nameTextField.resignFirstResponder()
+    return true
+  }
 }

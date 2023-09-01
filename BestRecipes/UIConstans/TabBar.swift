@@ -37,12 +37,6 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     }
   }
 
-  func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-    if viewController ==  notification {
-      return false
-    }
-    return true
-  }
 
   private func setupItems() {
     let customButtonController = CreateRecipeViewController()
@@ -55,7 +49,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     let discover = DiscoverViewController()
     discover.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "bookmark")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "bookmarkSelect")?.withRenderingMode(.alwaysOriginal))
 
-    let notification = OnboardingViewController()
+    let notification = ShopingListViewController()
     notification.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "notification")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "notificationSelect")?.withRenderingMode(.alwaysOriginal))
     notification.view.isUserInteractionEnabled = false
 

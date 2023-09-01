@@ -52,5 +52,38 @@ final class BookmarksManager {
             print("Error encoding results: \(error)")
         }
     }
+
+  private let viewedRecipesKey = "viewedRecipes"
+
+  var viewedRecipesArray: [RecipeInfoForCell] {
+      get {
+          guard let data = defaults.data(forKey: viewedRecipesKey) else {
+              return []
+          }
+          do {
+              let viewedRecipes = try JSONDecoder().decode([RecipeInfoForCell].self, from: data)
+              return viewedRecipes
+          } catch {
+              print("Error decoding viewed recipes: \(error)")
+              return []
+          }
+      }
+      set {
+          do {
+              let viewedRecipes = try JSONEncoder().encode(newValue)
+              defaults.set(viewedRecipes, forKey: viewedRecipesKey)
+          } catch {
+              print("Error encoding viewed recipes: \(error)")
+          }
+      }
+  }
+  func getViewedRecipes() -> [RecipeInfoForCell] {
+      return viewedRecipesArray
+  }
+
+  func saveViewedRecipes(_ dataToSave: [RecipeInfoForCell]) {
+      viewedRecipesArray = dataToSave
+  }
+
 }
 

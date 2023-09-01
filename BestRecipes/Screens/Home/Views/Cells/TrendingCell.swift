@@ -28,7 +28,7 @@ class TrendingCell: UICollectionViewCell {
   }
 
   //MARK: - Outlets
-  private let dishImageView: UIImageView = {
+  let dishImageView: UIImageView = {
     let image = UIImageView()
     image.image = UIImage(named: "image")
     image.contentMode = .scaleAspectFill
@@ -38,9 +38,9 @@ class TrendingCell: UICollectionViewCell {
     return image
   }()
 
-  private let titleLabel = UILabel.makeLabelForCells(text: "How to make sharwama at home", font: .poppinsSemiBold(size: 16), textColor: .black)
+  let titleLabel = UILabel.makeLabelForCells(text: "How to make sharwama at home", font: .poppinsSemiBold(size: 16), textColor: .black)
 
-  private let authorImageView: UIImageView = {
+  let authorImageView: UIImageView = {
     let image = UIImageView()
     image.image = UIImage(named: "Creator")
     image.contentMode = .scaleAspectFill
@@ -50,9 +50,9 @@ class TrendingCell: UICollectionViewCell {
     return image
   }()
 
-  private let authorLabel = UILabel.makeLabelForCells(text: "By Zeelicious foods", font: .poppinsRegular(size: 12), textColor: .black)
+  let authorLabel = UILabel.makeLabelForCells(text: "By Zeelicious foods", font: .poppinsRegular(size: 12), textColor: .black)
 
-  private let minuteLabel = UILabel.makeLabelForCells(text: "15 min", font: .poppinsRegular(size: 12), textColor: .white)
+  let minuteLabel = UILabel.makeLabelForCells(text: "15 min", font: .poppinsRegular(size: 12), textColor: .white)
 
   lazy var minuteView: UIView = {
       let view = UIView()
@@ -62,7 +62,7 @@ class TrendingCell: UICollectionViewCell {
       return view
   }()
 
-  private let likesLabel = UILabel.makeLabelForCells(text: "23 likes", font: .poppinsRegular(size: 12), textColor: .white)
+  let likesLabel = UILabel.makeLabelForCells(text: "23 likes", font: .poppinsRegular(size: 12), textColor: .white)
 
   lazy var likesView: UIView = {
       let view = UIView()
