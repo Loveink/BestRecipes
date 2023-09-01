@@ -8,5 +8,5 @@
 import Foundation
 import UIKit
 
-var lastVisitedViewController: UIViewController?
+var lastVisitedViewController: UIViewController = HomeViewController()
 var titleOfView = ""
