@@ -8,7 +8,9 @@
 import UIKit
 
 class SeeAllButton: UIButton {
-
+    
+    var name: String!
+    
     init() {
         super.init(frame: .zero)
         setupButton()
@@ -29,4 +31,25 @@ class SeeAllButton: UIButton {
         self.semanticContentAttribute = .forceRightToLeft
         self.translatesAutoresizingMaskIntoConstraints = false
     }
+    
+}
+
+
+
+extension HomeViewController {
+    @objc func seeAllButtonWasTapped(sender: SeeAllButton) {
+        let viewController = SeeAllViewController(title: sender.name)
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    
+    func configureSeeAllButtons() {
+        seeAllButtonTrend.addTarget(self, action: #selector(seeAllButtonWasTapped), for: .touchUpInside)
+        seeAllButtonTrend.name = "Trending now"
+        seeAllButtonRecent.addTarget(self, action: #selector(seeAllButtonWasTapped), for: .touchUpInside)
+        seeAllButtonRecent.name = "Recent recipe"
+        seeAllButtonCreators.addTarget(self, action: #selector(seeAllButtonWasTapped), for: .touchUpInside)
+        seeAllButtonCreators.name = "Creators"
+    }
+    
 }
