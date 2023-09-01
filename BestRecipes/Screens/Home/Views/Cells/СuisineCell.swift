@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-class RecentCell: UICollectionViewCell {
+class СuisineCell: UICollectionViewCell {
 
   var currentRecipe: RecipeInfoForCell?
   static let identifier = "RecentCell"
