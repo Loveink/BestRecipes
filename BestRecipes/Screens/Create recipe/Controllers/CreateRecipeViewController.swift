@@ -93,7 +93,7 @@ class CreateRecipeViewController: UIViewController {
         navigationBar.view.translatesAutoresizingMaskIntoConstraints = false
         addChild(navigationBar)
         view.addSubview(navigationBar.view)
-//        navigationBar.didMove(toParent: self)
+        navigationBar.didMove(toParent: self)
     }
 
     private func setupDishImageAction() {
