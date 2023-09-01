@@ -22,7 +22,7 @@ class RecipeDetailViewController: UIViewController {
     }
     
     private func setupNavBar() {
-        navigationBar.titleOfViewLabel.text = ""
+        navigationBar.titleOfViewLabel.text = "RecipeDetailVC"
         navigationBar.view.translatesAutoresizingMaskIntoConstraints = false
         addChild(navigationBar)
             view.addSubview(navigationBar.view)
