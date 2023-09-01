@@ -6,12 +6,10 @@
 //
 
 import UIKit
-import Kingfisher
 
 class СuisineCell: UICollectionViewCell {
 
-  var currentRecipe: RecipeInfoForCell?
-  static let identifier = "RecentCell"
+  static let identifier = "СuisineCell"
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -39,16 +37,12 @@ class СuisineCell: UICollectionViewCell {
 
 
   //MARK: - Functions
-  let options: KingfisherOptionsInfo = [
-    .cacheOriginalImage
-  ]
 
-  public func configureCell(_ data: RecipeInfoForCell) {
-    DispatchQueue.main.async {
-      self.titleLabel.text = data.title
-      self.dishImageView.kf.setImage(with: URL(string: data.image), options: self.options)
-      self.currentRecipe = data
-    }
+  public func configureCell(with title: String) {
+      DispatchQueue.main.async {
+        self.titleLabel.text = title
+        self.dishImageView.image = UIImage(named: title)
+      }
   }
 
   private func setupViews() {
@@ -60,13 +54,12 @@ class СuisineCell: UICollectionViewCell {
   private func setupConstraints() {
     NSLayoutConstraint.activate([
       dishImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-      dishImageView.centerYAnchor.constraint(equalTo: contentView.topAnchor),
       dishImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-      dishImageView.heightAnchor.constraint(equalToConstant: 140),
-      dishImageView.widthAnchor.constraint(equalToConstant: 140),
+      dishImageView.heightAnchor.constraint(equalToConstant: 150),
+      dishImageView.widthAnchor.constraint(equalToConstant: 150),
 
-      titleLabel.centerXAnchor.constraint(equalTo: dishImageView.centerXAnchor),
-      titleLabel.topAnchor.constraint(equalTo: dishImageView.bottomAnchor, constant: 10),
+      titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+      titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
     ])
   }
 }
