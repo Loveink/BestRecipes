@@ -10,14 +10,15 @@ import UIKit
 class DiscoverCollectionView: UIView {
     
     var collectionView: UICollectionView!
+    var navController: UINavigationController!
     let bookmarksManager = BookmarksManager.shared
     
     var recipes: [RecipeInfoForCell] = []
     
     
-    override init(frame: CGRect) {
+    init(frame: CGRect, navController: UINavigationController) {
+        self.navController = navController
         super.init(frame: frame)
-        
         configureCollection()
         setupConstraints()
     }
@@ -41,7 +42,6 @@ class DiscoverCollectionView: UIView {
         collectionView.register(DiscoverCell.self, forCellWithReuseIdentifier: DiscoverCell.discoverIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         self.addSubview(collectionView)
     }
     
@@ -83,7 +83,8 @@ extension DiscoverCollectionView: UICollectionViewDelegate, UICollectionViewData
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //
+        let recipeDetailVC = RecipeDetailViewController()
+        self.navController.pushViewController(recipeDetailVC, animated: true)
     }
     
     
