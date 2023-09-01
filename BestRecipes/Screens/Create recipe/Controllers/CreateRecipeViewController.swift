@@ -9,11 +9,12 @@
 import UIKit
 
 class CreateRecipeViewController: UIViewController {
-
+    
+    
     private let navigationBar = CustomNavigationBar()
     private let collectionView = MyRecipeCollectionView()
     private let imagePicker = UIImagePickerController()
-
+    
   private let imageEdit = UIImageView.init(image: UIImage(named: "Edit"))
 
   private var dishImageView: UIImageView = {
@@ -35,7 +36,7 @@ class CreateRecipeViewController: UIViewController {
     textField.borderStyle = .roundedRect
     textField.layer.cornerRadius = 10
     textField.layer.borderWidth = 1.0
-    textField.layer.borderColor = UIColor.black.cgColor
+    textField.layer.borderColor = UIColor.red.cgColor
     textField.translatesAutoresizingMaskIntoConstraints = false
     textField.returnKeyType = .done
     textField.backgroundColor = .white
@@ -54,6 +55,7 @@ class CreateRecipeViewController: UIViewController {
         button.layer.cornerRadius = 15
         button.titleLabel?.font = .poppinsSemiBold(size: 20)
         button.titleLabel?.textColor = .white
+        button.isEnabled = false
         return button
     }()
   
@@ -68,13 +70,19 @@ class CreateRecipeViewController: UIViewController {
     tabBarController?.tabBar.isHidden = true
     view.backgroundColor = .white
       nameTextField.delegate = self
-
     setupNavBar()
       setupScrollView()
     setupViews()
     setupConstraints()
     setupDishImageAction()
       keyboard()
+      
+//      collectionView.delegate = self
+      
+      
+      createButton.addTarget(self, action: #selector(addButtonLogic), for: .touchUpInside)
+      
+      nameTextField.addTarget(self, action: #selector(nameTextFieldEmpty), for: .editingChanged)
   }
 
   private func setupNavBar() {
@@ -82,7 +90,7 @@ class CreateRecipeViewController: UIViewController {
       navigationBar.titleOfViewLabel.font = .poppinsSemiBold(size: 24)
       navigationBar.view.translatesAutoresizingMaskIntoConstraints = false
       addChild(navigationBar)
-          view.addSubview(navigationBar.view)
+      view.addSubview(navigationBar.view)
       navigationBar.didMove(toParent: self)
   }
     
@@ -190,10 +198,25 @@ class CreateRecipeViewController: UIViewController {
             present(imagePicker, animated: true, completion: nil)
         }
     
-    func addButtonLogic() {
-    
-        
+    @objc func addButtonLogic() {
+        print("ADD")
+
     }
+    
+    func ifAddButtonAvailable() {
+        var isTextInCell = false
+        for i in 0...rowDataArray.count - 1  {
+            if  rowDataArray[i].isField1 && rowDataArray[i].isField2 {
+                isTextInCell = true
+                createButton.isEnabled = true
+            } else {
+                isTextInCell = false
+                createButton.isEnabled = false
+                break
+            }
+        }
+    }
+    
     
     private func removeViews() {
         dishImageView.removeFromSuperview()
@@ -215,6 +238,16 @@ class CreateRecipeViewController: UIViewController {
         ])
     }
     
+    @objc func nameTextFieldEmpty() {
+        
+        if let text = nameTextField.text, text.isEmpty {
+            nameTextField.layer.borderColor = UIColor.red.cgColor
+        } else {
+            nameTextField.layer.borderColor = UIColor.systemGreen.cgColor
+        }
+        ifAddButtonAvailable()
+    }
+    
     func keyboard() {
         // Подписываемся на уведомления о появлении и скрытии клавиатуры
                NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
@@ -232,7 +265,6 @@ class CreateRecipeViewController: UIViewController {
     }
 
     @objc func keyboardWillHide(_ notification: Notification) {
-
         if !nameTextField.isFirstResponder {
             collectionView.removeFromSuperview()
 
@@ -241,7 +273,13 @@ class CreateRecipeViewController: UIViewController {
                 self.setupConstraints()
             }
         }
+        ifAddButtonAvailable()
+
     }
+    
+    
+    
+    
     
 }
 
@@ -262,9 +300,7 @@ extension CreateRecipeViewController: UIImagePickerControllerDelegate, UINavigat
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
-    
-   
-    
+ 
 }
 
 extension CreateRecipeViewController: UITextFieldDelegate {
@@ -273,8 +309,28 @@ extension CreateRecipeViewController: UITextFieldDelegate {
         nameTextField.resignFirstResponder()
            return true
        }
+  
     
-
-
-   
+    
 }
+
+//extension CreateRecipeViewController: MyRecipeCollectionViewDelegate {
+//    func buttonIsEnable(_ IsEnable1: Bool, _ IsEnable2: Bool) {
+//        if IsEnable1 && IsEnable2 {
+//            
+//            isTextInCell = true
+//            
+//        } else {
+//            isTextInCell = false
+//        }
+//        ifAddButtonAvailable()
+//    }
+//    
+//    
+//   
+//    
+//    
+//}
+
+
+

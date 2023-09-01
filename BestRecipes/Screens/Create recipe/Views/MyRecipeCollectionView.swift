@@ -16,8 +16,19 @@ protocol MyRecipeCollectionCellDelegate: AnyObject {
   func textField2DidChange(at indexPath: IndexPath, newValue: String)
 }
 
+//protocol MyRecipeCollectionViewDelegate: AnyObject {
+//    func buttonIsEnable(_ IsEnable1: Bool, _ IsEnable2: Bool)
+//
+//}
+
 class MyRecipeCollectionView: UIView {
   
+//    var delegate: MyRecipeCollectionViewDelegate?
+    
+    var isButtonEnable1 = false
+    var isButtonEnable2 = false
+
+
   let collectionView: UICollectionView = {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .vertical
@@ -41,6 +52,7 @@ class MyRecipeCollectionView: UIView {
     backgroundColor = .white
     setupCollectionView()
     generateInitialData()
+
   }
   
   private func generateInitialData() {
@@ -80,8 +92,10 @@ extension MyRecipeCollectionView: UICollectionViewDelegate, UICollectionViewData
     
     cell.selectButton.tag = indexPath.row
     cell.indexPath = indexPath
-    cell.delegate = self
-    
+      cell.collectionDelegate = self
+//      cell.textFielDelegate = self
+//      delegate?.buttonIsEnable(false, false)
+
     return cell
   }
 }
@@ -102,7 +116,7 @@ extension MyRecipeCollectionView: MyRecipeCollectionCellDelegate {
         rowDataArray.remove(at: indexToRemove)
       }
     } else {
-      let blancDataRow = RowData(textField1Text: "", textField2Text: "", isSelected: false)
+      let blancDataRow = RowData(textField1Text: "", textField2Text: "", isSelected: false, isField1: false, isField2: false)
       rowDataArray.insert(blancDataRow, at: selectedRow + 1)
     }
     collectionView.reloadData()
@@ -114,7 +128,17 @@ extension MyRecipeCollectionView: MyRecipeCollectionCellDelegate {
   func textField1DidChange(at indexPath: IndexPath, newValue: String) {
       if (0...rowDataArray.count).contains(indexPath.row) {
           rowDataArray[indexPath.row].textField1Text = newValue
+          
+          if !newValue.isEmpty {
+              rowDataArray[indexPath.row].isField1 = true
+          } else {
+              rowDataArray[indexPath.row].isField1 = false
+          }
+          
           print(rowDataArray)
+
+//          delegate?.buttonIsEnable(isButtonEnable1, isButtonEnable2)
+
       }
   
   }
@@ -122,7 +146,28 @@ extension MyRecipeCollectionView: MyRecipeCollectionCellDelegate {
   func textField2DidChange(at indexPath: IndexPath, newValue: String) {
       if (0...rowDataArray.count).contains(indexPath.row) {
     rowDataArray[indexPath.row].textField2Text = newValue
-          print(rowDataArray)
+          
+          if !newValue.isEmpty {
+              rowDataArray[indexPath.row].isField2 = true
+          } else {
+              rowDataArray[indexPath.row].isField2 = false
+          }
+          
+          
+          
+//          delegate?.buttonIsEnable(isButtonEnable1, isButtonEnable2)
       }
   }
 }
+
+//extension MyRecipeCollectionView: MyTextFieldCellDelegate {
+//
+//        func textField1IsEmpty(_ isEmpty: Bool) {
+//             isButtonEnable1 = !isEmpty
+//
+//        }
+//
+//        func textField2IsEmpty(_ isEmpty: Bool) {
+//             isButtonEnable2 = !isEmpty
+//        }
+//    }

@@ -11,4 +11,7 @@ struct RowData: Equatable {
     var textField1Text: String = ""
     var textField2Text: String = ""
     var isSelected: Bool = false
+    var isField1: Bool = false
+    var isField2: Bool = false
+
 }
