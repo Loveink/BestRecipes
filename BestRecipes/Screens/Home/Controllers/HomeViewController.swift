@@ -23,7 +23,7 @@ class HomeViewController: UIViewController {
   var categoryLabel = UILabel.makeLabelForCells(text: "Popular category", font: .poppinsSemiBold(size: 20), textColor: .neutral100)
 
   var seeAllButtonTrend = SeeAllButton()
-  var seeAllButtonRecipe = SeeAllButton()
+  var seeAllButtonRecent = SeeAllButton()
   var seeAllButtonCreators = SeeAllButton()
 
 
@@ -31,7 +31,7 @@ class HomeViewController: UIViewController {
     super.viewDidLoad()
     
     view.backgroundColor = .white
-    
+      configureSeeAllButtons()
     setupScrollView()
     setupSearchBar()
     setupNameView()
