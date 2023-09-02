@@ -26,7 +26,7 @@ class MyRecipeCell: UICollectionViewCell {
   }
 
   //MARK: - Outlets
-  private let dishImageView: UIImageView = {
+   let dishImageView: UIImageView = {
     let image = UIImageView()
     image.image = UIImage(named: "image")
     image.contentMode = .scaleAspectFill
@@ -36,9 +36,9 @@ class MyRecipeCell: UICollectionViewCell {
     return image
   }()
 
-  private let titleLabel = UILabel.makeLabelForCells(text: "How to make sharwama at home", font: .poppinsSemiBold(size: 16), textColor: .black)
+   let titleLabel = UILabel.makeLabelForCells(text: "How to make sharwama at home", font: .poppinsSemiBold(size: 16), textColor: .black)
 
-  private let minuteLabel = UILabel.makeLabelForCells(text: "15 min", font: .poppinsRegular(size: 12), textColor: .white)
+   let minuteLabel = UILabel.makeLabelForCells(text: "15 min", font: .poppinsRegular(size: 12), textColor: .white)
 
   lazy var minuteView: UIView = {
       let view = UIView()
@@ -55,6 +55,8 @@ class MyRecipeCell: UICollectionViewCell {
     minuteView.addSubview(minuteLabel)
     contentView.addSubview(minuteView)
   }
+    
+    
 
   //MARK: - Constraints
   private func setupConstraints() {
@@ -73,7 +75,7 @@ class MyRecipeCell: UICollectionViewCell {
 
       minuteView.leadingAnchor.constraint(equalTo: dishImageView.leadingAnchor, constant: 10),
       minuteView.bottomAnchor.constraint(equalTo: dishImageView.bottomAnchor, constant: -10),
-      minuteView.widthAnchor.constraint(equalToConstant: 45),
+      minuteView.widthAnchor.constraint(equalToConstant: 150),
       minuteView.heightAnchor.constraint(equalToConstant: 20)
     ])
   }

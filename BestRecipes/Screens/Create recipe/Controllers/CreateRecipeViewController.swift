@@ -21,7 +21,7 @@ class CreateRecipeViewController: UIViewController {
 
     private var dishImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "ProfilePictureEdit")
+        imageView.image = UIImage(named: "No image")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = true
@@ -198,13 +198,30 @@ class CreateRecipeViewController: UIViewController {
 
     @objc func addButtonLogic() {
         print("ADD")
+        print(rowDataArray)
+
         print(rowDataPikers.serving)
         print(rowDataPikers.cookTime)
-
-
+        SaveToCoreData.saveRecipeInfoToCoreData(dishImageView.image!, nameTextField.text!, rowDataPikers.serving, rowDataPikers.cookTime)
+        SaveToCoreData.saveArrayOfArraysToCoreData([rowDataArray])
+       let array = GetFromCoreData.fetchArrayOfArraysFromCoreData()
+        print(array)
+        showRecipeAddedAlert()
         rowDataPikers = RowDataPiker() // В в самом конце после сохранения
 
 
+    }
+    
+    func showRecipeAddedAlert() {
+        let alertController = UIAlertController(title: "Ваш рецепт добавлен", message: nil, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default) { (action) in
+            let vc = MainTabBarController()
+            vc.selectedIndex = 4
+            vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
+        }
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
     }
 
     func ifAddButtonAvailable() {
