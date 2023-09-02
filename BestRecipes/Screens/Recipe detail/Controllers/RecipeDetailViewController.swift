@@ -25,7 +25,7 @@ class RecipeDetailViewController: UIViewController {
         navigationBar.titleOfViewLabel.text = "RecipeDetailVC"
         navigationBar.view.translatesAutoresizingMaskIntoConstraints = false
         addChild(navigationBar)
-            view.addSubview(navigationBar.view)
+        view.addSubview(navigationBar.view)
         navigationBar.didMove(toParent: self)
     }
     

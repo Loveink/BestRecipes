@@ -7,8 +7,15 @@
 
 import Foundation
 
-struct RowData: Equatable {
+struct RowDataCell: Equatable {
     var textField1Text: String = ""
     var textField2Text: String = ""
     var isSelected: Bool = false
+    var isField1: Bool = false
+    var isField2: Bool = false
+}
+
+struct RowDataPiker {
+    var serving: String = "1"
+    var cookTime: String = "20 min"
 }

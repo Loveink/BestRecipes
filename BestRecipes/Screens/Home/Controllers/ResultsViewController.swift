@@ -1,24 +1,35 @@
 //
-//  SearchViewController.swift
+//  ResultsViewController.swift
 //  BestRecipes
 //
-//  Created by Vanopr on 28.08.2023.
+//  Created by Александра Савчук on 01.09.2023.
 //
 
 import UIKit
 
-class SearchViewController: UIViewController  {
+class ResultsViewController: UIViewController  {
 
   let searchTableView = UITableView()
   let navigationBar = CustomNavigationBar()
   var recipes: [Recipe] = []
+  var selectedCuisine: String = ""
 
+  init(cuisine: String) {
+    super.init(nibName: nil, bundle: nil)
+    self.selectedCuisine = cuisine
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .white
     setupNavBar()
     setupTableView()
-    setConstrains()
+    setConstraints()
+    fetchCuisine()
   }
 
   private func setupTableView() {
@@ -30,14 +41,14 @@ class SearchViewController: UIViewController  {
   }
 
   private func setupNavBar() {
-    navigationBar.titleOfViewLabel.text = "Search Results"
+    navigationBar.titleOfViewLabel.text = "\(selectedCuisine.uppercased()) cuisine"
     navigationBar.view.translatesAutoresizingMaskIntoConstraints = false
     addChild(navigationBar)
     view.addSubview(navigationBar.view)
     navigationBar.didMove(toParent: self)
   }
 
-  private func setConstrains() {
+  private func setConstraints() {
     NSLayoutConstraint.activate([
       navigationBar.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
       navigationBar.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -50,11 +61,22 @@ class SearchViewController: UIViewController  {
     ])
   }
 
-
+  func fetchCuisine() {
+    Task {
+      do {
+        let data = try await RecipeAPI.fetchCuisine(with: selectedCuisine)
+        self.recipes = data.results
+        self.searchTableView.reloadData()
+      } catch {
+        await MainActor.run {
+          print(error.localizedDescription)
+        }
+      }
+    }
+  }
 }
 
-extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
-  // Методы делегата и источника данных таблицы
+extension ResultsViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     if recipes.count > 0 {
       return  recipes.count
@@ -66,7 +88,15 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! SearchTableViewCell
     if recipes.count > 0 {
-      cell.configureCell(recipes[indexPath.row])
+      let recipe = recipes[indexPath.item]
+      if let imageURL = URL(string: recipe.image) {
+        RecipeAPI.loadImageFromURL(urlString: imageURL.absoluteString) { image in
+          DispatchQueue.main.async {
+            cell.dishImageView.image = image
+            cell.titleLabel.text = recipe.title
+          }
+        }
+      }
     } else {
       cell.titleLabel.text = "No recipes"
 
@@ -81,11 +111,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if recipes.count > 0 {
       let selectedRecipe = recipes[indexPath.item]
-      // Запоминаем на каком контроллере были
-      lastVisitedViewController = SearchViewController()
-      // Переход наRecipeDetailsViewController()
       let recipeDetailsVC = RecipeDetailViewController()
-      // Передаем значение на следующий экран
       recipeDetailsVC.recipe = selectedRecipe
       recipeDetailsVC.modalPresentationStyle = .pageSheet
       present(recipeDetailsVC, animated: true, completion: nil)

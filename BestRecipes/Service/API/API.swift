@@ -20,20 +20,20 @@ let networkManager = NetworkManager()
         static let MainUrl = "https://api.spoonacular.com/recipes/"
     }
 
-  // Свои ключи
+let apiKey = [
+"de4f664533584529b9a71b334b628900",
+"a29eb5640b5c4435ad8ec2ef72759fe5",
+"a63ec13f2c7a473f9a9ec94e8d190e5c",
+"ce1dcc3c21614ac29f4f314e25f37a4f",
+"cbab9c65a56b431b843893b723acaa5d",
+"3edc89e90aad46d8a1806b89c284c359",
+"f23bfe6f20de46ef81114161e0e58ae6",
+"466a1187dd1a443d8e67d4da587ca850",
+"6b6b22ed8efc4cc18506fc60b5a9cd26",
+"d67869c008124d30a5e11bf6c47629ac"
+]
 
-enum apiKey {
-  static let key2 = "b4768be03cc34eecac9ddff5b5ec4f66"
-  static let key3 = "82c2d8b368364b64ba37c4f11aa55670"
-  static let key4 = "512b181445c643b29ffeab3ae46f3406"
-  static let key5 = "89470a21c8094205b62fa9d6f4fb7f75"
-  static let key6 = "06c6e6e34b5544f6a263f6825fa40fae"
-  static let key7 = "060fe2f88f7b4f9e9f5b21d90955989e"
-  static let key8 = "21e9db51c06e4d61bbd59d9ec120a3b7"
-  static let key9 = "ff6ba20005be4117a24fb55aa129b010"
-}
-
-    let apiKeySelect = apiKey.key5
+var apiKeySelect = apiKey[0]
 
     enum adds {
         static let popularity = "&sort=popularity"
@@ -71,6 +71,7 @@ struct RecipeAPI {
         let urlString = "\(url.MainUrl)\(adds.complexSearch)?apiKey=\(apiKeySelect)\(adds.popularity)"
         return try await networkManager.request(urlString: urlString)
     }
+
     // Для See all
     static func fetchTrendsAll() async throws -> RecipeResults {
         let urlString = "\(url.MainUrl)\(adds.complexSearch)?apiKey=\(apiKeySelect)\(adds.popularity)\(adds.number)"
@@ -92,6 +93,11 @@ struct RecipeAPI {
         let urlString = "\(url.MainUrl)\(adds.information)?ids=\(ids)&apiKey=\(apiKeySelect)"
         return try await networkManager.request(urlString: urlString)
     }
+
+  static func fetchCuisine(with request: String) async throws -> RecipeResults {
+      let urlString = "\(url.MainUrl)\(adds.complexSearch)?cuisine=\(request)&number=10&apiKey=\(apiKeySelect)"
+      return try await networkManager.request(urlString: urlString)
+  }
 }
 
 
