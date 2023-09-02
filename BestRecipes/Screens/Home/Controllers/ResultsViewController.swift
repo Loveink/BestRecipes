@@ -92,7 +92,7 @@ extension ResultsViewController: UITableViewDelegate, UITableViewDataSource {
       if let imageURL = URL(string: recipe.image) {
         RecipeAPI.loadImageFromURL(urlString: imageURL.absoluteString) { image in
           DispatchQueue.main.async {
-            cell.recipeImageView.image = image
+            cell.dishImageView.image = image
             cell.titleLabel.text = recipe.title
           }
         }
@@ -106,7 +106,7 @@ extension ResultsViewController: UITableViewDelegate, UITableViewDataSource {
   }
 
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 80
+    return 200
   }
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if recipes.count > 0 {
