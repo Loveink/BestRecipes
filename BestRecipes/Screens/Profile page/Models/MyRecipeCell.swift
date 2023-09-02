@@ -36,9 +36,9 @@ class MyRecipeCell: UICollectionViewCell {
     return image
   }()
 
-   let titleLabel = UILabel.makeLabelForCells(text: "How to make sharwama at home", font: .poppinsSemiBold(size: 16), textColor: .black)
+   let titleLabel = UILabel.makeLabelForCells(text: "How to make sharwama at home", font: .poppinsSemiBold(size: 16), textColor: .white)
 
-   let minuteLabel = UILabel.makeLabelForCells(text: "15 min", font: .poppinsRegular(size: 12), textColor: .white)
+   let minuteLabel = UILabel.makeLabelForCells(text: "15 min", font: .poppinsSemiBold(size: 12), textColor: .white)
 
   lazy var minuteView: UIView = {
       let view = UIView()
@@ -54,6 +54,7 @@ class MyRecipeCell: UICollectionViewCell {
     contentView.addSubview(titleLabel)
     minuteView.addSubview(minuteLabel)
     contentView.addSubview(minuteView)
+      minuteLabel.numberOfLines = 2
   }
     
     
@@ -66,10 +67,11 @@ class MyRecipeCell: UICollectionViewCell {
       dishImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
       dishImageView.heightAnchor.constraint(equalToConstant: 150),
 
-      titleLabel.leadingAnchor.constraint(equalTo: dishImageView.leadingAnchor),
+      titleLabel.leadingAnchor.constraint(equalTo: dishImageView.leadingAnchor, constant: 10),
       titleLabel.trailingAnchor.constraint(equalTo: dishImageView.trailingAnchor, constant: -10),
-      titleLabel.topAnchor.constraint(equalTo: dishImageView.bottomAnchor, constant: 10),
+      titleLabel.bottomAnchor.constraint(equalTo: minuteView.topAnchor, constant: -5),
 
+      
       minuteLabel.centerXAnchor.constraint(equalTo: minuteView.centerXAnchor),
       minuteLabel.centerYAnchor.constraint(equalTo: minuteView.centerYAnchor),
 

@@ -21,7 +21,7 @@ class CreateRecipeViewController: UIViewController {
 
     private var dishImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "No image")
+        imageView.image = UIImage(named: "No image 1")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = true
