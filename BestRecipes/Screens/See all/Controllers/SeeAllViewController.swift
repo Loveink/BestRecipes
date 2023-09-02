@@ -11,10 +11,16 @@ class SeeAllViewController: UIViewController {
     
     let navigationBar = CustomNavigationBar()
     
+    var recipes: [RecipeInfoForCell]!
     
-    init(title: String) {
+    var collectionView: SeeAllCollectionView!
+    
+    
+    
+    init(title: String, recipes: [RecipeInfoForCell]) {
         super.init(nibName: nil, bundle: nil)
         navigationBar.titleOfViewLabel.text = title
+        self.recipes = recipes
     }
     
     required init?(coder: NSCoder) {
@@ -28,8 +34,10 @@ class SeeAllViewController: UIViewController {
         self.view.backgroundColor = .white
         setupNavBar()
         
-        setConstraints()
+        setCollectionView()
+        
     }
+    
     
     
     private func setupNavBar() {
@@ -44,12 +52,20 @@ class SeeAllViewController: UIViewController {
             navigationBar.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             navigationBar.view.heightAnchor.constraint(equalToConstant: 50)
         ])
-        
     }
     
     
-    private func setConstraints() {
+    private func setCollectionView() {
+        collectionView = SeeAllCollectionView(frame: .zero, navController: navigationController!, recipes: recipes)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(collectionView)
         
+        NSLayoutConstraint.activate([
+            collectionView.leftAnchor.constraint(equalTo: self.view.leftAnchor),
+            collectionView.rightAnchor.constraint(equalTo: self.view.rightAnchor),
+            collectionView.topAnchor.constraint(equalTo: navigationBar.view.bottomAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+        ])
         
     }
     

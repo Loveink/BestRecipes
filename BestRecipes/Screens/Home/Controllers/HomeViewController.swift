@@ -105,6 +105,7 @@ class HomeViewController: UIViewController {
           recipesId += String( self.collectionView.recipes[number].id) + ","
           let secondResponce =  try await RecipeAPI.fetchFullInfoFromIdString(with: recipesId)
           self.collectionView.recipeFullInfo = secondResponce
+          self.seeAllButtonTrend.recipes = secondResponce
         }
 
       } catch {
