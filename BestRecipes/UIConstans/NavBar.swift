@@ -70,11 +70,12 @@ class CustomNavigationBar: UIViewController {
     
     @objc  func backButtonAction() {
         let lastVC = lastVisitedViewController
-        if lastVC is SearchViewController {
-            dismiss(animated: true, completion: nil)
-        } else if lastVC is HomeViewController {
+        if lastVC is HomeViewController {
             self.navigationController?.popViewController(animated: true)
+            
         }
+        dismiss(animated: true, completion: nil)
+        
   }
     
     @objc  func shareButtonAction() {
