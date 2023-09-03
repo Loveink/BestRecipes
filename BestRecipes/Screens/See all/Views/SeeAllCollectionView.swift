@@ -28,11 +28,6 @@ class SeeAllCollectionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func reloadData() {
-//        recipes = bookmarksManager.getBookmarks()
-        self.collectionView.reloadData()
-    }
-    
     
     private func configureCollection() {
         let layout = UICollectionViewFlowLayout()
@@ -41,7 +36,7 @@ class SeeAllCollectionView: UIView {
         collectionView.backgroundColor = .clear
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         
-        collectionView.register(SeeAllCell.self, forCellWithReuseIdentifier: SeeAllCell.seeAllIdentifier)
+        collectionView.register(DiscoverCell.self, forCellWithReuseIdentifier: DiscoverCell.discoverIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
         self.addSubview(collectionView)
@@ -69,7 +64,7 @@ extension SeeAllCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SeeAllCell.seeAllIdentifier, for: indexPath) as? SeeAllCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DiscoverCell.discoverIdentifier, for: indexPath) as? DiscoverCell else {
             return UICollectionViewCell()
         }
         let selectedNews = recipes[indexPath.row]
@@ -85,18 +80,13 @@ extension SeeAllCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.frame.width - 20, height: 250)
+        return CGSize(width: self.frame.width - 20, height: 350)
     }
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let recipeDetailVC = RecipeDetailViewController()
         self.navController.pushViewController(recipeDetailVC, animated: true)
-    }
-    
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 25.0
     }
     
 }

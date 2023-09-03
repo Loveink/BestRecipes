@@ -200,7 +200,7 @@ class HomeViewController: UIViewController {
               recipesId += String( self.categoryCollectionView.recipes[number].id) + ","
               let secondResponce =  try await RecipeAPI.fetchFullInfoFromIdString(with: recipesId)
               self.categoryCollectionView.recipeFullInfo = secondResponce
-              self.seeAllButtonCuisine.recipes = secondResponce
+              self.seeAllButtonRecipe.recipes = secondResponce
             }
           } catch {
               await MainActor.run {
@@ -227,7 +227,8 @@ extension HomeViewController: CollectionDidSelectProtocol {
                 recipesId += String( self.categoryCollectionView.recipes[number].id) + ","
                 let secondResponce =  try await RecipeAPI.fetchFullInfoFromIdString(with: recipesId)
                 self.categoryCollectionView.recipeFullInfo = secondResponce
-                self.seeAllButtonCuisine.recipes = secondResponce
+                self.seeAllButtonRecipe.recipes = secondResponce
+                self.seeAllButtonRecipe.name = categoryName
               }
             } catch {
                 await MainActor.run {

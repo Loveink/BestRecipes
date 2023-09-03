@@ -71,7 +71,6 @@
 		E7CDA1C82A9FD2E900E866EE /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CDA1C72A9FD2E900E866EE /* View.swift */; };
 		E7CDA1D02AA0A8B700E866EE /* DiscoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CDA1CF2AA0A8B700E866EE /* DiscoverCell.swift */; };
 		E7CDA1D22AA0A8C300E866EE /* DiscoverCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CDA1D12AA0A8C300E866EE /* DiscoverCollectionView.swift */; };
-		E7CDA1D82AA1FEB000E866EE /* SeeAllCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CDA1D72AA1FEB000E866EE /* SeeAllCell.swift */; };
 		E7CDA1DA2AA26A9B00E866EE /* SeeAllCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CDA1D92AA26A9B00E866EE /* SeeAllCollectionView.swift */; };
 /* End PBXBuildFile section */
 
@@ -141,7 +140,6 @@
 		E7CDA1C72A9FD2E900E866EE /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		E7CDA1CF2AA0A8B700E866EE /* DiscoverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscoverCell.swift; path = BestRecipes/Screens/Discover/DiscoverCell.swift; sourceTree = SOURCE_ROOT; };
 		E7CDA1D12AA0A8C300E866EE /* DiscoverCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscoverCollectionView.swift; path = BestRecipes/Screens/Discover/DiscoverCollectionView.swift; sourceTree = SOURCE_ROOT; };
-		E7CDA1D72AA1FEB000E866EE /* SeeAllCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SeeAllCell.swift; path = "BestRecipes/Screens/See all/Views/SeeAllCell.swift"; sourceTree = SOURCE_ROOT; };
 		E7CDA1D92AA26A9B00E866EE /* SeeAllCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SeeAllCollectionView.swift; path = "BestRecipes/Screens/See all/Views/SeeAllCollectionView.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -503,7 +501,6 @@
 		5705A2442A9A73560040E9E5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E7CDA1D72AA1FEB000E866EE /* SeeAllCell.swift */,
 				E7CDA1D92AA26A9B00E866EE /* SeeAllCollectionView.swift */,
 			);
 			path = Views;
@@ -702,7 +699,6 @@
 			files = (
 				57FA89A92AA1C3D600BBBECB /* CategoryNameCell.swift in Sources */,
 				0B7E02F52A9CCE9D00D48CE2 /* LetAndVarBrain.swift in Sources */,
-				E7CDA1D82AA1FEB000E866EE /* SeeAllCell.swift in Sources */,
 				0B7E02E52A9CCC3400D48CE2 /* File.swift in Sources */,
 				0B7E02D22A9B96AC00D48CE2 /* NetworkManager.swift in Sources */,
 				0B7E02EC2A9CCD6D00D48CE2 /* NavBar.swift in Sources */,
