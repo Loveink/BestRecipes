@@ -1,19 +1,24 @@
 //
-//  ProfilePageViewController.swift
+//  ImageSelectionViewController.swift
 //  BestRecipes
 //
-//  Created by Александра Савчук on 26.08.2023.
+//  Created by Vanopr on 30.08.2023.
 //
-//
-//  
+
+
+
+// "82c2d8b368364b64ba37c4f11aa55670", //Vanopr Keys
+// "c0472158d42f45c9b91c7244460c36e1",
+// "cb0a8f037cba4750bd8706d4473228d6"
 
 import UIKit
 
 class ProfilePageViewController: UIViewController, ImageSelectionDelegate {
     
+    var myRecipes = GetFromCoreData.getRecipeMyRecipeModelsFromCoreData()
+    var myIngridients = GetFromCoreData.fetchArrayOfArraysFromCoreData()
     private var mainLabel = UILabel.makeLabelForCells(text: "My Profile", font: .poppinsSemiBold(size: 35), textColor: .black)
     private let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: 200, height: 200), collectionViewLayout: UICollectionViewFlowLayout())
-    
       var imageProfileView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -25,24 +30,17 @@ class ProfilePageViewController: UIViewController, ImageSelectionDelegate {
         imageView.image = imageProfileViewSaved
         return imageView
     }()
-    
     private var myRecipeLabel = UILabel.makeLabelForCells(text: "My recipes", font: .poppinsSemiBold(size: 28), textColor: .black)
-
-    
     private let imageChoice = ImageSelectionViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-
         setupMainLabel()
         setupImageView()
         setupMyRecipeLabel()
         setupCollectionView()
         addConstrains()
-        
-//        addChild(imageChoice)
-//        view.addSubview(imageChoice.view)
-//        imageChoice.didMove(toParent: self)
     }
     
     private func setupImageView() {
@@ -81,7 +79,6 @@ class ProfilePageViewController: UIViewController, ImageSelectionDelegate {
     
   private func addConstrains() {
       NSLayoutConstraint.activate([
-      
         mainLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
         mainLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
         mainLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: 20),
@@ -101,18 +98,12 @@ class ProfilePageViewController: UIViewController, ImageSelectionDelegate {
         collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
         collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
         collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-
-      
       ])
     }
-    
         func didUpdateProfileImage(_ image: UIImage) {
             imageProfileView.image = image
-            
         }
-    
 }
-
 
 extension ProfilePageViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -122,22 +113,25 @@ extension ProfilePageViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 2 // Промежуток между карточками
     }
-
 }
 
 extension ProfilePageViewController:  UICollectionViewDelegate, UICollectionViewDataSource{
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return myRecipes.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyRecipeCell", for: indexPath) as! MyRecipeCell
+        let myRecipe = myRecipes[indexPath.row]
+        if let imageData = myRecipe.recipeImage {
+            cell.dishImageView.image = UIImage(data: imageData)
+        }
+        let howManyIngridients = myIngridients[indexPath.row].count
+        cell.minuteLabel.text = "\(howManyIngridients) ingredients" + " | " + myRecipe.cookTime!
+        cell.titleLabel.text  = myRecipe.recipeName
         cell.layer.borderColor = UIColor.black.cgColor
-        
         return cell
     }
-    
-    
-    
 }
 

@@ -26,7 +26,7 @@ class MyRecipeCell: UICollectionViewCell {
   }
 
   //MARK: - Outlets
-  private let dishImageView: UIImageView = {
+   let dishImageView: UIImageView = {
     let image = UIImageView()
     image.image = UIImage(named: "image")
     image.contentMode = .scaleAspectFill
@@ -36,9 +36,9 @@ class MyRecipeCell: UICollectionViewCell {
     return image
   }()
 
-  private let titleLabel = UILabel.makeLabelForCells(text: "How to make sharwama at home", font: .poppinsSemiBold(size: 16), textColor: .black)
+   let titleLabel = UILabel.makeLabelForCells(text: "How to make sharwama at home", font: .poppinsSemiBold(size: 16), textColor: .white)
 
-  private let minuteLabel = UILabel.makeLabelForCells(text: "15 min", font: .poppinsRegular(size: 12), textColor: .white)
+   let minuteLabel = UILabel.makeLabelForCells(text: "15 min", font: .poppinsSemiBold(size: 12), textColor: .white)
 
   lazy var minuteView: UIView = {
       let view = UIView()
@@ -54,7 +54,10 @@ class MyRecipeCell: UICollectionViewCell {
     contentView.addSubview(titleLabel)
     minuteView.addSubview(minuteLabel)
     contentView.addSubview(minuteView)
+      minuteLabel.numberOfLines = 2
   }
+    
+    
 
   //MARK: - Constraints
   private func setupConstraints() {
@@ -64,16 +67,17 @@ class MyRecipeCell: UICollectionViewCell {
       dishImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
       dishImageView.heightAnchor.constraint(equalToConstant: 150),
 
-      titleLabel.leadingAnchor.constraint(equalTo: dishImageView.leadingAnchor),
+      titleLabel.leadingAnchor.constraint(equalTo: dishImageView.leadingAnchor, constant: 10),
       titleLabel.trailingAnchor.constraint(equalTo: dishImageView.trailingAnchor, constant: -10),
-      titleLabel.topAnchor.constraint(equalTo: dishImageView.bottomAnchor, constant: 10),
+      titleLabel.bottomAnchor.constraint(equalTo: minuteView.topAnchor, constant: -5),
 
+      
       minuteLabel.centerXAnchor.constraint(equalTo: minuteView.centerXAnchor),
       minuteLabel.centerYAnchor.constraint(equalTo: minuteView.centerYAnchor),
 
       minuteView.leadingAnchor.constraint(equalTo: dishImageView.leadingAnchor, constant: 10),
       minuteView.bottomAnchor.constraint(equalTo: dishImageView.bottomAnchor, constant: -10),
-      minuteView.widthAnchor.constraint(equalToConstant: 45),
+      minuteView.widthAnchor.constraint(equalToConstant: 150),
       minuteView.heightAnchor.constraint(equalToConstant: 20)
     ])
   }
