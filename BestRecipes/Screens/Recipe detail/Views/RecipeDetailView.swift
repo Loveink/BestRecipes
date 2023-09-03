@@ -69,8 +69,11 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
         imageFood.image = UIImage(named: "image")
         imageFood.contentMode = .scaleAspectFit
 //        imageFood.heightAnchor.constraint(equalToConstant: 206).isActive = true
+        imageFood.isUserInteractionEnabled = true
         return imageFood
     }()
+    
+
     
     private lazy var recipeLabel: UILabel = {
         let recipeLabel = UILabel()
@@ -134,6 +137,14 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
         cell.descriptionLbl.text = "Right text"
         
         return cell
+    }
+    
+// MARK: - DELETE ME
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let destinationVC = ShopingListViewController()
+        present(destinationVC, animated: true) // Показываем модально
+
+    
     }
 }
 
