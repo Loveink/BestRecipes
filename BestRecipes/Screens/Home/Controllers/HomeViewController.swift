@@ -138,7 +138,7 @@ class HomeViewController: UIViewController {
 
       cuisineCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
       cuisineCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-      cuisineCollectionView.topAnchor.constraint(equalTo: cuisineLabel.bottomAnchor, constant: 8),
+      cuisineCollectionView.topAnchor.constraint(equalTo: cuisineLabel.bottomAnchor, constant: 10),
       cuisineCollectionView.heightAnchor.constraint(equalToConstant: 200),
     ])
   }
@@ -201,12 +201,12 @@ class HomeViewController: UIViewController {
             }
           } catch {
               await MainActor.run {
-                 apiKeyIndex += 1 // Увеличиваем индекс ключа
+                 apiKeyIndex += 1
                 if apiKeyIndex >= apiKey.count {
-                    apiKeyIndex = 0 // Вернуться к первому ключу, если достигнут конец массива
+                    apiKeyIndex = 0
                 }
-                apiKeySelect = apiKey[apiKeyIndex] // Используем новый ключ
-                fetchFirstSearch() // Повторно вызываем функцию
+                apiKeySelect = apiKey[apiKeyIndex]
+                fetchFirstSearch()
               }
           }
       }
@@ -227,12 +227,12 @@ extension HomeViewController: CollectionDidSelectProtocol {
               }
             } catch {
                 await MainActor.run {
-                    apiKeyIndex += 1 // Увеличиваем индекс ключа
+                    apiKeyIndex += 1
                   if apiKeyIndex >= apiKey.count {
-                      apiKeyIndex = 0 // Вернуться к первому ключу, если достигнут конец массива
+                      apiKeyIndex = 0
                   }
-                  apiKeySelect = apiKey[apiKeyIndex] // Используем новый ключ
-                  fetchSearch(categoryName: categoryName) // Повторно вызываем функцию
+                  apiKeySelect = apiKey[apiKeyIndex]
+                  fetchSearch(categoryName: categoryName)
                 }
                 }
             }

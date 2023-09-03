@@ -157,8 +157,8 @@ class TrendingCell: UICollectionViewCell {
       titleLabel.topAnchor.constraint(equalTo: dishImageView.bottomAnchor, constant: 10),
 
       authorImageView.leadingAnchor.constraint(equalTo: titleLabel.leadingAnchor),
-      authorImageView.widthAnchor.constraint(equalToConstant: 32),
-      authorImageView.heightAnchor.constraint(equalToConstant: 32),
+      authorImageView.widthAnchor.constraint(equalToConstant: 30),
+      authorImageView.heightAnchor.constraint(equalToConstant: 30),
       authorImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
 
       authorLabel.leadingAnchor.constraint(equalTo: authorImageView.trailingAnchor, constant: 10),

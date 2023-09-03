@@ -30,7 +30,7 @@ let apiKey = [
 "f23bfe6f20de46ef81114161e0e58ae6",
 "466a1187dd1a443d8e67d4da587ca850",
 "6b6b22ed8efc4cc18506fc60b5a9cd26",
-"d67869c008124d30a5e11bf6c47629ac"
+"5180ed4ebccf4787baa4c64e1882aa19"
 ]
 
 var apiKeySelect = apiKey[0]
@@ -41,6 +41,7 @@ var apiKeySelect = apiKey[0]
         static let number = "&number=50"
         static let complexSearch = "complexSearch"
         static let autocomplete = "autocomplete"
+        static let instructions = "analyzedInstructions"
         
     }
 
@@ -96,6 +97,11 @@ struct RecipeAPI {
 
   static func fetchCuisine(with request: String) async throws -> RecipeResults {
       let urlString = "\(url.MainUrl)\(adds.complexSearch)?cuisine=\(request)&number=10&apiKey=\(apiKeySelect)"
+      return try await networkManager.request(urlString: urlString)
+  }
+
+  static func fetchInstructions(with ids: String) async throws -> RecipeResults {
+      let urlString = "\(url.MainUrl)\(ids)\(adds.instructions)apiKey=\(apiKeySelect)"
       return try await networkManager.request(urlString: urlString)
   }
 }
