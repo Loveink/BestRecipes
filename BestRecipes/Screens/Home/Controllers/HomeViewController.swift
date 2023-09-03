@@ -29,7 +29,7 @@ class HomeViewController: UIViewController {
   var cuisineLabel = UILabel.makeLabelForCells(text: "Popular cuisine", font: .poppinsSemiBold(size: 20), textColor: .neutral100)
 
   var seeAllButtonTrend = SeeAllButton()
-  var seeAllButtonRecent = SeeAllButton()
+  var seeAllButtonRecipe = SeeAllButton()
   var seeAllButtonCreators = SeeAllButton()
   var seeAllButtonCuisine = SeeAllButton()
 
@@ -157,6 +157,7 @@ class HomeViewController: UIViewController {
               }
               let secondResponce = try await RecipeAPI.fetchFullInfoFromIdString(with: recipesId)
               self.trendingCollectionView.recipeFullInfo = secondResponce
+              self.seeAllButtonTrend.recipes = secondResponce
           } catch {
               apiKeyIndex += 1 // Увеличиваем индекс ключа
               if apiKeyIndex >= apiKey.count {
@@ -199,6 +200,7 @@ class HomeViewController: UIViewController {
               recipesId += String( self.categoryCollectionView.recipes[number].id) + ","
               let secondResponce =  try await RecipeAPI.fetchFullInfoFromIdString(with: recipesId)
               self.categoryCollectionView.recipeFullInfo = secondResponce
+              self.seeAllButtonCuisine.recipes = secondResponce
             }
           } catch {
               await MainActor.run {
@@ -225,6 +227,7 @@ extension HomeViewController: CollectionDidSelectProtocol {
                 recipesId += String( self.categoryCollectionView.recipes[number].id) + ","
                 let secondResponce =  try await RecipeAPI.fetchFullInfoFromIdString(with: recipesId)
                 self.categoryCollectionView.recipeFullInfo = secondResponce
+                self.seeAllButtonCuisine.recipes = secondResponce
               }
             } catch {
                 await MainActor.run {

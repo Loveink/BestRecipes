@@ -11,7 +11,11 @@ class SeeAllButton: UIButton {
     
     var name: String!
     
-    var recipes = [RecipeInfoForCell]()
+    var recipes = [RecipeInfoForCell]() {
+        didSet {
+            print("SeeAllButton recipes didSet")
+        }
+    }
     
     init() {
         super.init(frame: .zero)
@@ -52,9 +56,8 @@ extension HomeViewController {
     func configureSeeAllButtons() {
         seeAllButtonTrend.addTarget(self, action: #selector(seeAllButtonWasTapped), for: .touchUpInside)
         seeAllButtonTrend.name = "Trending now"
-        
-        seeAllButtonRecent.addTarget(self, action: #selector(seeAllButtonWasTapped), for: .touchUpInside)
-        seeAllButtonRecent.name = "Recent recipe"
+        seeAllButtonRecipe.addTarget(self, action: #selector(seeAllButtonWasTapped), for: .touchUpInside)
+        seeAllButtonRecipe.name = "Recent recipe"
         seeAllButtonCreators.addTarget(self, action: #selector(seeAllButtonWasTapped), for: .touchUpInside)
         seeAllButtonCreators.name = "Creators"
     }

@@ -17,6 +17,7 @@ class SeeAllCell: TrendingCell {
         self.removeAllConstraints()
         self.contentView.removeAllConstraints()
         self.setupConstraints()
+        configureUI()
     }
     
     required init?(coder: NSCoder) {
@@ -26,7 +27,14 @@ class SeeAllCell: TrendingCell {
     private func configureUI() {
         self.authorLabel.isHidden = true
         self.authorImageView.isHidden = true
-        self.titleLabel.tintColor = .white
+        
+        for label in [titleLabel, minuteLabel] {
+            label.textColor = .white
+            label.text = " " + (label.text ?? "") + " "
+            label.backgroundColor = .white.withAlphaComponent(0.4)
+            label.layer.cornerRadius = 15
+            label.layer.masksToBounds = true
+        }
     }
     
     
@@ -58,7 +66,8 @@ class SeeAllCell: TrendingCell {
             titleLabel.bottomAnchor.constraint(equalTo: minuteLabel.topAnchor, constant: -5),
 //            titleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: -100),
             titleLabel.leftAnchor.constraint(equalTo: dishImageView.leftAnchor, constant: 5),
-            titleLabel.rightAnchor.constraint(equalTo: dishImageView.rightAnchor, constant: -5),
+//            titleLabel.rightAnchor.constraint(equalTo: dishImageView.rightAnchor, constant: -5),
+            titleLabel.widthAnchor.constraint(lessThanOrEqualTo: dishImageView.widthAnchor, constant: -10),
             
             
             
