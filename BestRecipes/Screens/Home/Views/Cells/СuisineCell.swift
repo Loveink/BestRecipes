@@ -41,7 +41,7 @@ class СuisineCell: UICollectionViewCell {
   public func configureCell(with title: String) {
       DispatchQueue.main.async {
         self.titleLabel.text = title
-        self.dishImageView.image = UIImage(named: title)
+        self.dishImageView.image = UIImage(named: title.lowercased())
       }
   }
 
