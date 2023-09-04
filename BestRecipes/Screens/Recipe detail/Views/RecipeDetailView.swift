@@ -11,7 +11,7 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
     
     
     var ingridients = ["Тартилия", "Лук", "Помидор", "Огурцы", "Курица"]
-    
+  var recipe: Recipe?
     let navigationBar = CustomNavigationBar()
     
     //MARK: - UI elements

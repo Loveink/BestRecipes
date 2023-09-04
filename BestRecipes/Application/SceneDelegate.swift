@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     guard let windowScene = (scene as? UIWindowScene) else { return }
     window = UIWindow(windowScene: windowScene)
 
-    let viewController = RecipeDetailView()
+    let viewController = MainTabBarController()
     let navigationController = UINavigationController(rootViewController: viewController)
     navigationController.navigationBar.isHidden = true
 
