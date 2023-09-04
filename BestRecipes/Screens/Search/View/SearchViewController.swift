@@ -84,7 +84,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
       // Запоминаем на каком контроллере были
       lastVisitedViewController = SearchViewController()
       // Переход наRecipeDetailsViewController()
-      let recipeDetailsVC = RecipeDetailViewController()
+      let recipeDetailsVC = RecipeDetailView()
       // Передаем значение на следующий экран
       recipeDetailsVC.recipe = selectedRecipe
       recipeDetailsVC.modalPresentationStyle = .pageSheet

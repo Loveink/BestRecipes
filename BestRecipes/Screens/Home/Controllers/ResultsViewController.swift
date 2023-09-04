@@ -111,7 +111,7 @@ extension ResultsViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if recipes.count > 0 {
       let selectedRecipe = recipes[indexPath.item]
-      let recipeDetailsVC = RecipeDetailViewController()
+      let recipeDetailsVC = RecipeDetailView()
       recipeDetailsVC.recipe = selectedRecipe
       recipeDetailsVC.modalPresentationStyle = .pageSheet
       present(recipeDetailsVC, animated: true, completion: nil)
