@@ -69,14 +69,21 @@ class CustomNavigationBar: UIViewController {
     
     
     @objc  func backButtonAction() {
-        let lastVC = lastVisitedViewController
-        if lastVC is HomeViewController {
-            self.navigationController?.popViewController(animated: true)
-            
+
+        if navigationController?.viewControllers.count ?? 0 > 1 {
+            navigationController?.popViewController(animated: true)
+        } else {
+            dismiss(animated: true)
         }
-        dismiss(animated: true, completion: nil)
         
-  }
+//        let lastVC = lastVisitedViewController
+//        if lastVC is SearchViewController {
+//            dismiss(animated: true, completion: nil)
+//        } else if let navigationController = navigationController {
+//            let homeViewController = MainTabBarController()
+//            navigationController.setViewControllers([homeViewController], animated: true)
+//        }
+    }
     
     @objc  func shareButtonAction() {
             textToShare += """
