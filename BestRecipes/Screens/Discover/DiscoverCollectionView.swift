@@ -83,7 +83,11 @@ extension DiscoverCollectionView: UICollectionViewDelegate, UICollectionViewData
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let recipeDetailVC = RecipeDetailViewController()
+        let recipeDetailVC = RecipeDetailView()
+        let recipeAllInfo = self.recipes[indexPath.row]
+        let recipe = Recipe(id: recipeAllInfo.id, title: recipeAllInfo.title, image: recipeAllInfo.image)
+        recipeDetailVC.recipe = recipe
+        recipeDetailVC.modalPresentationStyle = .pageSheet
         self.navController.pushViewController(recipeDetailVC, animated: true)
     }
     
