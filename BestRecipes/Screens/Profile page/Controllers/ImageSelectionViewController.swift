@@ -25,7 +25,6 @@ class ImageSelectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupView()
         setupScrollView()
         setupImages()
@@ -43,13 +42,11 @@ class ImageSelectionViewController: UIViewController {
         scrollView.isScrollEnabled = true
         scrollView.showsHorizontalScrollIndicator = true
         scrollView.contentSize = CGSize(width: 1200, height: 200)
-
         view.addSubview(scrollView)
     }
 
     private func setupImages() {
         var xOffset: CGFloat = 50
-
         for (_, imageName) in profileImageNames.enumerated() {
             if let image = UIImage(named: imageName) {
                 let imageView = UIImageView(image: image)
@@ -66,7 +63,6 @@ class ImageSelectionViewController: UIViewController {
                 } else {
                     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageOtherTapped(_:)))
                     imageView.addGestureRecognizer(tapGesture)
-                    
                 }
 
                 xOffset += 170
@@ -81,12 +77,10 @@ class ImageSelectionViewController: UIViewController {
               return
           }
           if let tappedImage = tappedImageView.image {
-              saveImageToCoreData(tappedImage)
+              SaveToCoreData.saveProfileImageToCoreData(tappedImage)
               delegate?.didUpdateProfileImage(tappedImage)
           }
       }
-    
-
 
     private func setupImagePicker() {
         imagePicker.sourceType = .photoLibrary
@@ -129,45 +123,16 @@ extension ImageSelectionViewController: UIImagePickerControllerDelegate, UINavig
                 imageView.image = selectedImage
                 imageProfileViewSaved = selectedImage
                 delegate?.didUpdateProfileImage(selectedImage)
-                saveImageToCoreData(selectedImage)
-                
+                SaveToCoreData.saveProfileImageToCoreData(selectedImage)
             }
-       
-        
-        
-        
-        
-        
-        
-        
     }
-    
     picker.dismiss(animated: true, completion: nil)
 
     }
-
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true, completion: nil)
     }
     
-    func saveImageToCoreData(_ image:UIImage) {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                    return
-                }
-                context = appDelegate.persistentContainer.viewContext
-
-                // Сохранение изображения
-               
-                    if let imageData = image.pngData() {
-                        let image = PicturePofileModel(context: context)
-                        image.imageProfile = imageData
-                        do {
-                            try context.save()
-                            print("Изображение успешно сохранено")
-                        } catch {
-                            print("Ошибка при сохранении: \(error)")
-                        }
-                    }
-            }
 }
 

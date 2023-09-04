@@ -31,7 +31,7 @@ class CategoryCell: UICollectionViewCell {
   let grayBackgroundView: UIView = {
       let view = UIView()
       view.backgroundColor = .neutral10
-      view.layer.cornerRadius = 12
+      view.layer.cornerRadius = 20
       view.translatesAutoresizingMaskIntoConstraints = false
       return view
   }()
@@ -40,7 +40,7 @@ class CategoryCell: UICollectionViewCell {
     let image = UIImageView()
     image.image = UIImage(named: "image")
     image.contentMode = .scaleAspectFill
-    image.layer.cornerRadius = 70
+    image.layer.cornerRadius = 50
     image.clipsToBounds = true
     image.translatesAutoresizingMaskIntoConstraints = false
     return image
@@ -115,8 +115,8 @@ class CategoryCell: UICollectionViewCell {
       dishImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
       dishImageView.centerYAnchor.constraint(equalTo: grayBackgroundView.topAnchor),
       dishImageView.centerXAnchor.constraint(equalTo: grayBackgroundView.centerXAnchor),
-      dishImageView.heightAnchor.constraint(equalToConstant: 140),
-      dishImageView.widthAnchor.constraint(equalToConstant: 140),
+      dishImageView.heightAnchor.constraint(equalToConstant: 100),
+      dishImageView.widthAnchor.constraint(equalToConstant: 100),
 
       whiteCircleView.bottomAnchor.constraint(equalTo: grayBackgroundView.bottomAnchor, constant: -8),
       whiteCircleView.trailingAnchor.constraint(equalTo: grayBackgroundView.trailingAnchor,constant: -8),

@@ -61,7 +61,6 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
         let imageFood = UIImageView()
         imageFood.image = UIImage(named: "image")
         imageFood.contentMode = .scaleAspectFit
-        
         return imageFood
     }()
     
@@ -210,6 +209,5 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
         let cell = tableView.cellForRow(at: indexPath) as! CustomCellRecipe
         cell.toggleCheckmark()
     }
-    
 }
 

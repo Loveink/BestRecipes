@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RowDataCell: Equatable {
+struct RowDataCell: Equatable, Codable {
     var textField1Text: String = ""
     var textField2Text: String = ""
     var isSelected: Bool = false
@@ -19,3 +19,4 @@ struct RowDataPiker {
     var serving: String = "1"
     var cookTime: String = "20 min"
 }
+
