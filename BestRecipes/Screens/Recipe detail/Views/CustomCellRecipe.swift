@@ -15,6 +15,16 @@ class CustomCellRecipe: UITableViewCell {
     var stackView = UIStackView()
     var viewCardView = UIView()
     
+    private let checkmarkImage: UIImageView = {
+        let checkmarkImage = UIImageView()
+        checkmarkImage.contentMode = .scaleAspectFit
+        checkmarkImage.image = UIImage(systemName: "checkmark.circle.fill")
+        checkmarkImage.tintColor = UIColor.white // Установите начальный цвет на белый
+        checkmarkImage.translatesAutoresizingMaskIntoConstraints = false
+        return checkmarkImage
+    }()
+    
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: "CustomCellRecipe")
         setupUI()
@@ -27,7 +37,6 @@ class CustomCellRecipe: UITableViewCell {
     
     private func setupUI() {
         
-
         backgroundColor = UIColor.white
         selectionStyle = .none
         
@@ -38,6 +47,9 @@ class CustomCellRecipe: UITableViewCell {
         
         viewCardView.addSubview(dishImageView)
         viewCardView.addSubview(stackView)
+        
+        viewCardView.addSubview(checkmarkImage)
+//        checkmarkImage.isHidden = true
         
         viewCardView.backgroundColor = UIColor(white: 0.66666666666666663, alpha: 1)
         viewCardView.translatesAutoresizingMaskIntoConstraints = false
@@ -92,10 +104,27 @@ class CustomCellRecipe: UITableViewCell {
         dishImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
         dishImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         
+        stackView.axis = .horizontal // Используем горизонтальную ориентацию
+        stackView.alignment = .center // Центрируем элементы по вертикали
+        
         stackView.leadingAnchor.constraint(equalTo: dishImageView.trailingAnchor, constant: 16).isActive = true
         stackView.topAnchor.constraint(equalTo: viewCardView.topAnchor, constant: 16).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: viewCardView.trailingAnchor, constant: -16).isActive = true
+        stackView.trailingAnchor.constraint(equalTo: checkmarkImage.leadingAnchor, constant: -8).isActive = true // Расстояние между текстом и галочкой
         stackView.bottomAnchor.constraint(equalTo: viewCardView.bottomAnchor, constant: -16).isActive = true
+        
+        checkmarkImage.trailingAnchor.constraint(equalTo: viewCardView.trailingAnchor, constant: -16).isActive = true
+        checkmarkImage.centerYAnchor.constraint(equalTo: stackView.centerYAnchor).isActive = true
+        checkmarkImage.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        checkmarkImage.heightAnchor.constraint(equalToConstant: 24).isActive = true
+    }
+    
+    func toggleCheckmark() {
+        if checkmarkImage.tintColor == UIColor.white {
+            checkmarkImage.tintColor = UIColor.green
+        } else {
+            checkmarkImage.tintColor = UIColor.white
+        }
+
     }
 }
 

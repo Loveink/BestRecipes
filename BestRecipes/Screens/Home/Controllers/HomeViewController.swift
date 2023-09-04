@@ -8,16 +8,15 @@
 import UIKit
 
 class HomeViewController: UIViewController {
+
   private let searchBar = SearchBar()
   private let trendingCollectionView = TrendingCollectionView()
   private let categoryName = CategoriesNames()
   private let categoryCollectionView = CategoriesCollectionView()
-
   private let cuisineCollectionView = СuisineCollectionView()
 
   private let scrollView: UIScrollView = {
     let scrollView = UIScrollView()
-    
     scrollView.translatesAutoresizingMaskIntoConstraints = false
     return scrollView
   }()
@@ -49,6 +48,8 @@ class HomeViewController: UIViewController {
 
     categoryName.delegateCollectionDidSelect = self
     cuisineCollectionView.delegateCollectionDidSelect = self
+    categoryCollectionView.delegate = self
+    trendingCollectionView.delegate = self
   }
 
   func setupScrollView() {
@@ -169,27 +170,6 @@ class HomeViewController: UIViewController {
       }
   }
 
-
-//  private func loadTrendingRecipes() {
-//    Task {
-//      do {
-//        let response = try await RecipeAPI.fetchTrends()
-//        self.trendingCollectionView.recipes = response.results
-//        var recipesId: String = ""
-//        for number in 0...( self.trendingCollectionView.recipes.count - 1) {
-//          recipesId += String( self.trendingCollectionView.recipes[number].id) + ","
-//          let secondResponce =  try await RecipeAPI.fetchFullInfoFromIdString(with: recipesId)
-//          self.trendingCollectionView.recipeFullInfo = secondResponce
-//        }
-//      } catch {
-//        await MainActor.run(body: {
-//          apiKeySelect = apiKey[8]
-//          loadTrendingRecipes()
-//        })
-//      }
-//    }
-//  }
-
   func fetchFirstSearch() {
       Task {
           do {
@@ -204,12 +184,12 @@ class HomeViewController: UIViewController {
             }
           } catch {
               await MainActor.run {
-                 apiKeyIndex += 1 // Увеличиваем индекс ключа
+                 apiKeyIndex += 1
                 if apiKeyIndex >= apiKey.count {
-                    apiKeyIndex = 0 // Вернуться к первому ключу, если достигнут конец массива
+                    apiKeyIndex = 0
                 }
-                apiKeySelect = apiKey[apiKeyIndex] // Используем новый ключ
-                fetchFirstSearch() // Повторно вызываем функцию
+                apiKeySelect = apiKey[apiKeyIndex]
+                fetchFirstSearch()
               }
           }
       }
@@ -232,12 +212,12 @@ extension HomeViewController: CollectionDidSelectProtocol {
               }
             } catch {
                 await MainActor.run {
-                    apiKeyIndex += 1 // Увеличиваем индекс ключа
+                    apiKeyIndex += 1
                   if apiKeyIndex >= apiKey.count {
-                      apiKeyIndex = 0 // Вернуться к первому ключу, если достигнут конец массива
+                      apiKeyIndex = 0
                   }
-                  apiKeySelect = apiKey[apiKeyIndex] // Используем новый ключ
-                  fetchSearch(categoryName: categoryName) // Повторно вызываем функцию
+                  apiKeySelect = apiKey[apiKeyIndex]
+                  fetchSearch(categoryName: categoryName)
                 }
                 }
             }
@@ -250,4 +230,13 @@ extension HomeViewController: CollectionCuisineDidSelectProtocol {
         self.present(resultsViewController, animated: true, completion: nil)
         lastVisitedViewController = SearchViewController()
     }
+}
+
+extension HomeViewController: CategoriesCollectionViewDelegate, TrendingCollectionViewDelegate {
+  func didSelectRecipe(_ recipe: Recipe) {
+    let recipeDetailsVC = RecipeDetailView()
+    recipeDetailsVC.recipe = recipe
+    recipeDetailsVC.modalPresentationStyle = .pageSheet
+    present(recipeDetailsVC, animated: true, completion: nil)
+  }
 }

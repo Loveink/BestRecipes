@@ -7,10 +7,15 @@
 
 import UIKit
 
+protocol TrendingCollectionViewDelegate: AnyObject {
+  func didSelectRecipe(_ recipe: Recipe)
+}
+
 class TrendingCollectionView: UIView {
   
   var collectionView: UICollectionView!
   let bookmarksManager = BookmarksManager.shared
+  weak var delegate: TrendingCollectionViewDelegate?
   
   var recipes: [Recipe] = [] {
     didSet {
@@ -19,7 +24,7 @@ class TrendingCollectionView: UIView {
       }
     }
   }
-
+  
   var recipeFullInfo: [RecipeInfoForCell] = [] {
     didSet {
       DispatchQueue.main.async {
@@ -30,7 +35,7 @@ class TrendingCollectionView: UIView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-
+    
     configureCollection()
     setupConstraints()
   }
@@ -89,6 +94,9 @@ extension TrendingCollectionView: UICollectionViewDelegate, UICollectionViewData
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
+    if recipes.count > 0 {
+      let selectedRecipe = recipes[indexPath.item]
+      delegate?.didSelectRecipe(selectedRecipe)
+    }
   }
 }
