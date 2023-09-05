@@ -73,6 +73,7 @@
 		E7CDA1C82A9FD2E900E866EE /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CDA1C72A9FD2E900E866EE /* View.swift */; };
 		E7CDA1D02AA0A8B700E866EE /* DiscoverCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CDA1CF2AA0A8B700E866EE /* DiscoverCell.swift */; };
 		E7CDA1D22AA0A8C300E866EE /* DiscoverCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CDA1D12AA0A8C300E866EE /* DiscoverCollectionView.swift */; };
+		E7CDA1DA2AA26A9B00E866EE /* SeeAllCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CDA1D92AA26A9B00E866EE /* SeeAllCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -143,6 +144,7 @@
 		E7CDA1C72A9FD2E900E866EE /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		E7CDA1CF2AA0A8B700E866EE /* DiscoverCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscoverCell.swift; path = BestRecipes/Screens/Discover/DiscoverCell.swift; sourceTree = SOURCE_ROOT; };
 		E7CDA1D12AA0A8C300E866EE /* DiscoverCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DiscoverCollectionView.swift; path = BestRecipes/Screens/Discover/DiscoverCollectionView.swift; sourceTree = SOURCE_ROOT; };
+		E7CDA1D92AA26A9B00E866EE /* SeeAllCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SeeAllCollectionView.swift; path = "BestRecipes/Screens/See all/Views/SeeAllCollectionView.swift"; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -504,6 +506,7 @@
 		5705A2442A9A73560040E9E5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E7CDA1D92AA26A9B00E866EE /* SeeAllCollectionView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -738,6 +741,7 @@
 				570C97572AA26982009645AB /* ResultsViewController.swift in Sources */,
 				0BB05FA52A9DBDD900B6BC65 /* RecipeInfoForCell.swift in Sources */,
 				5705A27F2A9F495B0040E9E5 /* SlideModel.swift in Sources */,
+				E7CDA1DA2AA26A9B00E866EE /* SeeAllCollectionView.swift in Sources */,
 				57FA89AA2AA1C3D600BBBECB /* CategoryCell.swift in Sources */,
 				5705A2222A9A16800040E9E5 /* CustomColors.swift in Sources */,
 				5705A25A2A9A749B0040E9E5 /* NetworkService.swift in Sources */,

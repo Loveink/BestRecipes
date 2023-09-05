@@ -29,6 +29,7 @@ class HomeViewController: UIViewController {
 
   var seeAllButtonTrend = SeeAllButton()
   var seeAllButtonRecipe = SeeAllButton()
+  var seeAllButtonCreators = SeeAllButton()
   var seeAllButtonCuisine = SeeAllButton()
 
 
@@ -36,7 +37,7 @@ class HomeViewController: UIViewController {
     super.viewDidLoad()
     
     view.backgroundColor = .white
-    
+      configureSeeAllButtons()
     setupScrollView()
     setupSearchBar()
     setupNameView()
@@ -158,6 +159,7 @@ class HomeViewController: UIViewController {
               }
               let secondResponce = try await RecipeAPI.fetchFullInfoFromIdString(with: recipesId)
               self.trendingCollectionView.recipeFullInfo = secondResponce
+              self.seeAllButtonTrend.recipes = secondResponce
           } catch {
               apiKeyIndex += 1 // Увеличиваем индекс ключа
               if apiKeyIndex >= apiKey.count {
@@ -179,6 +181,7 @@ class HomeViewController: UIViewController {
               recipesId += String( self.categoryCollectionView.recipes[number].id) + ","
               let secondResponce =  try await RecipeAPI.fetchFullInfoFromIdString(with: recipesId)
               self.categoryCollectionView.recipeFullInfo = secondResponce
+              self.seeAllButtonRecipe.recipes = secondResponce
             }
           } catch {
               await MainActor.run {
@@ -205,6 +208,8 @@ extension HomeViewController: CollectionDidSelectProtocol {
                 recipesId += String( self.categoryCollectionView.recipes[number].id) + ","
                 let secondResponce =  try await RecipeAPI.fetchFullInfoFromIdString(with: recipesId)
                 self.categoryCollectionView.recipeFullInfo = secondResponce
+                self.seeAllButtonRecipe.recipes = secondResponce
+                self.seeAllButtonRecipe.name = categoryName
               }
             } catch {
                 await MainActor.run {
