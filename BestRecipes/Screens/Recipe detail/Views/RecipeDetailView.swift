@@ -208,11 +208,11 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 2),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 14),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -14),
+            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 14),
+            stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -14),
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
-            stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32), // Ограничение для ширины stackView
+            stackView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -32),
             
             tableView.heightAnchor.constraint(equalToConstant: 300),
 

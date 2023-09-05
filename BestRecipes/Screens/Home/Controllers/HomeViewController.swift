@@ -14,6 +14,7 @@ class HomeViewController: UIViewController {
   private let categoryName = CategoriesNames()
   private let categoryCollectionView = CategoriesCollectionView()
   private let cuisineCollectionView = СuisineCollectionView()
+  private let recentCollectionView = RecentCollectionView()
 
   private let scrollView: UIScrollView = {
     let scrollView = UIScrollView()
@@ -28,8 +29,8 @@ class HomeViewController: UIViewController {
   var cuisineLabel = UILabel.makeLabelForCells(text: "Popular cuisine", font: .poppinsSemiBold(size: 20), textColor: .neutral100)
 
   var seeAllButtonTrend = SeeAllButton()
-  var seeAllButtonRecipe = SeeAllButton()
-  var seeAllButtonCreators = SeeAllButton()
+  var seeAllButtonCategory = SeeAllButton()
+  var seeAllButtonRecent = SeeAllButton()
   var seeAllButtonCuisine = SeeAllButton()
 
 
@@ -84,17 +85,21 @@ class HomeViewController: UIViewController {
     categoryName.translatesAutoresizingMaskIntoConstraints = false
     categoryCollectionView.translatesAutoresizingMaskIntoConstraints = false
     cuisineCollectionView.translatesAutoresizingMaskIntoConstraints = false
+    recentCollectionView.translatesAutoresizingMaskIntoConstraints = false
 
     scrollView.addSubview(trendingCollectionView)
     scrollView.addSubview(trendingLabel)
     scrollView.addSubview(seeAllButtonTrend)
     scrollView.addSubview(categoryLabel)
-    scrollView.addSubview(seeAllButtonRecipe)
+    scrollView.addSubview(seeAllButtonCategory)
     scrollView.addSubview(categoryName)
     scrollView.addSubview(categoryCollectionView)
     scrollView.addSubview(cuisineLabel)
     scrollView.addSubview(seeAllButtonCuisine)
     scrollView.addSubview(cuisineCollectionView)
+    scrollView.addSubview(recentRecipeLabel)
+    scrollView.addSubview(seeAllButtonRecent)
+    scrollView.addSubview(recentCollectionView)
   }
 
   
@@ -130,10 +135,10 @@ class HomeViewController: UIViewController {
       categoryLabel.topAnchor.constraint(equalTo: trendingCollectionView.bottomAnchor, constant: 8),
       categoryLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 8),
       categoryLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 150),
-
-      seeAllButtonRecipe.topAnchor.constraint(equalTo: trendingCollectionView.bottomAnchor, constant: 8),
-      seeAllButtonRecipe.trailingAnchor.constraint(equalTo: seeAllButtonTrend.trailingAnchor),
       
+      seeAllButtonCategory.topAnchor.constraint(equalTo: trendingCollectionView.bottomAnchor, constant: 8),
+      seeAllButtonCategory.trailingAnchor.constraint(equalTo: seeAllButtonTrend.trailingAnchor),
+
       categoryName.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 8),
       categoryName.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 8),
       categoryName.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -8),
@@ -149,18 +154,33 @@ class HomeViewController: UIViewController {
       cuisineLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 150),
 
       seeAllButtonCuisine.topAnchor.constraint(equalTo: categoryCollectionView.bottomAnchor, constant: 8),
-      seeAllButtonCuisine.trailingAnchor.constraint(equalTo: seeAllButtonRecipe.trailingAnchor),
+      seeAllButtonCuisine.trailingAnchor.constraint(equalTo: seeAllButtonCategory.trailingAnchor),
 
       cuisineCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
       cuisineCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
       cuisineCollectionView.topAnchor.constraint(equalTo: cuisineLabel.bottomAnchor, constant: 10),
       cuisineCollectionView.heightAnchor.constraint(equalToConstant: 200),
+
+      recentRecipeLabel.topAnchor.constraint(equalTo: cuisineCollectionView.bottomAnchor, constant: 8),
+      recentRecipeLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 8),
+      recentRecipeLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 150),
+
+      seeAllButtonRecent.topAnchor.constraint(equalTo: cuisineCollectionView.bottomAnchor, constant: 8),
+      seeAllButtonRecent.trailingAnchor.constraint(equalTo: seeAllButtonCuisine.trailingAnchor),
+
+      recentCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+      recentCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+      recentCollectionView.topAnchor.constraint(equalTo: recentRecipeLabel.bottomAnchor, constant: 10),
+      recentCollectionView.heightAnchor.constraint(equalToConstant: 200),
+      recentCollectionView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20)
+
     ])
   }
 
   private var apiKeyIndex = 0
 
   private func loadTrendingRecipes() {
+
       Task {
           do {
               let response = try await RecipeAPI.fetchTrends()
@@ -253,5 +273,4 @@ extension HomeViewController: CategoriesCollectionViewDelegate, TrendingCollecti
     recipeDetailsVC.modalPresentationStyle = .fullScreen
     present(recipeDetailsVC, animated: true, completion: nil)
   }
-    
 }

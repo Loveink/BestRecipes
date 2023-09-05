@@ -21,7 +21,7 @@ let networkManager = NetworkManager()
     }
 
 let apiKey = [
-"5180ed4ebccf4787baa4c64e1882aa19",
+"bd92163e35534e8082e75e22c3eb43d7",
 "a29eb5640b5c4435ad8ec2ef72759fe5",
 "a63ec13f2c7a473f9a9ec94e8d190e5c",
 "ce1dcc3c21614ac29f4f314e25f37a4f",
@@ -116,53 +116,3 @@ struct RecipeAPI {
       return try await networkManager.request(urlString: urlString)
   }
 }
-
-
-
-// Вот пример получения данных для Trending
-
-//var recipes: [Recipe] = []
-//func loadRecipes()  {
-//    Task {
-//        do {
-//            let response = try await RecipeAPI.fetchTrends()
-//            recipes = response.results
-//        } catch {
-//            await MainActor.run(body: {
-//                print(error, error.localizedDescription)
-//            })
-//        }
-//    }
-//}
-
-// Новый Пример запроса для Trending
-
-//private func loadRecipes()  {
-//    var recipes: [Recipe] = []
-//    Task {
-//        do {
-//            let response = try await RecipeAPI.fetchTrends()
-//            recipes = response.results
-//            var recipesId: String = ""
-//            for number in 0...(recipes.count - 1) {
-//                recipesId += String(recipes[number].id) + ","
-//                let secondResponce =  try await RecipeAPI.fetchFullInfoFromIdString(with: recipesId)
-//                recipeFullInfo = secondResponce
-//            }
-//
-//        } catch {
-//            await MainActor.run(body: {
-//                print(error, error.localizedDescription)
-//            })
-//        }
-//    }
-//}
-
-
-
-
-
-
-
-
-

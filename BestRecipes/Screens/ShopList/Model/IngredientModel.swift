@@ -19,6 +19,10 @@ struct IngredientModel: Codable {
             IngredientModel(image: "image", name: "Огурки", amount: "2 кг"),
             IngredientModel(image: "image", name: "Помидорки", amount: "3 кг"),
             IngredientModel(image: "image", name: "Мазик", amount: "1 пачка"),
+            IngredientModel(image: "image", name: "Мазик", amount: "1 пачка"),
+            IngredientModel(image: "image", name: "Мазик", amount: "1 пачка"),
+            IngredientModel(image: "image", name: "Мазик", amount: "1 пачка"),
+            IngredientModel(image: "image", name: "Мазик", amount: "1 пачка"),
         ]
     }
 }

@@ -10,11 +10,12 @@ import Kingfisher
 
 class RecentCell: UICollectionViewCell {
 
-  var currentRecipe: RecipeInfoForCell?
+  var currentRecipe: Recipe?
   static let identifier = "RecentCell"
 
   override init(frame: CGRect) {
     super.init(frame: frame)
+    backgroundColor = .red
     setupViews()
     setupConstraints()
   }
@@ -36,18 +37,16 @@ class RecentCell: UICollectionViewCell {
   }()
 
   let titleLabel = UILabel.makeLabelForCells(text: "How to make sharwama at home", font: .poppinsSemiBold(size: 16), textColor: .black)
-  let authorLabel = UILabel.makeLabelForCells(text: "By Zeelicious foods", font: .poppinsRegular(size: 12), textColor: .black)
 
   //MARK: - Functions
   let options: KingfisherOptionsInfo = [
     .cacheOriginalImage
   ]
 
-  public func configureCell(_ data: RecipeInfoForCell) {
+  public func configureCell(_ data: Recipe) {
     DispatchQueue.main.async {
       self.titleLabel.text = data.title
       self.dishImageView.kf.setImage(with: URL(string: data.image), options: self.options)
-      self.authorLabel.text = data.sourceName
       self.currentRecipe = data
     }
   }
@@ -55,7 +54,6 @@ class RecentCell: UICollectionViewCell {
   private func setupViews() {
     contentView.addSubview(dishImageView)
     contentView.addSubview(titleLabel)
-    contentView.addSubview(authorLabel)
   }
 
   //MARK: - Constraints
@@ -67,10 +65,7 @@ class RecentCell: UICollectionViewCell {
       dishImageView.heightAnchor.constraint(equalToConstant: 150),
 
       titleLabel.leadingAnchor.constraint(equalTo: dishImageView.leadingAnchor),
-      titleLabel.topAnchor.constraint(equalTo: dishImageView.bottomAnchor, constant: 10),
-
-      authorLabel.leadingAnchor.constraint(equalTo: titleLabel.trailingAnchor),
-      authorLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
+      titleLabel.topAnchor.constraint(equalTo: dishImageView.bottomAnchor, constant: 10)
     ])
   }
 }

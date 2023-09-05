@@ -110,7 +110,7 @@ class CategoryCell: UICollectionViewCell {
       grayBackgroundView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
       grayBackgroundView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
       grayBackgroundView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-      grayBackgroundView.heightAnchor.constraint(equalToConstant: 170),
+      grayBackgroundView.heightAnchor.constraint(equalToConstant: 150),
 
       dishImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
       dishImageView.centerYAnchor.constraint(equalTo: grayBackgroundView.topAnchor),

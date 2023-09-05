@@ -56,12 +56,7 @@ class ShopingListViewController: UIViewController {
     
     @objc private func clearButtonTapped(_ selector: UIButton) {
         print("Clear Button tapped")
-
     }
-    
-    
-    
-
 }
 
 
@@ -78,11 +73,9 @@ extension ShopingListViewController {
         // Регистрируем кастомную ячейку
         tableView.register(CustomShopListCell.self, forCellReuseIdentifier: customCellIdentifier)
     }
-    
-    
+
     private func setupConstraints() {
-        
-        let constraints: [NSLayoutConstraint] = [
+      NSLayoutConstraint.activate([
             textLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             textLabel.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
@@ -95,10 +88,7 @@ extension ShopingListViewController {
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             tableView.bottomAnchor.constraint(equalTo: clearButton.topAnchor, constant: -20),
-            
-        ]
-        
-        NSLayoutConstraint.activate(constraints)
+        ])
     }
     
 }

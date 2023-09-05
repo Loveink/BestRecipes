@@ -197,19 +197,11 @@ class CreateRecipeViewController: UIViewController {
     }
 
     @objc func addButtonLogic() {
-        print("ADD")
-        print(rowDataArray)
-
-        print(rowDataPikers.serving)
-        print(rowDataPikers.cookTime)
         SaveToCoreData.saveRecipeInfoToCoreData(dishImageView.image!, nameTextField.text!, rowDataPikers.serving, rowDataPikers.cookTime)
         SaveToCoreData.saveArrayOfArraysToCoreData([rowDataArray])
        let array = GetFromCoreData.fetchArrayOfArraysFromCoreData()
-        print(array)
         showRecipeAddedAlert()
         rowDataPikers = RowDataPiker() // В в самом конце после сохранения
-
-
     }
     
     func showRecipeAddedAlert() {
@@ -246,7 +238,6 @@ class CreateRecipeViewController: UIViewController {
         cookTimePicker.removeFromSuperview()
         ingredientsLabel.removeFromSuperview()
         createButton.removeFromSuperview()
-        //        scrollView.addSubview(collectionView)
     }
 
     func setupNewConstrains() {
