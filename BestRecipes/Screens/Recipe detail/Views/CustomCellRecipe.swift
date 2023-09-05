@@ -68,7 +68,7 @@ class CustomCellRecipe: UITableViewCell {
   private let checkmarkImage: UIImageView = {
     let checkmarkImage = UIImageView()
     checkmarkImage.contentMode = .scaleAspectFit
-    checkmarkImage.image = UIImage(systemName: "checkmark.circle.fill")
+    checkmarkImage.image = UIImage(systemName: "cart.fill.badge.plus")
     checkmarkImage.tintColor = UIColor.black
     checkmarkImage.translatesAutoresizingMaskIntoConstraints = false
     return checkmarkImage
