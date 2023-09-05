@@ -59,13 +59,49 @@ struct SaveToCoreData {
                 let coreDataObject = NSManagedObject(entity: entity!, insertInto: context)
                 do {
                     let jsonData = try JSONEncoder().encode(array)
-                    coreDataObject.setValue(jsonData, forKey: "ingridients") // Замените "rowDataArray" на имя Transformable поля
+                    coreDataObject.setValue(jsonData, forKey: "ingridients") 
                     try context.save()
                 } catch {
                     print("Ошибка при сохранении: \(error)")
                 }
             }
         }
+    
+//    static func saveRecentArrayToCoreData(_ arrayOfArrays: [String]) {
+//        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+//            return
+//        }
+//        let context = appDelegate.persistentContainer.viewContext
+//        let entity = NSEntityDescription.entity(forEntityName: "Recent", in: context)
+//        for array in arrayOfArrays {
+//            let coreDataObject = NSManagedObject(entity: entity!, insertInto: context)
+//            do {
+//                let jsonData = try JSONEncoder().encode(array)
+//                coreDataObject.setValue(jsonData, forKey: "recent")
+//                try context.save()
+//            } catch {
+//                print("Ошибка при сохранении: \(error)")
+//            }
+//        }
+//    }
+    
+        static func saveRecentArrayToCoreData(_ id: Int) {
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                return
+            }
+            let context = appDelegate.persistentContainer.viewContext
+            let entity = NSEntityDescription.entity(forEntityName: "Recent", in: context)
+                let coreDataObject = NSManagedObject(entity: entity!, insertInto: context)
+                do {
+                    coreDataObject.setValue(id, forKey: "recent")
+                    try context.save()
+                } catch {
+                    print("Ошибка при сохранении: \(error)")
+                }
+            
+        }
+        
+    
     
 }
 

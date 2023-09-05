@@ -85,8 +85,11 @@ extension SeeAllCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let recipeDetailVC = RecipeDetailViewController()
-        self.navController.pushViewController(recipeDetailVC, animated: true)
+        let recipeDetailsVC = RecipeDetailView()
+        SaveToCoreData.saveRecentArrayToCoreData(recipes[indexPath.row].id)
+        recipeDetailsVC.recipeFromSeeAll = recipes[indexPath.row]
+        recipeDetailsVC.modalPresentationStyle = .fullScreen
+        self.navController.pushViewController(recipeDetailsVC, animated: true)
     }
     
 }

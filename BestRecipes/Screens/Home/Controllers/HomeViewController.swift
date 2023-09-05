@@ -50,6 +50,7 @@ class HomeViewController: UIViewController {
     cuisineCollectionView.delegateCollectionDidSelect = self
     categoryCollectionView.delegate = self
     trendingCollectionView.delegate = self
+      
   }
 
   func setupScrollView() {
@@ -235,9 +236,11 @@ extension HomeViewController: CollectionCuisineDidSelectProtocol {
 
 extension HomeViewController: CategoriesCollectionViewDelegate, TrendingCollectionViewDelegate {
   func didSelectRecipe(_ recipe: Recipe) {
+    SaveToCoreData.saveRecentArrayToCoreData(recipe.id)
     let recipeDetailsVC = RecipeDetailView()
     recipeDetailsVC.recipe = recipe
     recipeDetailsVC.modalPresentationStyle = .fullScreen
     present(recipeDetailsVC, animated: true, completion: nil)
   }
+    
 }

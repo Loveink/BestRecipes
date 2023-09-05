@@ -11,6 +11,7 @@ import Foundation
 
 struct RecipeFullInfo: Codable {
     let id: Int
+    let image: String
     let title: String
     let readyInMinutes: Int
     let servings: Int

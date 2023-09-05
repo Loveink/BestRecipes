@@ -12,8 +12,10 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
     
     var ingridients = ["Тартилия", "Лук", "Помидор", "Огурцы", "Курица"]
     var recipe: Recipe?
+    var recipeFromSeeAll: RecipeInfoForCell?
     let navigationBar = CustomNavigationBar()
     var recipeDetail: [RecipeFullInfo]?
+   
     var image: UIImage?
     
     //MARK: - UI elements
@@ -132,8 +134,10 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
     }
     //MARK: - Gettin Details
     private func getRecipeDetail() {
-        print(recipe!.id)
-        if let id = recipe?.id {
+        if let id = recipe?.id   {
+            loadRecipes(with: id)
+        }
+        if let id =  recipeFromSeeAll?.id  {
             loadRecipes(with: id)
         }
     }
@@ -143,7 +147,7 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
             do {
                 let response = try await RecipeAPI.fetchFullInfo(id)
                 recipeDetail = response
-                getImage(recipe?.image  ?? "",at: imageFood)
+                getImage(recipeDetail?[0].image ?? "" ,at: imageFood)
                 setupDetails()
                 self.tableView.reloadData()
 
@@ -170,6 +174,8 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
         textLabel.text = recipeDetail?[0].title
         recipeLabel.text = recipeDetail?[0].instructions.htmlToString
         likeLabel.text = "👍" + " " + "\(recipeDetail?[0].aggregateLikes ?? 0 )"
+        itemLabel.text = "\(recipeDetail?[0].extendedIngredients.count ?? 0) items"
+
     }
     
     //MARK: - Button
@@ -184,7 +190,6 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
         scrollView.addSubview(stackView)
         //        view.addSubview(stackView)
         view.backgroundColor = .white
-        
         stackView.addArrangedSubview(textLabel)
         stackView.addArrangedSubview(imageFood)
         stackView.addArrangedSubview(likeLabel)

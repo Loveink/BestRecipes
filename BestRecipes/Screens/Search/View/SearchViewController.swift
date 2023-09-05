@@ -83,6 +83,7 @@ extension SearchViewController: UITableViewDelegate, UITableViewDataSource {
       let selectedRecipe = recipes[indexPath.item]
       // Запоминаем на каком контроллере были
       lastVisitedViewController = SearchViewController()
+        SaveToCoreData.saveRecentArrayToCoreData(selectedRecipe.id)
       // Переход наRecipeDetailsViewController()
       let recipeDetailsVC = RecipeDetailView()
       // Передаем значение на следующий экран
