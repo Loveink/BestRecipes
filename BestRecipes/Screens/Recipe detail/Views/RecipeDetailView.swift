@@ -56,6 +56,7 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
         textLabel.text = ""
         textLabel.textAlignment = .center
         textLabel.font = .poppinsRegular(size: 18)
+        textLabel.numberOfLines = 2
         return textLabel
     }()
     
