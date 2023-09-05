@@ -65,7 +65,7 @@ class CustomCellRecipe: UITableViewCell {
     return viewCardView
   }()
 
-  private let checkmarkImage: UIImageView = {
+    let checkmarkImage: UIImageView = {
     let checkmarkImage = UIImageView()
     checkmarkImage.contentMode = .scaleAspectFit
     checkmarkImage.image = UIImage(systemName: "cart.fill.badge.plus")
