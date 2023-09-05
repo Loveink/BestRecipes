@@ -35,7 +35,7 @@
 		5705A2262A9A64F20040E9E5 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A2252A9A64F20040E9E5 /* Fonts.swift */; };
 		5705A24E2A9A739D0040E9E5 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A24D2A9A739D0040E9E5 /* OnboardingViewController.swift */; };
 		5705A2502A9A73EF0040E9E5 /* DiscoverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A24F2A9A73EF0040E9E5 /* DiscoverViewController.swift */; };
-		5705A2522A9A741A0040E9E5 /* RecipeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A2512A9A741A0040E9E5 /* RecipeDetailViewController.swift */; };
+		5705A2522A9A741A0040E9E5 /* MyRecipeDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A2512A9A741A0040E9E5 /* MyRecipeDetailViewController.swift */; };
 		5705A2542A9A74290040E9E5 /* SeeAllViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A2532A9A74290040E9E5 /* SeeAllViewController.swift */; };
 		5705A2562A9A74420040E9E5 /* CreateRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A2552A9A74420040E9E5 /* CreateRecipeViewController.swift */; };
 		5705A2582A9A74520040E9E5 /* ProfilePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5705A2572A9A74520040E9E5 /* ProfilePageViewController.swift */; };
@@ -109,7 +109,7 @@
 		5705A2272A9A6F130040E9E5 /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		5705A24D2A9A739D0040E9E5 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		5705A24F2A9A73EF0040E9E5 /* DiscoverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewController.swift; sourceTree = "<group>"; };
-		5705A2512A9A741A0040E9E5 /* RecipeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailViewController.swift; sourceTree = "<group>"; };
+		5705A2512A9A741A0040E9E5 /* MyRecipeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipeDetailViewController.swift; sourceTree = "<group>"; };
 		5705A2532A9A74290040E9E5 /* SeeAllViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllViewController.swift; sourceTree = "<group>"; };
 		5705A2552A9A74420040E9E5 /* CreateRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRecipeViewController.swift; sourceTree = "<group>"; };
 		5705A2572A9A74520040E9E5 /* ProfilePageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePageViewController.swift; sourceTree = "<group>"; };
@@ -442,7 +442,7 @@
 		5705A23D2A9A733A0040E9E5 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5705A2512A9A741A0040E9E5 /* RecipeDetailViewController.swift */,
+				5705A2512A9A741A0040E9E5 /* MyRecipeDetailViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -713,7 +713,7 @@
 				5705A2122A9A14460040E9E5 /* HomeViewController.swift in Sources */,
 				57FA89922AA0926600BBBECB /* RecipeDetailView.swift in Sources */,
 				5705A24E2A9A739D0040E9E5 /* OnboardingViewController.swift in Sources */,
-				5705A2522A9A741A0040E9E5 /* RecipeDetailViewController.swift in Sources */,
+				5705A2522A9A741A0040E9E5 /* MyRecipeDetailViewController.swift in Sources */,
 				390B02132AA48A040086C6B6 /* CellData.swift in Sources */,
 				5705A2582A9A74520040E9E5 /* ProfilePageViewController.swift in Sources */,
 				5705A27B2A9E143A0040E9E5 /* ServingPickerView.swift in Sources */,
