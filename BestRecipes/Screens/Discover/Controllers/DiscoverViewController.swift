@@ -9,11 +9,12 @@ import UIKit
 
 class DiscoverViewController: UIViewController {
     
-    var collectionView = DiscoverCollectionView()
+    var collectionView: DiscoverCollectionView!
     var mainLabel = UILabel.makeLabelForCells(text: "Saved recipes", font: .poppinsSemiBold(size: 24), textColor: .neutral100)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView = DiscoverCollectionView(frame: .zero, navController: self.navigationController!)
         self.view.backgroundColor = .white
         setupCollectionView()
         setConstraints()

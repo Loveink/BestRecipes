@@ -81,24 +81,23 @@ class OnboardingViewController: UIViewController {
         }
     }
     
-    private let pageControl: UIPageControl = {
-        let page = UIPageControl()
-        page.numberOfPages = 4
-        page.currentPage = 0
-        page.backgroundStyle = .minimal
-        page.pageIndicatorTintColor = .lightGray
-        page.currentPageIndicatorTintColor = UIColor(named: "buttonBlue")
-        
-        let selectedImage = UIImage(systemName: "rectangle.fill")?.withTintColor(page.currentPageIndicatorTintColor ?? .black, renderingMode: .alwaysTemplate)
-        
-        let deselectedImage = UIImage(systemName: "cirle.fill")?.withTintColor(page.pageIndicatorTintColor ?? .lightGray, renderingMode: .alwaysTemplate)
-        
-        page.setIndicatorImage(selectedImage, forPage: page.currentPage)
-        page.setIndicatorImage(deselectedImage, forPage: page.currentPage + 1)
-        page.translatesAutoresizingMaskIntoConstraints = false
-        page.isUserInteractionEnabled = true
-        return page
-    }()
+  private let pageControl: UIPageControl = {
+      let page = UIPageControl()
+      page.numberOfPages = 4
+      page.currentPage = 0
+      page.backgroundStyle = .minimal
+      page.pageIndicatorTintColor = .lightGray
+      page.currentPageIndicatorTintColor = UIColor.primary30
+      page.setIndicatorImage(UIImage(named: "Rectangle0"), forPage: 0)
+      page.setIndicatorImage(UIImage(named: "Rectangle1"), forPage: 1)
+      page.setIndicatorImage(UIImage(named: "Rectangle1"), forPage: 2)
+      page.setIndicatorImage(UIImage(named: "Rectangle1"), forPage: 3)
+
+      page.translatesAutoresizingMaskIntoConstraints = false
+      page.isUserInteractionEnabled = true
+      return page
+  }()
+
     
     
     override func viewDidLoad() {
@@ -106,6 +105,8 @@ class OnboardingViewController: UIViewController {
         addSubviews()
         setupConstraints()
         currentIndex = 0
+      pageControl.addTarget(self, action: #selector(pageControlTapped(_:)), for: .valueChanged)
+
     }
     
     private func addSubviews() {
@@ -169,33 +170,34 @@ class OnboardingViewController: UIViewController {
             nextButton.setTitle("Get Started", for: .normal)
             titleLabel.font = titleLabel.font.withSize(62)
             skipButton.isHidden = true
+            pageControl.isHidden = true
         } else if currentIndex == slides.count - 1 {
             nextButton.setTitle("Start cooking", for: .normal)
             titleLabel.font = titleLabel.font.withSize(40)
             skipButton.isHidden = true
             topLabel.isHidden = true
+          pageControl.isHidden = false
         } else {
             nextButton.setTitle("Continue", for: .normal)
             titleLabel.font = titleLabel.font.withSize(40)
             skipButton.isHidden = false
             topLabel.isHidden = true
+            pageControl.isHidden = false
         }
     }
     
     @objc private func nextButtonTapped() {
         if currentIndex == slides.count - 1 {
             print("Last button pressed")
-//            let scene = UIApplication.shared.connectedScenes.first
-//            if let sceneDelegate = scene?.delegate as? SceneDelegate {
-//                let vc = UserSignInController()
-//                sceneDelegate.window?.rootViewController = vc
-//            }
+            let vc = MainTabBarController()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc , animated: true)
         } else {
             print("Not last button pressed")
             currentIndex += 1
             updateUI()
             pageControl.currentPage = currentIndex
-            pageControl.setIndicatorImage(UIImage(systemName: "rectangle.fill"), forPage: currentIndex)
+            pageControl.setIndicatorImage(UIImage(named: "Rectangle1"), forPage: currentIndex)
         }
     }
     
@@ -203,7 +205,11 @@ class OnboardingViewController: UIViewController {
     @objc private func skipButtonTapped() {
         print("Skip Button Tapped")
     }
-    
+
+  @objc private func pageControlTapped(_ sender: UIPageControl) {
+      currentIndex = sender.currentPage
+  }
+
 }
 
 

@@ -29,6 +29,7 @@ class HomeViewController: UIViewController {
 
   var seeAllButtonTrend = SeeAllButton()
   var seeAllButtonRecipe = SeeAllButton()
+  var seeAllButtonCreators = SeeAllButton()
   var seeAllButtonCuisine = SeeAllButton()
 
 
@@ -37,7 +38,7 @@ class HomeViewController: UIViewController {
 //    self.hideKeyBoard()
     
     view.backgroundColor = .white
-    
+      configureSeeAllButtons()
     setupScrollView()
     setupSearchBar()
     setupNameView()
@@ -50,13 +51,24 @@ class HomeViewController: UIViewController {
     cuisineCollectionView.delegateCollectionDidSelect = self
     categoryCollectionView.delegate = self
     trendingCollectionView.delegate = self
+      
   }
+    
+    private func hideKeyBoard() {
+        let backgroundTapGesrure = UITapGestureRecognizer(target: self, action: #selector(didTapBackground))
+        view.addGestureRecognizer(backgroundTapGesrure)
+    }
+    
+    @objc private func didTapBackground() {
+        view.endEditing(true)
+    }
 
   func setupScrollView() {
     view.addSubview(scrollView)
     scrollView.contentSize = CGSize(width: .zero, height: 1400)
     scrollView.backgroundColor = .white
   }
+    
   func setupSearchBar() {
     searchBar.searchBar.translatesAutoresizingMaskIntoConstraints = false
     scrollView.addSubview(searchBar.view)
@@ -64,6 +76,7 @@ class HomeViewController: UIViewController {
 
   func setupNameView() {
     scrollView.addSubview(mainLabel)
+    lastVisitedViewController = HomeViewController()
   }
 
   func setupCollectionView() {
@@ -158,6 +171,7 @@ class HomeViewController: UIViewController {
               }
               let secondResponce = try await RecipeAPI.fetchFullInfoFromIdString(with: recipesId)
               self.trendingCollectionView.recipeFullInfo = secondResponce
+              self.seeAllButtonTrend.recipes = secondResponce
           } catch {
               apiKeyIndex += 1 // Увеличиваем индекс ключа
               if apiKeyIndex >= apiKey.count {
@@ -179,6 +193,7 @@ class HomeViewController: UIViewController {
               recipesId += String( self.categoryCollectionView.recipes[number].id) + ","
               let secondResponce =  try await RecipeAPI.fetchFullInfoFromIdString(with: recipesId)
               self.categoryCollectionView.recipeFullInfo = secondResponce
+              self.seeAllButtonRecipe.recipes = secondResponce
             }
           } catch {
               await MainActor.run {
@@ -205,6 +220,8 @@ extension HomeViewController: CollectionDidSelectProtocol {
                 recipesId += String( self.categoryCollectionView.recipes[number].id) + ","
                 let secondResponce =  try await RecipeAPI.fetchFullInfoFromIdString(with: recipesId)
                 self.categoryCollectionView.recipeFullInfo = secondResponce
+                self.seeAllButtonRecipe.recipes = secondResponce
+                self.seeAllButtonRecipe.name = categoryName
               }
             } catch {
                 await MainActor.run {
@@ -230,9 +247,11 @@ extension HomeViewController: CollectionCuisineDidSelectProtocol {
 
 extension HomeViewController: CategoriesCollectionViewDelegate, TrendingCollectionViewDelegate {
   func didSelectRecipe(_ recipe: Recipe) {
+    SaveToCoreData.saveRecentArrayToCoreData(recipe.id)
     let recipeDetailsVC = RecipeDetailView()
     recipeDetailsVC.recipe = recipe
-    recipeDetailsVC.modalPresentationStyle = .pageSheet
+    recipeDetailsVC.modalPresentationStyle = .fullScreen
     present(recipeDetailsVC, animated: true, completion: nil)
   }
+    
 }

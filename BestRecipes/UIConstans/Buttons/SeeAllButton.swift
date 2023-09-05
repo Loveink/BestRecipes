@@ -8,7 +8,15 @@
 import UIKit
 
 class SeeAllButton: UIButton {
-
+    
+    var name: String!
+    
+    var recipes = [RecipeInfoForCell]() {
+        didSet {
+            print("SeeAllButton recipes didSet")
+        }
+    }
+    
     init() {
         super.init(frame: .zero)
         setupButton()
@@ -28,5 +36,30 @@ class SeeAllButton: UIButton {
         self.titleLabel?.font = .poppinsSemiBold(size: 14)
         self.semanticContentAttribute = .forceRightToLeft
         self.translatesAutoresizingMaskIntoConstraints = false
+        
     }
+    
+    
+    
+    
+}
+
+
+
+extension HomeViewController {
+    @objc func seeAllButtonWasTapped(sender: SeeAllButton) {
+        let viewController = SeeAllViewController(title: sender.name, recipes: sender.recipes)
+        self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    
+    func configureSeeAllButtons() {
+        seeAllButtonTrend.addTarget(self, action: #selector(seeAllButtonWasTapped), for: .touchUpInside)
+        seeAllButtonTrend.name = "Trending now"
+        seeAllButtonRecipe.addTarget(self, action: #selector(seeAllButtonWasTapped), for: .touchUpInside)
+        seeAllButtonRecipe.name = "Main Course"
+        seeAllButtonCreators.addTarget(self, action: #selector(seeAllButtonWasTapped), for: .touchUpInside)
+        seeAllButtonCreators.name = "Creators"
+    }
+    
 }

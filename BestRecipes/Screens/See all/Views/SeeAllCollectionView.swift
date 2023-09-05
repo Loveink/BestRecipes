@@ -1,13 +1,13 @@
 //
-//  DiscoverCollectionView.swift
+//  SeeAllCollectionView.swift
 //  BestRecipes
 //
-//  Created by Владимир on 31.08.2023.
+//  Created by Владимир on 01.09.2023.
 //
 
 import UIKit
 
-class DiscoverCollectionView: UIView {
+class SeeAllCollectionView: UIView {
     
     var collectionView: UICollectionView!
     var navController: UINavigationController!
@@ -16,8 +16,9 @@ class DiscoverCollectionView: UIView {
     var recipes: [RecipeInfoForCell] = []
     
     
-    init(frame: CGRect, navController: UINavigationController) {
+    init(frame: CGRect, navController: UINavigationController, recipes: [RecipeInfoForCell]) {
         self.navController = navController
+        self.recipes = recipes
         super.init(frame: frame)
         configureCollection()
         setupConstraints()
@@ -27,11 +28,6 @@ class DiscoverCollectionView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func reloadData() {
-        recipes = bookmarksManager.getBookmarks()
-        self.collectionView.reloadData()
-    }
-    
     
     private func configureCollection() {
         let layout = UICollectionViewFlowLayout()
@@ -39,6 +35,7 @@ class DiscoverCollectionView: UIView {
         collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = .clear
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        
         collectionView.register(DiscoverCell.self, forCellWithReuseIdentifier: DiscoverCell.discoverIdentifier)
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -59,7 +56,7 @@ class DiscoverCollectionView: UIView {
 
 
 
-extension DiscoverCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension SeeAllCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return recipes.count
@@ -70,8 +67,13 @@ extension DiscoverCollectionView: UICollectionViewDelegate, UICollectionViewData
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DiscoverCell.discoverIdentifier, for: indexPath) as? DiscoverCell else {
             return UICollectionViewCell()
         }
-        cell.liked = true
-        cell.favouriteButton.setImage(UIImage(named: "bookmarkSelect"), for: .normal)
+        let selectedNews = recipes[indexPath.row]
+        if bookmarksManager.bookmarksArray.contains(selectedNews) {
+          cell.liked = true
+          cell.favouriteButton.setImage(UIImage(named: "bookmarkSelect"), for: .normal)
+        } else {
+          cell.favouriteButton.setImage(UIImage(named: "bookmark"), for: .normal)
+        }
         cell.configureCell(recipes[indexPath.row])
         return cell
     }
@@ -83,12 +85,11 @@ extension DiscoverCollectionView: UICollectionViewDelegate, UICollectionViewData
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let recipeDetailVC = RecipeDetailView()
-        let recipeAllInfo = self.recipes[indexPath.row]
-        let recipe = Recipe(id: recipeAllInfo.id, title: recipeAllInfo.title, image: recipeAllInfo.image)
-        recipeDetailVC.recipe = recipe
-        recipeDetailVC.modalPresentationStyle = .pageSheet
-        self.navController.pushViewController(recipeDetailVC, animated: true)
+        let recipeDetailsVC = RecipeDetailView()
+        SaveToCoreData.saveRecentArrayToCoreData(recipes[indexPath.row].id)
+        recipeDetailsVC.recipeFromSeeAll = recipes[indexPath.row]
+        recipeDetailsVC.modalPresentationStyle = .fullScreen
+        self.navController.pushViewController(recipeDetailsVC, animated: true)
     }
     
 }

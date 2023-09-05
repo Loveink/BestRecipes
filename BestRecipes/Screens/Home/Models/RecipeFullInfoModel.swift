@@ -11,12 +11,14 @@ import Foundation
 
 struct RecipeFullInfo: Codable {
     let id: Int
+    let image: String
     let title: String
     let readyInMinutes: Int
     let servings: Int
     let spoonacularSourceUrl: String
     let instructions: String
     let extendedIngredients: [ExtendedIngredient]
+    let aggregateLikes: Int
 }
 
 struct ExtendedIngredient: Codable {
