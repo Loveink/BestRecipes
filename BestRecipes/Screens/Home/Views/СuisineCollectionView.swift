@@ -67,10 +67,7 @@ extension СuisineCollectionView: UICollectionViewDelegate, UICollectionViewData
             return UICollectionViewCell()
         }
         let category = categories[indexPath.row]
-
-        // Use category as the image name
         cell.configureCell(with: category)
-
         return cell
     }
 

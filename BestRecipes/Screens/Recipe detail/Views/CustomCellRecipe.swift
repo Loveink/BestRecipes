@@ -8,124 +8,130 @@
 import UIKit
 
 class CustomCellRecipe: UITableViewCell {
-    
-    var dishImageView = UIImageView()
-    var titleLbl = UILabel()
-    var descriptionLbl = UILabel()
-    var stackView = UIStackView()
-    var viewCardView = UIView()
-    
-    private let checkmarkImage: UIImageView = {
-        let checkmarkImage = UIImageView()
-        checkmarkImage.contentMode = .scaleAspectFit
-        checkmarkImage.image = UIImage(systemName: "checkmark.circle.fill")
-        checkmarkImage.tintColor = UIColor.white // Установите начальный цвет на белый
-        checkmarkImage.translatesAutoresizingMaskIntoConstraints = false
-        return checkmarkImage
-    }()
-    
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: "CustomCellRecipe")
-        setupUI()
-        setupLayout()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("Please use this class from code.")
-    }
-    
-    private func setupUI() {
-        
-        backgroundColor = UIColor.white
-        selectionStyle = .none
-        
-        contentView.addSubview(viewCardView)
-        
-        contentView.contentMode = .center
-        contentView.isMultipleTouchEnabled = true
-        
-        viewCardView.addSubview(dishImageView)
-        viewCardView.addSubview(stackView)
-        
-        viewCardView.addSubview(checkmarkImage)
-//        checkmarkImage.isHidden = true
-        
-        viewCardView.backgroundColor = UIColor(white: 0.66666666666666663, alpha: 1)
-        viewCardView.translatesAutoresizingMaskIntoConstraints = false
-        
-        viewCardView.setValue(10, forKeyPath: "cornerRadius")
-        
-        stackView.addArrangedSubview(titleLbl)
-        stackView.addArrangedSubview(descriptionLbl)
-        
-        stackView.backgroundColor = UIColor(white: 0, alpha: 0)
-        stackView.distribution = .fillEqually
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        
-        descriptionLbl.contentMode = .left
-        descriptionLbl.font = UIFont.systemFont(ofSize: 14)
-        descriptionLbl.setContentHuggingPriority(UILayoutPriority(rawValue: 251), for: .horizontal)
-        descriptionLbl.setContentHuggingPriority(UILayoutPriority(rawValue: 251), for: .vertical)
-        descriptionLbl.text = "Label"
-        descriptionLbl.textAlignment = .right
-        descriptionLbl.textColor = UIColor.systemGray
-        descriptionLbl.translatesAutoresizingMaskIntoConstraints = false
-        
-        titleLbl.contentMode = .left
-        titleLbl.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-        titleLbl.setContentHuggingPriority(UILayoutPriority(rawValue: 251), for: .horizontal)
-        titleLbl.setContentHuggingPriority(UILayoutPriority(rawValue: 251), for: .vertical)
-        titleLbl.text = "Label"
-        titleLbl.translatesAutoresizingMaskIntoConstraints = false
-        
-        dishImageView.clipsToBounds = true
-        dishImageView.contentMode = .scaleAspectFill
-        dishImageView.setContentHuggingPriority(UILayoutPriority(rawValue: 251), for: .horizontal)
-        dishImageView.setContentHuggingPriority(UILayoutPriority(rawValue: 251), for: .vertical)
-        dishImageView.translatesAutoresizingMaskIntoConstraints = false
-        dishImageView.accessibilityTraits = [.image, .notEnabled]
-        
-        dishImageView.setValue(5, forKeyPath: "cornerRadius")
-    }
-    
-    private func setupLayout() {
-        
-        // Ограничения для viewCardView
-        viewCardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16).isActive = true
-        viewCardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
-        viewCardView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
-        viewCardView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
-        
-        // Ограничения для stackView и dishImageView
-        dishImageView.leadingAnchor.constraint(equalTo: viewCardView.leadingAnchor, constant: 16).isActive = true
-        dishImageView.topAnchor.constraint(equalTo: viewCardView.topAnchor, constant: 16).isActive = true
-        dishImageView.bottomAnchor.constraint(equalTo: viewCardView.bottomAnchor, constant: -16).isActive = true
-        dishImageView.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        dishImageView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
-        stackView.axis = .horizontal // Используем горизонтальную ориентацию
-        stackView.alignment = .center // Центрируем элементы по вертикали
-        
-        stackView.leadingAnchor.constraint(equalTo: dishImageView.trailingAnchor, constant: 16).isActive = true
-        stackView.topAnchor.constraint(equalTo: viewCardView.topAnchor, constant: 16).isActive = true
-        stackView.trailingAnchor.constraint(equalTo: checkmarkImage.leadingAnchor, constant: -8).isActive = true // Расстояние между текстом и галочкой
-        stackView.bottomAnchor.constraint(equalTo: viewCardView.bottomAnchor, constant: -16).isActive = true
-        
-        checkmarkImage.trailingAnchor.constraint(equalTo: viewCardView.trailingAnchor, constant: -16).isActive = true
-        checkmarkImage.centerYAnchor.constraint(equalTo: stackView.centerYAnchor).isActive = true
-        checkmarkImage.widthAnchor.constraint(equalToConstant: 24).isActive = true
-        checkmarkImage.heightAnchor.constraint(equalToConstant: 24).isActive = true
-    }
-    
-    func toggleCheckmark() {
-        if checkmarkImage.tintColor == UIColor.white {
-            checkmarkImage.tintColor = UIColor.green
-        } else {
-            checkmarkImage.tintColor = UIColor.white
-        }
 
+  private var whiteBackgroundView: UIView = {
+    let view = UIView()
+    view.backgroundColor = .white
+    view.layer.cornerRadius = 5
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+
+  var dishImageView: UIImageView = {
+    let dishImageView = UIImageView()
+    dishImageView.clipsToBounds = true
+    dishImageView.contentMode = .scaleAspectFit
+    dishImageView.layer.cornerRadius = 5
+    dishImageView.translatesAutoresizingMaskIntoConstraints = false
+    return dishImageView
+  }()
+  
+  var titleLbl: UILabel = {
+    let titleLbl = UILabel()
+    titleLbl.contentMode = .left
+    titleLbl.font = .poppinsSemiBold(size: 16)
+    titleLbl.numberOfLines = 3
+    titleLbl.text = "Label"
+    titleLbl.translatesAutoresizingMaskIntoConstraints = false
+    return titleLbl
+  }()
+
+  var descriptionLbl: UILabel = {
+    let descriptionLbl = UILabel()
+    descriptionLbl.contentMode = .left
+    descriptionLbl.font = .poppinsSemiBold(size: 16)
+    descriptionLbl.text = "Label"
+    descriptionLbl.textAlignment = .right
+    descriptionLbl.textColor = UIColor.systemGray
+    descriptionLbl.translatesAutoresizingMaskIntoConstraints = false
+    return descriptionLbl
+  }()
+
+  var stackView: UIStackView = {
+    let stackView = UIStackView()
+    stackView.backgroundColor = UIColor(white: 0, alpha: 0)
+    stackView.distribution = .fillEqually
+    stackView.axis = .horizontal
+    stackView.alignment = .center
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    return stackView
+  }()
+
+  var viewCardView: UIView = {
+    let viewCardView = UIView()
+    viewCardView.backgroundColor = .neutral10
+    viewCardView.layer.cornerRadius = 10
+    viewCardView.translatesAutoresizingMaskIntoConstraints = false
+    return viewCardView
+  }()
+
+  private let checkmarkImage: UIImageView = {
+    let checkmarkImage = UIImageView()
+    checkmarkImage.contentMode = .scaleAspectFit
+    checkmarkImage.image = UIImage(systemName: "checkmark.circle.fill")
+    checkmarkImage.tintColor = UIColor.black
+    checkmarkImage.translatesAutoresizingMaskIntoConstraints = false
+    return checkmarkImage
+  }()
+
+
+  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    super.init(style: style, reuseIdentifier: "CustomCellRecipe")
+    setupUI()
+    setupLayout()
+  }
+
+  required init?(coder: NSCoder) {
+    fatalError("Please use this class from code.")
+  }
+
+  private func setupUI() {
+
+    contentView.addSubview(viewCardView)
+    viewCardView.addSubview(whiteBackgroundView)
+    viewCardView.addSubview(dishImageView)
+    viewCardView.addSubview(stackView)
+    viewCardView.addSubview(checkmarkImage)
+    stackView.addArrangedSubview(titleLbl)
+    stackView.addArrangedSubview(descriptionLbl)
+//        contentView.isMultipleTouchEnabled = true
+  }
+
+  private func setupLayout() {
+    NSLayoutConstraint.activate([
+      viewCardView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+      viewCardView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+      viewCardView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+      viewCardView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+
+      dishImageView.leadingAnchor.constraint(equalTo: viewCardView.leadingAnchor, constant: 16),
+      dishImageView.topAnchor.constraint(equalTo: viewCardView.topAnchor, constant: 16),
+      dishImageView.bottomAnchor.constraint(equalTo: viewCardView.bottomAnchor, constant: -16),
+      dishImageView.widthAnchor.constraint(equalToConstant: 50),
+      dishImageView.heightAnchor.constraint(equalToConstant: 50),
+
+      stackView.leadingAnchor.constraint(equalTo: dishImageView.trailingAnchor, constant: 16),
+      stackView.topAnchor.constraint(equalTo: viewCardView.topAnchor, constant: 16),
+      stackView.trailingAnchor.constraint(equalTo: checkmarkImage.leadingAnchor, constant: -8),
+      stackView.bottomAnchor.constraint(equalTo: viewCardView.bottomAnchor, constant: -16),
+
+      checkmarkImage.trailingAnchor.constraint(equalTo: viewCardView.trailingAnchor, constant: -16),
+      checkmarkImage.centerYAnchor.constraint(equalTo: stackView.centerYAnchor),
+      checkmarkImage.widthAnchor.constraint(equalToConstant: 24),
+      checkmarkImage.heightAnchor.constraint(equalToConstant: 24),
+
+      whiteBackgroundView.leadingAnchor.constraint(equalTo: dishImageView.leadingAnchor),
+      whiteBackgroundView.topAnchor.constraint(equalTo: dishImageView.topAnchor),
+      whiteBackgroundView.trailingAnchor.constraint(equalTo: dishImageView.trailingAnchor),
+      whiteBackgroundView.bottomAnchor.constraint(equalTo: dishImageView.bottomAnchor)
+    ])
+  }
+
+  func toggleCheckmark() {
+    if checkmarkImage.tintColor == UIColor.black {
+      checkmarkImage.tintColor = UIColor.primary50
+    } else {
+      checkmarkImage.tintColor = UIColor.black
     }
+  }
 }
-
-

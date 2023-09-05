@@ -8,9 +8,6 @@
 import UIKit
 
 class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
-    
-    var ingridients = ["Тартилия", "Лук", "Помидор", "Огурцы", "Курица"]
     var recipe: Recipe?
     var recipeFromSeeAll: RecipeInfoForCell?
     let navigationBar = CustomNavigationBar()
@@ -45,6 +42,7 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
+
     private lazy var horizontalStackView: UIStackView = {
         let horizontalStackView = UIStackView()
         horizontalStackView.axis = .horizontal
@@ -55,7 +53,7 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
     
     private lazy var textLabel: UILabel = {
         let textLabel = UILabel()
-        textLabel.text = "Шаурма"
+        textLabel.text = ""
         textLabel.textAlignment = .center
         textLabel.font = .poppinsRegular(size: 18)
         return textLabel
@@ -63,15 +61,15 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
     
     private lazy var imageFood: UIImageView = {
         let imageFood = UIImageView()
-        imageFood.image = UIImage(named: "image")
+        imageFood.clipsToBounds = true
         imageFood.layer.cornerRadius = 20
-        imageFood.contentMode = .scaleAspectFit
+        imageFood.contentMode = .scaleAspectFill
         return imageFood
     }()
     
     private lazy var likeLabel: UILabel = {
         let likeLabel = UILabel()
-        likeLabel.text = "150 Likes"
+        likeLabel.text = ""
         likeLabel.textAlignment = .left
         likeLabel.font = .poppinsRegular(size: 12)
         return likeLabel
@@ -87,7 +85,7 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
     
     private lazy var recipeLabel: UILabel = {
         let recipeLabel = UILabel()
-        recipeLabel.text = "Подготовь ингредиенты: 1. Маринованное мясо (курица, говядина или баранина) - нарежь его тонкими полосками и предварительно промаринуй с специями. 2. Овощи (помидоры, огурцы, лук, зелень) - нарежь их полосками или кубиками."
+        recipeLabel.text = ""
         recipeLabel.font = .poppinsRegular(size: 14)
         recipeLabel.numberOfLines = 0
         return recipeLabel
@@ -95,14 +93,14 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
     
     private lazy var ingridentsLabel: UILabel = {
         let ingridentsLabel = UILabel()
-        ingridentsLabel.text = "ingridents"
+        ingridentsLabel.text = "Ingridents"
         ingridentsLabel.font = .poppinsSemiBold(size: 16)
         return ingridentsLabel
     } ()
     
     private lazy var itemLabel: UILabel = {
         let itemLabel = UILabel()
-        itemLabel.text = "5 items"
+        itemLabel.text = ""
         itemLabel.font = .poppinsRegular(size: 16)
         itemLabel.textAlignment = .right
         
@@ -114,8 +112,7 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
@@ -128,9 +125,6 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
         subview()
         setupConstraints()
         cartButton.addTarget(self, action: #selector(cartButtonPressed), for: .touchUpInside)
-
-        
-        
     }
     //MARK: - Gettin Details
     private func getRecipeDetail() {
@@ -186,10 +180,9 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
     //MARK: - Add subview func
     
     private func subview() {
+        view.backgroundColor = .white
         view.addSubview(scrollView)
         scrollView.addSubview(stackView)
-        //        view.addSubview(stackView)
-        view.backgroundColor = .white
         stackView.addArrangedSubview(textLabel)
         stackView.addArrangedSubview(imageFood)
         stackView.addArrangedSubview(likeLabel)
@@ -199,8 +192,6 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
         stackView.addArrangedSubview(horizontalStackView)
         stackView.addArrangedSubview(tableView)
         stackView.addArrangedSubview(cartButton)
-        
-        
     }
     
     // MARK: -  Constrains
@@ -217,15 +208,19 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             stackView.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 2),
-            stackView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
-            stackView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 14),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -14),
             stackView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             
             stackView.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: -32), // Ограничение для ширины stackView
             
             tableView.heightAnchor.constraint(equalToConstant: 300),
-            
-            
+
+            textLabel.topAnchor.constraint(equalTo: stackView.topAnchor),
+            imageFood.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 5),
+            imageFood.leadingAnchor.constraint(equalTo: stackView.leadingAnchor, constant: 10),
+            imageFood.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: -10),
+            imageFood.heightAnchor.constraint(equalToConstant: 250),
         ])
     }
     
@@ -253,7 +248,13 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
    
         let imageString = "https://spoonacular.com/cdn/ingredients_100x100/\(recipeIngridients?.image ?? "")"
         cell.titleLbl.text = recipeIngridients?.name
-        cell.descriptionLbl.text = "\(recipeIngridients?.measures.metric.amount ?? 0)" + " " + "g"
+      if let amount = recipeIngridients?.measures.metric.amount {
+          let intValue = Int(amount)
+          cell.descriptionLbl.text = "\(intValue)g"
+      } else {
+          cell.descriptionLbl.text = "0g"
+      }
+      cell.selectionStyle = .none
         DispatchQueue.main.async {
             self.getImage(imageString, at: cell.dishImageView)
         }

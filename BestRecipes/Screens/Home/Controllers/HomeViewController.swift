@@ -44,8 +44,8 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
     super.viewDidLoad()
+
     hideKeyBoard()
-    
     view.backgroundColor = .white
       configureSeeAllButtons()
     setupScrollView()
@@ -163,7 +163,7 @@ class HomeViewController: UIViewController {
 
       cuisineCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
       cuisineCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-      cuisineCollectionView.topAnchor.constraint(equalTo: cuisineLabel.bottomAnchor, constant: 8),
+      cuisineCollectionView.topAnchor.constraint(equalTo: cuisineLabel.bottomAnchor, constant: 10),
       cuisineCollectionView.heightAnchor.constraint(equalToConstant: 200),
     ])
   }
