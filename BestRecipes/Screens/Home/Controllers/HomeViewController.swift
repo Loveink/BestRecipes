@@ -64,6 +64,7 @@ class HomeViewController: UIViewController {
 
   func setupNameView() {
     scrollView.addSubview(mainLabel)
+    lastVisitedViewController = HomeViewController()
   }
 
   func setupCollectionView() {
@@ -236,7 +237,7 @@ extension HomeViewController: CategoriesCollectionViewDelegate, TrendingCollecti
   func didSelectRecipe(_ recipe: Recipe) {
     let recipeDetailsVC = RecipeDetailView()
     recipeDetailsVC.recipe = recipe
-    recipeDetailsVC.modalPresentationStyle = .pageSheet
+    recipeDetailsVC.modalPresentationStyle = .fullScreen
     present(recipeDetailsVC, animated: true, completion: nil)
   }
 }

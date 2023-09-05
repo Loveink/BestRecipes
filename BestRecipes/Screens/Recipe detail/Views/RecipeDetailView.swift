@@ -11,8 +11,10 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
     
     
     var ingridients = ["Тартилия", "Лук", "Помидор", "Огурцы", "Курица"]
-  var recipe: Recipe?
+    var recipe: Recipe?
     let navigationBar = CustomNavigationBar()
+    var recipeDetail: [RecipeFullInfo]?
+    var image: UIImage?
     
     //MARK: - UI elements
     
@@ -60,6 +62,7 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
     private lazy var imageFood: UIImageView = {
         let imageFood = UIImageView()
         imageFood.image = UIImage(named: "image")
+        imageFood.layer.cornerRadius = 20
         imageFood.contentMode = .scaleAspectFit
         return imageFood
     }()
@@ -117,13 +120,57 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
         tableView.delegate = self
         tableView.register(CustomCellRecipe.self, forCellReuseIdentifier: "CustomCellRecipe")
         tableView.separatorStyle = .none
+
+        getRecipeDetail()
         setupNavBar()
         subview()
         setupConstraints()
         cartButton.addTarget(self, action: #selector(cartButtonPressed), for: .touchUpInside)
+
+        
         
     }
+    //MARK: - Gettin Details
+    private func getRecipeDetail() {
+        print(recipe!.id)
+        if let id = recipe?.id {
+            loadRecipes(with: id)
+        }
+    }
     
+    private func loadRecipes(with id: Int)  {
+        Task {
+            do {
+                let response = try await RecipeAPI.fetchFullInfo(id)
+                recipeDetail = response
+                getImage(recipe?.image  ?? "",at: imageFood)
+                setupDetails()
+                self.tableView.reloadData()
+
+
+            } catch {
+                await MainActor.run(body: {
+                    print(error, error.localizedDescription)
+                })
+            }
+        }
+    }
+    
+    private func getImage(_ image: String,at imageView: UIImageView) {
+        if let imageURL = URL(string: image) {
+            RecipeAPI.loadImageFromURL(urlString: imageURL.absoluteString) { image in
+                DispatchQueue.main.async {
+                    imageView.image = image
+                }
+            }
+        }
+    }
+    
+    private func setupDetails() {
+        textLabel.text = recipeDetail?[0].title
+        recipeLabel.text = recipeDetail?[0].instructions.htmlToString
+        likeLabel.text = "👍" + " " + "\(recipeDetail?[0].aggregateLikes ?? 0 )"
+    }
     
     //MARK: - Button
     @objc func cartButtonPressed() {
@@ -190,18 +237,21 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
     //MARK: - TableView
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+  
+        return recipeDetail?[0].extendedIngredients.count ?? 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCellRecipe", for: indexPath) as! CustomCellRecipe
-        
-        // Настройте данные вашей кастомной ячейки
-        cell.dishImageView.image = UIImage(named: "image")
-        cell.titleLbl.text = "Left Text"
-        cell.descriptionLbl.text = "Right text"
-        
+        let recipeIngridients = recipeDetail?[0].extendedIngredients[indexPath.row]
+   
+        let imageString = "https://spoonacular.com/cdn/ingredients_100x100/\(recipeIngridients?.image ?? "")"
+        cell.titleLbl.text = recipeIngridients?.name
+        cell.descriptionLbl.text = "\(recipeIngridients?.measures.metric.amount ?? 0)" + " " + "g"
+        DispatchQueue.main.async {
+            self.getImage(imageString, at: cell.dishImageView)
+        }
         return cell
     }
     
