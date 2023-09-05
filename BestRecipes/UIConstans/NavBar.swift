@@ -73,16 +73,20 @@ class CustomNavigationBar: UIViewController {
         if navigationController?.viewControllers.count ?? 0 > 1 {
             navigationController?.popViewController(animated: true)
         } else {
+            self.tabBarController?.selectedIndex = 0
             dismiss(animated: true)
+
+
         }
         
-//        let lastVC = lastVisitedViewController
-//        if lastVC is SearchViewController {
-//            dismiss(animated: true, completion: nil)
-//        } else if let navigationController = navigationController {
-//            let homeViewController = MainTabBarController()
-//            navigationController.setViewControllers([homeViewController], animated: true)
-//        }
+    }
+    
+    func ifAddViewOpen() {
+        
+        if let currentViewController = self.navigationController?.visibleViewController {
+            if currentViewController is CreateRecipeViewController {
+            }
+        }
     }
     
     @objc  func shareButtonAction() {
