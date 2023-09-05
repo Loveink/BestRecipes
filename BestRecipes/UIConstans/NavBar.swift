@@ -18,7 +18,7 @@ class CustomNavigationBar: UIViewController {
         label.text = "Screen Name "
         label.textColor = .black
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 25)
+        label.font = .poppinsSemiBold(size: 24)
         return label
     }()
 
@@ -31,6 +31,9 @@ class CustomNavigationBar: UIViewController {
     private func setupNavigationBar() {
         navigationBar.translatesAutoresizingMaskIntoConstraints = false
         titleOfViewLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        navigationBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+        navigationBar.shadowImage = UIImage()
         
         navigationBar.backgroundColor = .white
         navigationBar.barTintColor = .white
@@ -66,14 +69,21 @@ class CustomNavigationBar: UIViewController {
     
     
     @objc  func backButtonAction() {
-        let lastVC = lastVisitedViewController
-        if lastVC is SearchViewController {
-            dismiss(animated: true, completion: nil)
-        } else if let navigationController = navigationController {
-          let homeViewController = MainTabBarController()
-          navigationController.setViewControllers([homeViewController], animated: true)
-      }
-  }
+
+        if navigationController?.viewControllers.count ?? 0 > 1 {
+            navigationController?.popViewController(animated: true)
+        } else {
+            dismiss(animated: true)
+        }
+        
+//        let lastVC = lastVisitedViewController
+//        if lastVC is SearchViewController {
+//            dismiss(animated: true, completion: nil)
+//        } else if let navigationController = navigationController {
+//            let homeViewController = MainTabBarController()
+//            navigationController.setViewControllers([homeViewController], animated: true)
+//        }
+    }
     
     @objc  func shareButtonAction() {
             textToShare += """
