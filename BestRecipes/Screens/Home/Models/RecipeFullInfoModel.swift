@@ -17,6 +17,7 @@ struct RecipeFullInfo: Codable {
     let spoonacularSourceUrl: String
     let instructions: String
     let extendedIngredients: [ExtendedIngredient]
+    let aggregateLikes: Int
 }
 
 struct ExtendedIngredient: Codable {

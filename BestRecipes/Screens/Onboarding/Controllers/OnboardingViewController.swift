@@ -194,6 +194,9 @@ class OnboardingViewController: UIViewController {
 //                let vc = UserSignInController()
 //                sceneDelegate.window?.rootViewController = vc
 //            }
+            let vc = MainTabBarController()
+            vc.modalPresentationStyle = .fullScreen
+            present(vc , animated: true)
         } else {
             print("Not last button pressed")
             currentIndex += 1

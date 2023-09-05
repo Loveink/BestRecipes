@@ -12,6 +12,7 @@
 		0B62E6E52A9FC8F000AE3CC2 /* ImageSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B62E6E42A9FC8F000AE3CC2 /* ImageSelectionViewController.swift */; };
 		0B62E6E82A9FC91E00AE3CC2 /* MyRecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B62E6E72A9FC91E00AE3CC2 /* MyRecipeCell.swift */; };
 		0B758F1A2AA3460D009D02A5 /* SaveToCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B758F192AA3460D009D02A5 /* SaveToCoreData.swift */; };
+		0B758F222AA66C7F009D02A5 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B758F212AA66C7F009D02A5 /* String.swift */; };
 		0B7E02D02A9B965900D48CE2 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7E02CF2A9B965900D48CE2 /* API.swift */; };
 		0B7E02D22A9B96AC00D48CE2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7E02D12A9B96AC00D48CE2 /* NetworkManager.swift */; };
 		0B7E02D42A9B96DC00D48CE2 /* JASON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7E02D32A9B96DC00D48CE2 /* JASON.swift */; };
@@ -80,6 +81,7 @@
 		0B62E6E42A9FC8F000AE3CC2 /* ImageSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSelectionViewController.swift; sourceTree = "<group>"; };
 		0B62E6E72A9FC91E00AE3CC2 /* MyRecipeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipeCell.swift; sourceTree = "<group>"; };
 		0B758F192AA3460D009D02A5 /* SaveToCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveToCoreData.swift; sourceTree = "<group>"; };
+		0B758F212AA66C7F009D02A5 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		0B7E02CF2A9B965900D48CE2 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		0B7E02D12A9B96AC00D48CE2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		0B7E02D32A9B96DC00D48CE2 /* JASON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JASON.swift; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 			isa = PBXGroup;
 			children = (
 				0B7E02F42A9CCE9D00D48CE2 /* LetAndVarBrain.swift */,
+				0B758F212AA66C7F009D02A5 /* String.swift */,
 			);
 			path = Help;
 			sourceTree = "<group>";
@@ -720,6 +723,7 @@
 				E7CDA1D22AA0A8C300E866EE /* DiscoverCollectionView.swift in Sources */,
 				0B201BCD2AA066BA00308C19 /* DataModel.xcdatamodeld in Sources */,
 				57FA89942AA0926B00BBBECB /* CustomCellRecipe.swift in Sources */,
+				0B758F222AA66C7F009D02A5 /* String.swift in Sources */,
 				0B758F1A2AA3460D009D02A5 /* SaveToCoreData.swift in Sources */,
 				5705A2752A9BC26D0040E9E5 /* TrendingCell.swift in Sources */,
 				5705A25C2A9B27F30040E9E5 /* Label.swift in Sources */,
