@@ -40,7 +40,7 @@ class DiscoverViewController: UIViewController {
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-          mainLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: -20),
+          mainLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
           mainLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
           mainLabel.heightAnchor.constraint(greaterThanOrEqualToConstant: 50),
 

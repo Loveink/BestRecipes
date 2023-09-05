@@ -65,11 +65,13 @@ class CreateRecipeViewController: UIViewController {
         let scrollView = UIScrollView()
         return scrollView
     }()
+    override func viewWillAppear(_ animated: Bool) {
+        tabBarController?.tabBar.isHidden = true
 
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tabBarController?.tabBar.isHidden = true
+        
         view.backgroundColor = .white
         nameTextField.delegate = self
         setupNavBar()
@@ -78,12 +80,8 @@ class CreateRecipeViewController: UIViewController {
         setupConstraints()
         setupDishImageAction()
         keyboard()
-
         collectionView.delegate = self
-
-
         createButton.addTarget(self, action: #selector(addButtonLogic), for: .touchUpInside)
-
         nameTextField.addTarget(self, action: #selector(nameTextFieldEmpty), for: .editingChanged)
     }
 
@@ -105,7 +103,6 @@ class CreateRecipeViewController: UIViewController {
 
     private func setupViews() {
         view.addSubview(scrollView)
-
         scrollView.addSubview(dishImageView)
         dishImageView.addSubview(imageEdit)
         scrollView.addSubview(nameTextField)
@@ -114,8 +111,6 @@ class CreateRecipeViewController: UIViewController {
         scrollView.addSubview(ingredientsLabel)
         scrollView.addSubview(collectionView)
         scrollView.addSubview(createButton)
-
-
     }
 
     func setupScrollView() {
@@ -213,7 +208,7 @@ class CreateRecipeViewController: UIViewController {
     }
     
     func showRecipeAddedAlert() {
-        let alertController = UIAlertController(title: "Ваш рецепт добавлен", message: nil, preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Your recipe has been added.", message: nil, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default) { (action) in
             let vc = MainTabBarController()
             vc.selectedIndex = 4

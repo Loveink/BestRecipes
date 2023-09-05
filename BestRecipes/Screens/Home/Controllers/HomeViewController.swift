@@ -33,10 +33,19 @@ class HomeViewController: UIViewController {
   var seeAllButtonCuisine = SeeAllButton()
 
 
-  override func viewDidLoad() {
-    super.viewDidLoad()
-//    self.hideKeyBoard()
+  
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // Показать навигационную панель и таббар
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        tabBarController?.tabBar.isHidden = false
+    }
     
+    override func viewDidLoad() {
+    super.viewDidLoad()
+
+    hideKeyBoard()
     view.backgroundColor = .white
       configureSeeAllButtons()
     setupScrollView()
@@ -55,8 +64,9 @@ class HomeViewController: UIViewController {
   }
     
     private func hideKeyBoard() {
-        let backgroundTapGesrure = UITapGestureRecognizer(target: self, action: #selector(didTapBackground))
-        view.addGestureRecognizer(backgroundTapGesrure)
+        let backgroundTapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapBackground))
+           backgroundTapGesture.cancelsTouchesInView = false
+           scrollView.addGestureRecognizer(backgroundTapGesture)
     }
     
     @objc private func didTapBackground() {
