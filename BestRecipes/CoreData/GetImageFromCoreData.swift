@@ -93,6 +93,47 @@ struct GetFromCoreData {
        }
        return arrayOfArrays
    }
+    
+
+    static func getRecentIdFromCoreData() -> [Int] {
+        var recentIds: [Int] = []
+
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return recentIds
+        }
+
+        let context = appDelegate.persistentContainer.viewContext
+
+        let fetchRequest: NSFetchRequest<Recent> = Recent.fetchRequest()
+
+        do {
+            let recentObjects = try context.fetch(fetchRequest)
+            recentIds = recentObjects.compactMap { Int($0.recent) }
+            
+            if recentIds.count > 10 {
+                recentIds = Array(recentIds.suffix(10))
+            }
+            
+            var uniqueArray = [Int]()
+            for element in recentIds {
+                if !uniqueArray.contains(element) {
+                    uniqueArray.append(element)
+                } else {
+                    uniqueArray.removeAll { $0 == element }
+                    uniqueArray.append(element)
+                }
+            }
+            recentIds = uniqueArray.reversed()
+        } catch {
+            print("Ошибка при выполнении запроса: \(error)")
+        }
+        print("---------------------------------")
+        return recentIds
+    }
+
+
+    
+
 }
 
 

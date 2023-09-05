@@ -189,11 +189,6 @@ class OnboardingViewController: UIViewController {
     @objc private func nextButtonTapped() {
         if currentIndex == slides.count - 1 {
             print("Last button pressed")
-//            let scene = UIApplication.shared.connectedScenes.first
-//            if let sceneDelegate = scene?.delegate as? SceneDelegate {
-//                let vc = UserSignInController()
-//                sceneDelegate.window?.rootViewController = vc
-//            }
             let vc = MainTabBarController()
             vc.modalPresentationStyle = .fullScreen
             present(vc , animated: true)

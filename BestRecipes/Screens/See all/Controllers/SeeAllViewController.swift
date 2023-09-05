@@ -69,5 +69,9 @@ class SeeAllViewController: UIViewController {
         
     }
     
+    private func didSelectRecipe(_ recipe: Recipe) {
+      
+    }
+    
     
 }
