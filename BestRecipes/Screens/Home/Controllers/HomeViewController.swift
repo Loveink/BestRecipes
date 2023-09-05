@@ -35,6 +35,7 @@ class HomeViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.hideKeyBoard()
     
     view.backgroundColor = .white
       configureSeeAllButtons()
@@ -52,12 +53,22 @@ class HomeViewController: UIViewController {
     trendingCollectionView.delegate = self
       
   }
+    
+    private func hideKeyBoard() {
+        let backgroundTapGesrure = UITapGestureRecognizer(target: self, action: #selector(didTapBackground))
+        view.addGestureRecognizer(backgroundTapGesrure)
+    }
+    
+    @objc private func didTapBackground() {
+        view.endEditing(true)
+    }
 
   func setupScrollView() {
     view.addSubview(scrollView)
     scrollView.contentSize = CGSize(width: .zero, height: 1400)
     scrollView.backgroundColor = .white
   }
+    
   func setupSearchBar() {
     searchBar.searchBar.translatesAutoresizingMaskIntoConstraints = false
     scrollView.addSubview(searchBar.view)
