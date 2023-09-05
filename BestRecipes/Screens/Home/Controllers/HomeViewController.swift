@@ -34,6 +34,7 @@ class HomeViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+//    self.hideKeyBoard()
     
     view.backgroundColor = .white
     

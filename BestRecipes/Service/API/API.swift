@@ -21,7 +21,7 @@ let networkManager = NetworkManager()
     }
 
 let apiKey = [
-"de4f664533584529b9a71b334b628900",
+"047890ebde314c3e94db31c84d9aedbc",
 "a29eb5640b5c4435ad8ec2ef72759fe5",
 "a63ec13f2c7a473f9a9ec94e8d190e5c",
 "ce1dcc3c21614ac29f4f314e25f37a4f",
