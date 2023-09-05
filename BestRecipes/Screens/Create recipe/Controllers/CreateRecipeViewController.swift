@@ -194,7 +194,7 @@ class CreateRecipeViewController: UIViewController {
     @objc func addButtonLogic() {
         SaveToCoreData.saveRecipeInfoToCoreData(dishImageView.image!, nameTextField.text!, rowDataPikers.serving, rowDataPikers.cookTime)
         SaveToCoreData.saveArrayOfArraysToCoreData([rowDataArray])
-       let array = GetFromCoreData.fetchArrayOfArraysFromCoreData()
+      _ = GetFromCoreData.fetchArrayOfArraysFromCoreData()
         showRecipeAddedAlert()
         rowDataPikers = RowDataPiker() // В в самом конце после сохранения
     }

@@ -70,7 +70,6 @@ extension RecentCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentCell.identifier, for: indexPath) as? RecentCell else {
       return UICollectionViewCell()
     }
-    let selectedRecipe = recipes[indexPath.row]
     cell.configureCell(recipes[indexPath.row])
     return cell
   }
