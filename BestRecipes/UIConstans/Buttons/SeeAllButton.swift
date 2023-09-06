@@ -64,7 +64,7 @@ extension HomeViewController {
         seeAllButtonCategory.addTarget(self, action: #selector(seeAllButtonWasTapped), for: .touchUpInside)
         seeAllButtonCategory.name = "Main Course"
         seeAllButtonRecent.addTarget(self, action: #selector(seeAllButtonWasTapped), for: .touchUpInside)
-        seeAllButtonRecent.name = "Creators"
+        seeAllButtonRecent.name = "Recent recipes"
         seeAllButtonCuisine.addTarget(self, action: #selector(seeAllButtonCuisineWasTapped), for: .touchUpInside)
         seeAllButtonCuisine.name = "Cousines"
     }

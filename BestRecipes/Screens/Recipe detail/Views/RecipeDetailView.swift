@@ -8,14 +8,13 @@
 import UIKit
 
 class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDelegate {
+
   var recipe: Recipe?
   var recipeFromSeeAll: RecipeInfoForCell?
   let navigationBar = CustomNavigationBar()
   var recipeDetail: [RecipeFullInfo]?
   var selectedIngredients: [IngredientModel] = []
   var image: UIImage?
-  var shoppingListViewController: ShopingListViewController?
-
 
   //MARK: - UI elements
 
@@ -177,15 +176,11 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
 
   //MARK: - Button
   @objc func cartButtonPressed() {
-//      if !selectedIngredients.isEmpty {
-//          delegate?.didSelectIngredients(selectedIngredients)
-//          navigationController?.popViewController(animated: true)
-//        print(selectedIngredients)
-//      } else {
-//          print("Nothing selected.")
-//      }
+    SelectedIngredientsManager.shared.selectedIngredients.append(contentsOf: selectedIngredients)
+    let shopListVC = ShopingListViewController()
+    shopListVC.modalPresentationStyle = .pageSheet
+       present(shopListVC, animated: true, completion: nil)
   }
- 
 
   //MARK: - Add subview func
 

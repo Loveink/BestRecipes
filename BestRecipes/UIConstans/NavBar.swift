@@ -75,8 +75,6 @@ class CustomNavigationBar: UIViewController {
         } else {
             self.tabBarController?.selectedIndex = 0
             dismiss(animated: true)
-
-
         }
         
     }
