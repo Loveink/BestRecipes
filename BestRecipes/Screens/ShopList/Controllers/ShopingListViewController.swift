@@ -10,9 +10,14 @@ import UIKit
 class ShopingListViewController: UIViewController {
 
     private let customCellIdentifier = "CustomShopListCell"
-    private var shoppingList = IngredientModel.makeMockData()
+    var selectedIngredients: [IngredientModel] = [] {
+      didSet {
+        DispatchQueue.main.async {
+          self.tableView.reloadData()
+        }
+      }
+    }
 
-// MARK: - Data for tableView
 // MARK: - User Interface
     private lazy var textLabel: UILabel = {
         let textLabel = UILabel.makeLabel(font: .poppinsRegular(size: 48), textColor: .darkGray)
@@ -51,12 +56,13 @@ class ShopingListViewController: UIViewController {
         super.viewDidLoad()
         setupView()
         setupConstraints()
+      print(selectedIngredients)
     }
 
-    @objc private func clearButtonTapped(_ selector: UIButton) {
-        print("Clear Button tapped")
-
-    }
+  @objc private func clearButtonTapped() {
+      selectedIngredients.removeAll()
+      tableView.reloadData()
+  }
 }
 
 // MARK: - Extension for setUp view constraints
@@ -93,39 +99,34 @@ extension ShopingListViewController {
 
 extension ShopingListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        shoppingList.count
+      selectedIngredients.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         // Метод переиспользования ячейки с заданным идентификатором
-        let cell = tableView.dequeueReusableCell(withIdentifier: customCellIdentifier, for: indexPath) as? CustomShopListCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: customCellIdentifier, for: indexPath) as! CustomShopListCell
 
         // Передаем в ячейку данные из массива (заполняем все ячейки)
-        let ingredient = shoppingList[indexPath.row]
-        cell?.setDataIntocell(
+        let ingredient = selectedIngredients[indexPath.row]
+        cell.setDataIntocell(
             imageName: ingredient.image,
             name: ingredient.name,
             amount: ingredient.amount)
-
-        // Нужно развернуть опционал
-        return cell ?? CustomShopListCell()
+        return cell
     }
 
-//    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//        let action = UIContextualAction(style: .destructive, title: "Удалить") { _, _, _ in
-//
-//            // Удаляем ячейку из списка покупок
-//            self.shoppingList.remove(at: indexPath.row)
-//
-//            // Удаление ячейки из таблицы надо обернуть в Updates()
-//            self.tableView.beginUpdates()
-//            self.tableView.deleteRows(at: [indexPath], with: .left)
-//            self.tableView.endUpdates()
-//        }
-//
-//        let configuration = UISwipeActionsConfiguration(actions: [action])
-//        return configuration
-//    }
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction(style: .destructive, title: "Удалить") { _, _, _ in
+
+            self.selectedIngredients.remove(at: indexPath.row)
+            self.tableView.beginUpdates()
+            self.tableView.deleteRows(at: [indexPath], with: .left)
+            self.tableView.endUpdates()
+        }
+
+        let configuration = UISwipeActionsConfiguration(actions: [action])
+        return configuration
+    }
 }
 

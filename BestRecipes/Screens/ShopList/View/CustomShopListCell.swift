@@ -53,10 +53,10 @@ class CustomShopListCell: UITableViewCell {
     }
 
 // MARK: - methode to put information into the cell
-    func setDataIntocell(imageName: String, name: String, amount: String) {
+    func setDataIntocell(imageName: String, name: String, amount: Double) {
         ingrImageView.image = UIImage(named: imageName)
         ingrNameLabel.text = name
-        ingrAmountLabel.text = amount
+        ingrAmountLabel.text = String(amount) + " Gr"
     }
 }
 

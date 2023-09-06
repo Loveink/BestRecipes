@@ -51,7 +51,6 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
 
     let notification = ShopingListViewController()
     notification.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "notification")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "notificationSelect")?.withRenderingMode(.alwaysOriginal))
-    notification.view.isUserInteractionEnabled = false
 
     let profile = ProfilePageViewController()
     profile.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "profile")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "profileSelect")?.withRenderingMode(.alwaysOriginal))
