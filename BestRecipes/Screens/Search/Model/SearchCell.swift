@@ -64,7 +64,7 @@ class SearchTableViewCell: UITableViewCell {
 
       titleBackgroundView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
       titleBackgroundView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
-      titleBackgroundView.bottomAnchor.constraint(equalTo: dishImageView.bottomAnchor, constant: 10),
+      titleBackgroundView.bottomAnchor.constraint(equalTo: dishImageView.bottomAnchor, constant: -10),
       titleBackgroundView.heightAnchor.constraint(equalToConstant: 20),
 
       titleLabel.leadingAnchor.constraint(equalTo: titleBackgroundView.leadingAnchor, constant: 10),
