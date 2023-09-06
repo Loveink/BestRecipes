@@ -8,7 +8,7 @@
 import UIKit
 
 class SeeAllCuisineViewController: UIViewController {
-  
+
   private var cuisineCollectionView: СuisineCollectionView!
   let navigationBar = CustomNavigationBar()
   
@@ -37,8 +37,13 @@ class SeeAllCuisineViewController: UIViewController {
   private func setupCollection() {
     cuisineCollectionView = СuisineCollectionView(frame: .zero)
     cuisineCollectionView.delegateCollectionDidSelect = self
-    cuisineCollectionView.backgroundColor = .white // Измените фон на нужный цвет
+    cuisineCollectionView.backgroundColor = .white
+    let layout = UICollectionViewFlowLayout()
+    layout.scrollDirection = .vertical
+    cuisineCollectionView.collectionView.showsVerticalScrollIndicator = false
+    cuisineCollectionView.collectionView.collectionViewLayout = layout
     cuisineCollectionView.translatesAutoresizingMaskIntoConstraints = false
+
     view.addSubview(cuisineCollectionView)
     
     NSLayoutConstraint.activate([

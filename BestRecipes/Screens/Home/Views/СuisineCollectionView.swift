@@ -9,7 +9,7 @@ import UIKit
 
 class СuisineCollectionView: UIView {
 
-    private var collectionView: UICollectionView!
+    var collectionView: UICollectionView!
     weak var delegateCollectionDidSelect: CollectionCuisineDidSelectProtocol?
 
     private var categories: [String] = ["Asian", "American", "French", "German", "Greek", "Indian", "Italian", "Japanese", "Mexican", "Thai"]
