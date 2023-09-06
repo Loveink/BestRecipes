@@ -11,7 +11,7 @@ class CustomShopListCell: UITableViewCell {
         
 // MARK: - User Interface
     
-    private lazy var ingrImageView: UIImageView = {
+     var ingrImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "image")
         imageView.contentMode = .scaleAspectFit
@@ -53,10 +53,9 @@ class CustomShopListCell: UITableViewCell {
     }
 
 // MARK: - methode to put information into the cell
-    func setDataIntocell(imageName: String, name: String, amount: Double) {
-        ingrImageView.image = UIImage(named: imageName)
+    func setDataIntocell(name: String, amount: Double) {
         ingrNameLabel.text = name
-        ingrAmountLabel.text = String(amount) + " Gr"
+        ingrAmountLabel.text = "\(Int(amount))g"
     }
 }
 

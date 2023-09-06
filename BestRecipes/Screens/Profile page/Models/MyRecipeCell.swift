@@ -54,7 +54,7 @@ class MyRecipeCell: UICollectionViewCell {
     contentView.addSubview(titleLabel)
     minuteView.addSubview(minuteLabel)
     contentView.addSubview(minuteView)
-      minuteLabel.numberOfLines = 2
+    minuteLabel.numberOfLines = 2
   }
     
     
@@ -63,15 +63,15 @@ class MyRecipeCell: UICollectionViewCell {
   private func setupConstraints() {
     NSLayoutConstraint.activate([
       dishImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-      dishImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-      dishImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-      dishImageView.heightAnchor.constraint(equalToConstant: 150),
+//      dishImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+//      dishImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+      dishImageView.heightAnchor.constraint(equalToConstant: 200),
+      dishImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
 
       titleLabel.leadingAnchor.constraint(equalTo: dishImageView.leadingAnchor, constant: 10),
       titleLabel.trailingAnchor.constraint(equalTo: dishImageView.trailingAnchor, constant: -10),
       titleLabel.bottomAnchor.constraint(equalTo: minuteView.topAnchor, constant: -5),
 
-      
       minuteLabel.centerXAnchor.constraint(equalTo: minuteView.centerXAnchor),
       minuteLabel.centerYAnchor.constraint(equalTo: minuteView.centerYAnchor),
 

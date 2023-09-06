@@ -87,3 +87,8 @@ final class BookmarksManager {
 
 }
 
+class SelectedIngredientsManager {
+    static let shared = SelectedIngredientsManager()
+    var selectedIngredients: [IngredientModel] = []
+    private init() {}
+}

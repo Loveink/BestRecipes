@@ -19,7 +19,7 @@ class SeeAllViewController: UIViewController {
     
     init(title: String, recipes: [RecipeInfoForCell]) {
         super.init(nibName: nil, bundle: nil)
-        navigationBar.titleOfViewLabel.text = title
+      navigationBar.titleOfViewLabel.text = title.capitalized
         self.recipes = recipes
     }
     
@@ -33,9 +33,7 @@ class SeeAllViewController: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         setupNavBar()
-        
         setCollectionView()
-        
     }
     
     

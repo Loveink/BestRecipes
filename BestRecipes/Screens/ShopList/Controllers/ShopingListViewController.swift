@@ -10,13 +10,7 @@ import UIKit
 class ShopingListViewController: UIViewController {
 
     private let customCellIdentifier = "CustomShopListCell"
-    var selectedIngredients: [IngredientModel] = [] {
-      didSet {
-        DispatchQueue.main.async {
-          self.tableView.reloadData()
-        }
-      }
-    }
+    var selectedIngredients = SelectedIngredientsManager.shared.selectedIngredients
 
 // MARK: - User Interface
     private lazy var textLabel: UILabel = {
@@ -59,6 +53,13 @@ class ShopingListViewController: UIViewController {
       print(selectedIngredients)
     }
 
+  override func viewWillAppear(_ animated: Bool) {
+      super.viewWillAppear(animated)
+      selectedIngredients = SelectedIngredientsManager.shared.selectedIngredients
+      tableView.reloadData()
+  }
+
+
   @objc private func clearButtonTapped() {
       selectedIngredients.removeAll()
       tableView.reloadData()
@@ -92,6 +93,15 @@ extension ShopingListViewController {
           clearButton.heightAnchor.constraint(equalToConstant: 56)
       ])
   }
+  private func getImage(_ image: String,at imageView: UIImageView) {
+    if let imageURL = URL(string: image) {
+      RecipeAPI.loadImageFromURL(urlString: imageURL.absoluteString) { image in
+        DispatchQueue.main.async {
+          imageView.image = image
+        }
+      }
+    }
+  }
 
 }
 
@@ -104,15 +114,16 @@ extension ShopingListViewController: UITableViewDataSource, UITableViewDelegate 
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-        // Метод переиспользования ячейки с заданным идентификатором
         let cell = tableView.dequeueReusableCell(withIdentifier: customCellIdentifier, for: indexPath) as! CustomShopListCell
 
-        // Передаем в ячейку данные из массива (заполняем все ячейки)
         let ingredient = selectedIngredients[indexPath.row]
+        let imageString = "https://spoonacular.com/cdn/ingredients_100x100/\(ingredient.image)"
         cell.setDataIntocell(
-            imageName: ingredient.image,
             name: ingredient.name,
             amount: ingredient.amount)
+      DispatchQueue.main.async {
+        self.getImage(imageString, at: cell.ingrImageView)
+      }
         return cell
     }
 

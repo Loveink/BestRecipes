@@ -246,8 +246,6 @@ class HomeViewController: UIViewController {
 
           let data = try await RecipeAPI.fetchFullInfoFromIdString(with: resultString)
           self.recentCollectionView.recipesFull = data
-//          self.recentCollectionView.recipes = arrayOfId
-            print(data)
         } catch {
           await MainActor.run {
             print(error.localizedDescription)
