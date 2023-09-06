@@ -133,12 +133,13 @@ extension ProfilePageViewController:  UICollectionViewDelegate, UICollectionView
         cell.layer.borderColor = UIColor.black.cgColor
         return cell
     }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = MyRecipeDetailViewController()
-        vc.myRecipe = myRecipes[indexPath.row]
-        vc.ingredients = myIngridients[indexPath.row]
-        vc.modalPresentationStyle = .currentContext
-        present(vc,animated: true)
-    }
+
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        let vc = MyRecipeDetailViewController()
+//        vc.myRecipe = myRecipes[indexPath.row]
+//        vc.ingredients = myIngridients[indexPath.row]
+//        vc.modalPresentationStyle = .currentContext
+//        present(vc,animated: true)
+//    }
 }
 

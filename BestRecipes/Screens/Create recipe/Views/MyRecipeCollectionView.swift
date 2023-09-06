@@ -139,12 +139,7 @@ extension MyRecipeCollectionView: MyRecipeCollectionCellDelegate {
           } else {
               rowDataArray[indexPath.row].isField1 = false
           }
-          
-//          print(rowDataArray)
-
-
       }
-  
   }
   
   func textField2DidChange(at indexPath: IndexPath, newValue: String) {
@@ -156,10 +151,6 @@ extension MyRecipeCollectionView: MyRecipeCollectionCellDelegate {
           } else {
               rowDataArray[indexPath.row].isField2 = false
           }
-          
-          
-          
       }
   }
 }
-

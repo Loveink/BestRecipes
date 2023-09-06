@@ -103,14 +103,11 @@ class MyRecipeCollectionCell: UICollectionViewCell, UITextFieldDelegate {
     @objc private func textField1DidChange(_ textField: UITextField) {
         collectionDelegate?.textField1DidChange(at: indexPath!, newValue: textField.text ?? "")
         isTexField1Empty()
-        print(rowDataArray)
     }
   
   @objc private func textField2DidChange(_ textField: UITextField) {
       collectionDelegate?.textField2DidChange(at: indexPath!, newValue: textField.text ?? "")
       isTexField2Empty()
-      print(rowDataArray)
-
   }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

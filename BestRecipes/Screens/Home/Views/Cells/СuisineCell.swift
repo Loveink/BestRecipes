@@ -59,7 +59,7 @@ class СuisineCell: UICollectionViewCell {
       dishImageView.widthAnchor.constraint(equalToConstant: 150),
 
       titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-      titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+      titleLabel.topAnchor.constraint(equalTo: dishImageView.bottomAnchor, constant: 10),
     ])
   }
 }
