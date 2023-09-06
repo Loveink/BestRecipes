@@ -80,9 +80,9 @@ extension CategoriesCollectionView: UICollectionViewDelegate, UICollectionViewDa
     let selectedRecipe = recipeFullInfo[indexPath.row]
     if bookmarksManager.bookmarksArray.contains(selectedRecipe) {
       cell.liked = true
-      cell.favouriteButton.setImage(UIImage(systemName: "bookmark.fill"), for: .normal)
+      cell.favouriteButton.setImage(UIImage(named: "bookmark.fill"), for: .normal)
     } else {
-      cell.favouriteButton.setImage(UIImage(systemName: "bookmark"), for: .normal)
+      cell.favouriteButton.setImage(UIImage(named: "bookmark"), for: .normal)
     }
     cell.configureCell(recipeFullInfo[indexPath.row])
     return cell
