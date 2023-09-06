@@ -61,6 +61,7 @@ class HomeViewController: UIViewController {
     cuisineCollectionView.delegateCollectionDidSelect = self
     categoryCollectionView.delegate = self
     trendingCollectionView.delegate = self
+    recentCollectionView.delegate = self
     
   }
   
@@ -244,7 +245,8 @@ class HomeViewController: UIViewController {
             let resultString = arrayOfId.map(String.init).joined(separator: ",")
 
           let data = try await RecipeAPI.fetchFullInfoFromIdString(with: resultString)
-            self.recentCollectionView.recipes = data
+          self.recentCollectionView.recipesFull = data
+//          self.recentCollectionView.recipes = arrayOfId
             print(data)
         } catch {
           await MainActor.run {
@@ -299,6 +301,15 @@ extension HomeViewController: CategoriesCollectionViewDelegate, TrendingCollecti
     SaveToCoreData.saveRecentArrayToCoreData(recipe.id)
     let recipeDetailsVC = RecipeDetailView()
     recipeDetailsVC.recipe = recipe
+    recipeDetailsVC.modalPresentationStyle = .fullScreen
+    present(recipeDetailsVC, animated: true, completion: nil)
+  }
+}
+
+extension HomeViewController: RecentCollectionViewDelegate {
+  func didSelectRecipeRe(_ recipe: RecipeInfoForCell) {
+    let recipeDetailsVC = RecipeDetailView()
+    recipeDetailsVC.recipeFromSeeAll = recipe
     recipeDetailsVC.modalPresentationStyle = .fullScreen
     present(recipeDetailsVC, animated: true, completion: nil)
   }

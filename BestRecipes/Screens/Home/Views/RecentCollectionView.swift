@@ -8,7 +8,7 @@
 import UIKit
 
 protocol RecentCollectionViewDelegate: AnyObject {
-  func didSelectRecipe(_ recipe: Recipe)
+  func didSelectRecipeRe(_ recipe: RecipeInfoForCell)
 }
 
 class RecentCollectionView: UIView {
@@ -16,7 +16,16 @@ class RecentCollectionView: UIView {
   var collectionView: UICollectionView!
   weak var delegate: RecentCollectionViewDelegate?
   var navController: UIViewController!
-  var recipes: [RecipeInfoForCell] = [] {
+//
+//  var recipes: [Recipe] = [] {
+//    didSet {
+//      DispatchQueue.main.async {
+//        self.collectionView.reloadData()
+//      }
+//    }
+//  }
+
+  var recipesFull: [RecipeInfoForCell] = [] {
       didSet {
         DispatchQueue.main.async {
           self.collectionView.reloadData()
@@ -70,15 +79,15 @@ class RecentCollectionView: UIView {
 extension RecentCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return recipes.count
+    return recipesFull.count
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentCell.identifier, for: indexPath) as? RecentCell else {
       return UICollectionViewCell()
     }
-      let recipe = recipes[indexPath.row]
-      cell.configureCell(recipe)
+    let recipe = recipesFull[indexPath.row]
+    cell.configureCell(recipe)
     return cell
   }
 
@@ -87,9 +96,7 @@ extension RecentCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
   }
 
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-      let recipeDetailsVC = RecipeDetailView()
-      recipeDetailsVC.recipeFromSeeAll = recipes[indexPath.row]
-      recipeDetailsVC.modalPresentationStyle = .currentContext
-      self.navController.present(recipeDetailsVC, animated: true)
+    let selectedRecipe = recipesFull[indexPath.item]
+    delegate?.didSelectRecipeRe(selectedRecipe)
   }
 }

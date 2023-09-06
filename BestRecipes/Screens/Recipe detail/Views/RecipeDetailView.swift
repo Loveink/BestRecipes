@@ -134,7 +134,7 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
     if let id = recipe?.id   {
       loadRecipes(with: id)
     }
-    if let id =  recipeFromSeeAll?.id  {
+    if let id = recipeFromSeeAll?.id  {
       loadRecipes(with: id)
     }
   }
