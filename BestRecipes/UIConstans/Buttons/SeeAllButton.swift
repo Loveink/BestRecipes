@@ -51,6 +51,11 @@ extension HomeViewController {
         let viewController = SeeAllViewController(title: sender.name, recipes: sender.recipes)
         self.navigationController?.pushViewController(viewController, animated: true)
     }
+
+    @objc func seeAllButtonCuisineWasTapped(sender: SeeAllButton) {
+      let viewController = SeeAllCuisineViewController()
+      self.navigationController?.pushViewController(viewController, animated: true)
+  }
     
     
     func configureSeeAllButtons() {
@@ -60,6 +65,8 @@ extension HomeViewController {
         seeAllButtonCategory.name = "Main Course"
         seeAllButtonRecent.addTarget(self, action: #selector(seeAllButtonWasTapped), for: .touchUpInside)
         seeAllButtonRecent.name = "Creators"
+        seeAllButtonCuisine.addTarget(self, action: #selector(seeAllButtonCuisineWasTapped), for: .touchUpInside)
+        seeAllButtonCuisine.name = "Cousines"
     }
     
 }

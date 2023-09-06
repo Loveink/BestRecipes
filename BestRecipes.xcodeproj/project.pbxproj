@@ -56,6 +56,7 @@
 		570C97532AA22FE8009645AB /* СuisineCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570C97522AA22FE8009645AB /* СuisineCollectionView.swift */; };
 		570C97552AA23C0D009645AB /* RowDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570C97542AA23C0D009645AB /* RowDataCell.swift */; };
 		570C97572AA26982009645AB /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 570C97562AA26982009645AB /* ResultsViewController.swift */; };
+		576C25282AA8663A00B8A455 /* SeeAllCuisineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576C25272AA8663900B8A455 /* SeeAllCuisineViewController.swift */; };
 		576C55A12AA1F145003D5317 /* RecentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576C55A02AA1F145003D5317 /* RecentCell.swift */; };
 		576C55A32AA1F16B003D5317 /* СuisineCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576C55A22AA1F16B003D5317 /* СuisineCell.swift */; };
 		57FA89882A9FEEA900BBBECB /* MyRecipeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57FA89872A9FEEA900BBBECB /* MyRecipeCollectionCell.swift */; };
@@ -126,6 +127,7 @@
 		570C97522AA22FE8009645AB /* СuisineCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СuisineCollectionView.swift"; sourceTree = "<group>"; };
 		570C97542AA23C0D009645AB /* RowDataCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RowDataCell.swift; sourceTree = "<group>"; };
 		570C97562AA26982009645AB /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
+		576C25272AA8663900B8A455 /* SeeAllCuisineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeAllCuisineViewController.swift; sourceTree = "<group>"; };
 		576C55A02AA1F145003D5317 /* RecentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentCell.swift; sourceTree = "<group>"; };
 		576C55A22AA1F16B003D5317 /* СuisineCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "СuisineCell.swift"; sourceTree = "<group>"; };
 		57FA89872A9FEEA900BBBECB /* MyRecipeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRecipeCollectionCell.swift; sourceTree = "<group>"; };
@@ -448,6 +450,7 @@
 			isa = PBXGroup;
 			children = (
 				5705A2532A9A74290040E9E5 /* SeeAllViewController.swift */,
+				576C25272AA8663900B8A455 /* SeeAllCuisineViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -719,6 +722,7 @@
 				E7CDA1C82A9FD2E900E866EE /* View.swift in Sources */,
 				E7CDA1D02AA0A8B700E866EE /* DiscoverCell.swift in Sources */,
 				0B7E02F02A9CCDB500D48CE2 /* SearchCell.swift in Sources */,
+				576C25282AA8663A00B8A455 /* SeeAllCuisineViewController.swift in Sources */,
 				E7CDA1D22AA0A8C300E866EE /* DiscoverCollectionView.swift in Sources */,
 				0B201BCD2AA066BA00308C19 /* DataModel.xcdatamodeld in Sources */,
 				57FA89942AA0926B00BBBECB /* CustomCellRecipe.swift in Sources */,
