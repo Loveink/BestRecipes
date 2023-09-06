@@ -10,12 +10,12 @@ import Kingfisher
 
 class RecentCell: UICollectionViewCell {
 
-  var currentRecipe: Recipe?
+  var currentRecipe: RecipeInfoForCell?
   static let identifier = "RecentCell"
 
   override init(frame: CGRect) {
     super.init(frame: frame)
-    backgroundColor = .red
+    backgroundColor = .white
     setupViews()
     setupConstraints()
   }
@@ -43,7 +43,7 @@ class RecentCell: UICollectionViewCell {
     .cacheOriginalImage
   ]
 
-  public func configureCell(_ data: Recipe) {
+  public func configureCell(_ data: RecipeInfoForCell) {
     DispatchQueue.main.async {
       self.titleLabel.text = data.title
       self.dishImageView.kf.setImage(with: URL(string: data.image), options: self.options)
@@ -65,6 +65,7 @@ class RecentCell: UICollectionViewCell {
       dishImageView.heightAnchor.constraint(equalToConstant: 150),
 
       titleLabel.leadingAnchor.constraint(equalTo: dishImageView.leadingAnchor),
+      titleLabel.trailingAnchor.constraint(equalTo: dishImageView.trailingAnchor),
       titleLabel.topAnchor.constraint(equalTo: dishImageView.bottomAnchor, constant: 10)
     ])
   }

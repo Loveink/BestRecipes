@@ -37,8 +37,7 @@ class HomeViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    
-    // Показать навигационную панель и таббар
+      fetchRecentRecipe()
     navigationController?.setNavigationBarHidden(false, animated: false)
     tabBarController?.tabBar.isHidden = false
     trendingCollectionView.collectionView.reloadData()
@@ -237,6 +236,26 @@ class HomeViewController: UIViewController {
       }
     }
   }
+    
+    func fetchRecentRecipe() {
+      Task {
+        do {
+            let arrayOfId =  GetFromCoreData.getRecentIdFromCoreData()
+            let resultString = arrayOfId.map(String.init).joined(separator: ",")
+
+          let data = try await RecipeAPI.fetchFullInfoFromIdString(with: resultString)
+            self.recentCollectionView.recipes = data
+            print(data)
+        } catch {
+          await MainActor.run {
+            print(error.localizedDescription)
+              print(88888888888)
+          }
+        }
+      }
+    }
+    
+    
 }
 
 extension HomeViewController: CollectionDidSelectProtocol {

@@ -15,18 +15,23 @@ class RecentCollectionView: UIView {
 
   var collectionView: UICollectionView!
   weak var delegate: RecentCollectionViewDelegate?
-
-  var recipes: [Recipe] = [] {
-    didSet {
-      DispatchQueue.main.async {
-        self.collectionView.reloadData()
+  var navController: UIViewController!
+  var recipes: [RecipeInfoForCell] = [] {
+      didSet {
+        DispatchQueue.main.async {
+          self.collectionView.reloadData()
+        }
       }
     }
-  }
 
+    override func layoutSubviews() {
+            super.layoutSubviews()
+        collectionView.reloadData()
+        }
+    
   override init(frame: CGRect) {
     super.init(frame: frame)
-    backgroundColor = .red
+    backgroundColor = .white
     configureCollection()
     addSubview(collectionView)
     setupConstraints()
@@ -37,6 +42,8 @@ class RecentCollectionView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
 
+    
+    
   func configureCollection() {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
@@ -70,7 +77,8 @@ extension RecentCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentCell.identifier, for: indexPath) as? RecentCell else {
       return UICollectionViewCell()
     }
-    cell.configureCell(recipes[indexPath.row])
+      let recipe = recipes[indexPath.row]
+      cell.configureCell(recipe)
     return cell
   }
 
@@ -79,9 +87,9 @@ extension RecentCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
   }
 
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    if recipes.count > 0 {
-      let selectedRecipe = recipes[indexPath.item]
-      delegate?.didSelectRecipe(selectedRecipe)
-    }
+      let recipeDetailsVC = RecipeDetailView()
+      recipeDetailsVC.recipeFromSeeAll = recipes[indexPath.row]
+      recipeDetailsVC.modalPresentationStyle = .currentContext
+      self.navController.present(recipeDetailsVC, animated: true)
   }
 }
