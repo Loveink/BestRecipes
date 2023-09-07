@@ -63,10 +63,9 @@ class MyRecipeCell: UICollectionViewCell {
   private func setupConstraints() {
     NSLayoutConstraint.activate([
       dishImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
-//      dishImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-//      dishImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+      dishImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+      dishImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
       dishImageView.heightAnchor.constraint(equalToConstant: 200),
-      dishImageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
 
       titleLabel.leadingAnchor.constraint(equalTo: dishImageView.leadingAnchor, constant: 10),
       titleLabel.trailingAnchor.constraint(equalTo: dishImageView.trailingAnchor, constant: -10),

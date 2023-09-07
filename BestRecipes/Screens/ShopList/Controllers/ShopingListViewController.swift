@@ -14,10 +14,9 @@ class ShopingListViewController: UIViewController {
 
 // MARK: - User Interface
     private lazy var textLabel: UILabel = {
-        let textLabel = UILabel.makeLabel(font: .poppinsRegular(size: 48), textColor: .darkGray)
-        textLabel.text = "ShopList"
+        let textLabel = UILabel.makeLabel(font: .poppinsSemiBold(size: 24), textColor: .darkGray)
+        textLabel.text = "Shopping List"
         textLabel.textAlignment = .center
-        textLabel.font = .poppinsSemiBold(size: 48)
         textLabel.translatesAutoresizingMaskIntoConstraints = false
         return textLabel
     }()
