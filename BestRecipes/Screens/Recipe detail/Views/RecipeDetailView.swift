@@ -15,7 +15,8 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
   var recipeDetail: [RecipeFullInfo]?
   var selectedIngredients: [IngredientModel] = []
   var image: UIImage?
-
+  var isIngredientSelected: [Bool]?
+ 
   //MARK: - UI elements
 
   private lazy var scrollView: UIScrollView = {
@@ -114,15 +115,16 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
     tableView.translatesAutoresizingMaskIntoConstraints = false
     return tableView
   }()
+    
+ 
 
   override func viewDidLoad() {
     super.viewDidLoad()
+      getRecipeDetail()
     tableView.dataSource = self
     tableView.delegate = self
     tableView.register(CustomCellRecipe.self, forCellReuseIdentifier: "CustomCellRecipe")
     tableView.separatorStyle = .none
-
-    getRecipeDetail()
     setupNavBar()
     subview()
     setupConstraints()
@@ -145,6 +147,7 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
         recipeDetail = response
         getImage(recipeDetail?[0].image ?? "" ,at: imageFood)
         setupDetails()
+        isIngrSelected()
         self.tableView.reloadData()
 
 
@@ -173,10 +176,18 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
     itemLabel.text = "\(recipeDetail?[0].extendedIngredients.count ?? 0) items"
 
   }
+    private func isIngrSelected() {
+        let count = recipeDetail?[0].extendedIngredients.count ?? 0
+         isIngredientSelected = [Bool](repeating: false, count: count)
+    }
 
   //MARK: - Button
   @objc func cartButtonPressed() {
-    SelectedIngredientsManager.shared.selectedIngredients.append(contentsOf: selectedIngredients)
+      let array1 = selectedIngredients
+      let array2 = SelectedIngredientsManager.shared.selectedIngredients
+      let resultArray = array1.filter { !array2.contains($0) }
+
+      SelectedIngredientsManager.shared.selectedIngredients.append(contentsOf: resultArray)
     let shopListVC = ShopingListViewController()
     shopListVC.modalPresentationStyle = .pageSheet
        present(shopListVC, animated: true, completion: nil)
@@ -263,19 +274,36 @@ class RecipeDetailView: UIViewController, UITableViewDataSource, UITableViewDele
     DispatchQueue.main.async {
       self.getImage(imageString, at: cell.dishImageView)
     }
+      
+      if isIngredientSelected?[indexPath.row] ?? false {
+          cell.checkmarkImage.tintColor = UIColor.primary50
+      } else {
+          cell.checkmarkImage.tintColor = UIColor.black
+      }
+      
     return cell
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if let recipeIngridients = recipeDetail?[0].extendedIngredients[indexPath.row] {
+      let cell = tableView.cellForRow(at: indexPath) as! CustomCellRecipe
+
       let selectedIngredient = IngredientModel(
         image: recipeIngridients.image ,
         name: recipeIngridients.name ,
         amount: recipeIngridients.measures.metric.amount
       )
-      selectedIngredients.append(selectedIngredient)
-      let cell = tableView.cellForRow(at: indexPath) as! CustomCellRecipe
-      cell.toggleCheckmark()
+        if isIngredientSelected?[indexPath.row] ?? false {
+            selectedIngredients.removeAll{$0 == selectedIngredient}
+            cell.checkmarkImage.tintColor = UIColor.black
+            isIngredientSelected?[indexPath.row] = false
+
+        } else {
+            selectedIngredients.append(selectedIngredient)
+            cell.checkmarkImage.tintColor = UIColor.primary50
+            isIngredientSelected?[indexPath.row] = true
+        }
+
     }
   }
 }
