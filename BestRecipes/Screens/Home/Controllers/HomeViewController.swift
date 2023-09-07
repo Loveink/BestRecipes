@@ -247,9 +247,13 @@ class HomeViewController: UIViewController {
           let data = try await RecipeAPI.fetchFullInfoFromIdString(with: resultString)
           self.recentCollectionView.recipesFull = data
         } catch {
-          await MainActor.run {
-            print(error.localizedDescription)
-              print(88888888888)
+            await MainActor.run {
+              apiKeyIndex += 1
+              if apiKeyIndex >= apiKey.count {
+                apiKeyIndex = 0
+              }
+              apiKeySelect = apiKey[apiKeyIndex]
+                fetchRecentRecipe()
           }
         }
       }
@@ -289,6 +293,7 @@ extension HomeViewController: CollectionDidSelectProtocol {
 extension HomeViewController: CollectionCuisineDidSelectProtocol {
   func fetchCuisine(cuisine: String) {
     let resultsViewController = ResultsViewController(cuisine: cuisine)
+      resultsViewController.modalPresentationStyle = .currentContext
     self.present(resultsViewController, animated: true, completion: nil)
     lastVisitedViewController = SearchViewController()
   }
@@ -307,6 +312,7 @@ extension HomeViewController: CategoriesCollectionViewDelegate, TrendingCollecti
 extension HomeViewController: RecentCollectionViewDelegate {
   func didSelectRecipeRe(_ recipe: RecipeInfoForCell) {
     let recipeDetailsVC = RecipeDetailView()
+    SaveToCoreData.saveRecentArrayToCoreData(recipe.id)
     recipeDetailsVC.recipeFromSeeAll = recipe
     recipeDetailsVC.modalPresentationStyle = .fullScreen
     present(recipeDetailsVC, animated: true, completion: nil)
