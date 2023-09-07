@@ -202,10 +202,9 @@ class CreateRecipeViewController: UIViewController {
     func showRecipeAddedAlert() {
         let alertController = UIAlertController(title: "Your recipe has been added.", message: nil, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default) { (action) in
-            let vc = MainTabBarController()
-            vc.selectedIndex = 4
-            vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true)
+          let viewController = MainTabBarController()
+          self.navigationController?.setViewControllers([viewController], animated: true)
+          self.navigationController?.navigationBar.isHidden = true
         }
         alertController.addAction(okAction)
         present(alertController, animated: true, completion: nil)
