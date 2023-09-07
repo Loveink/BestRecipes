@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct IngredientModel: Codable {
+struct IngredientModel: Codable, Equatable {
     let image: String
     let name: String
     let amount: Double
