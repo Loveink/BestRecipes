@@ -8,7 +8,7 @@
 import UIKit
 
 struct Slide {
-    let image: UIImage?
-    let title: String
-    let description: String
+  let image: UIImage?
+  let title: String
+  let description: String
 }

@@ -8,7 +8,7 @@
 import UIKit
 
 class SeeAllCuisineViewController: UIViewController {
-
+  
   private var cuisineCollectionView: СuisineCollectionView!
   let navigationBar = CustomNavigationBar()
   
@@ -43,7 +43,7 @@ class SeeAllCuisineViewController: UIViewController {
     cuisineCollectionView.collectionView.showsVerticalScrollIndicator = false
     cuisineCollectionView.collectionView.collectionViewLayout = layout
     cuisineCollectionView.translatesAutoresizingMaskIntoConstraints = false
-
+    
     view.addSubview(cuisineCollectionView)
     
     NSLayoutConstraint.activate([
@@ -59,6 +59,5 @@ extension SeeAllCuisineViewController: CollectionCuisineDidSelectProtocol {
   func fetchCuisine(cuisine: String) {
     let resultsViewController = ResultsViewController(cuisine: cuisine)
     self.present(resultsViewController, animated: true, completion: nil)
-    lastVisitedViewController = SearchViewController()
   }
 }

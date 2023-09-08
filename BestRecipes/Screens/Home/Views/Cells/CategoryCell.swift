@@ -10,12 +10,10 @@ import Kingfisher
 
 class CategoryCell: UICollectionViewCell {
 
+  static let identifier = "CategoryCell"
   var liked: Bool = false
   var currentRecipe: RecipeInfoForCell?
-
-  static let identifier = "CategoryCell"
   let bookmarksManager = BookmarksManager.shared
-
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -28,43 +26,20 @@ class CategoryCell: UICollectionViewCell {
   }
 
   //MARK: - Outlets
-  let grayBackgroundView: UIView = {
-      let view = UIView()
-      view.backgroundColor = .neutral10
-      view.layer.cornerRadius = 20
-      view.translatesAutoresizingMaskIntoConstraints = false
-      return view
-  }()
 
-  let dishImageView: UIImageView = {
-    let image = UIImageView()
-    image.image = UIImage(named: "image")
-    image.contentMode = .scaleAspectFill
-    image.layer.cornerRadius = 50
-    image.clipsToBounds = true
-    image.translatesAutoresizingMaskIntoConstraints = false
-    return image
-  }()
-
-  let titleLabel = UILabel.makeLabelForCells(text: "How to make sharwama at home", font: .poppinsSemiBold(size: 16), textColor: .black)
-
-  let minuteLabel = UILabel.makeLabelForCells(text: "15 min", font: .poppinsSemiBold(size: 12), textColor: .neutral100)
-  let timeLabel = UILabel.makeLabelForCells(text: "Time", font: .poppinsRegular(size: 12), textColor: .neutral30)
-
-  lazy var whiteCircleView: UIView = {
-      let view = UIView()
-      view.backgroundColor = .white
-      view.layer.cornerRadius = 17
-      view.translatesAutoresizingMaskIntoConstraints = false
-      return view
-  }()
+  private let grayBackgroundView = UIView.makeView(backgroundColor: .neutral10, cornerRadius: 20)
+  private let whiteCircleView = UIView.makeView(backgroundColor: .white, cornerRadius: 17)
+  private let dishImageView = UIImageView.makeImage(cornerRadius: 50)
+  private let titleLabel = UILabel.makeLabelForCells(text: "How to make sharwama at home", font: .poppinsSemiBold(size: 16), textColor: .black)
+  private let minuteLabel = UILabel.makeLabelForCells(text: "15 min", font: .poppinsSemiBold(size: 12), textColor: .neutral100)
+  private let timeLabel = UILabel.makeLabelForCells(text: "Time", font: .poppinsRegular(size: 12), textColor: .neutral30)
 
   lazy var favouriteButton: UIButton = {
-      let button = UIButton()
-      button.setImage(UIImage(named: "bookmark"), for: .normal)
-      button.addTarget(self, action: #selector(favouriteButtonPressed), for: .touchUpInside)
-      button.translatesAutoresizingMaskIntoConstraints = false
-      return button
+    let button = UIButton()
+    button.setImage(UIImage(named: "bookmark"), for: .normal)
+    button.addTarget(self, action: #selector(favouriteButtonPressed), for: .touchUpInside)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    return button
   }()
 
   //MARK: - Functions
@@ -99,7 +74,6 @@ class CategoryCell: UICollectionViewCell {
     contentView.addSubview(titleLabel)
     contentView.addSubview(timeLabel)
     contentView.addSubview(minuteLabel)
-
     whiteCircleView.addSubview(favouriteButton)
     contentView.addSubview(whiteCircleView)
   }
@@ -133,7 +107,6 @@ class CategoryCell: UICollectionViewCell {
       titleLabel.leadingAnchor.constraint(equalTo: grayBackgroundView.leadingAnchor, constant: 8),
       titleLabel.trailingAnchor.constraint(equalTo: grayBackgroundView.trailingAnchor, constant: -8),
       titleLabel.heightAnchor.constraint(equalToConstant: 30),
-
 
       minuteLabel.leadingAnchor.constraint(equalTo: grayBackgroundView.leadingAnchor, constant: 10),
       minuteLabel.bottomAnchor.constraint(equalTo: grayBackgroundView.bottomAnchor, constant: -10),

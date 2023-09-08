@@ -23,26 +23,16 @@ class СuisineCell: UICollectionViewCell {
 
   //MARK: - Outlets
 
-  let dishImageView: UIImageView = {
-    let image = UIImageView()
-    image.image = UIImage(named: "image")
-    image.contentMode = .scaleAspectFill
-    image.layer.cornerRadius = 70
-    image.clipsToBounds = true
-    image.translatesAutoresizingMaskIntoConstraints = false
-    return image
-  }()
-
-  let titleLabel = UILabel.makeLabelForCells(text: "How to make sharwama at home", font: .poppinsSemiBold(size: 16), textColor: .black)
-
+  private let dishImageView = UIImageView.makeImage(cornerRadius: 70)
+  private let titleLabel = UILabel.makeLabelForCells(text: "How to make sharwama at home", font: .poppinsSemiBold(size: 16), textColor: .black)
 
   //MARK: - Functions
 
   public func configureCell(with title: String) {
-      DispatchQueue.main.async {
-        self.titleLabel.text = title
-        self.dishImageView.image = UIImage(named: title.lowercased())
-      }
+    DispatchQueue.main.async {
+      self.titleLabel.text = title
+      self.dishImageView.image = UIImage(named: title.lowercased())
+    }
   }
 
   private func setupViews() {

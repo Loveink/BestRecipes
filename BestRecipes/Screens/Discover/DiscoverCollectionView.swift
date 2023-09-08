@@ -8,28 +8,27 @@
 import UIKit
 
 class DiscoverCollectionView: UIView {
-
+  
   var collectionView: UICollectionView!
   let bookmarksManager = BookmarksManager.shared
-  
   var recipes: [RecipeInfoForCell] = []
   weak var delegate: DiscoverCollectionDidSelectProtocol?
-
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     configureCollection()
     setupConstraints()
   }
-
+  
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-
+  
   func reloadData() {
     recipes = bookmarksManager.getBookmarks()
     self.collectionView.reloadData()
   }
-
+  
   private func configureCollection() {
     let layout = UICollectionViewFlowLayout()
     collectionView = UICollectionView(frame: CGRect(), collectionViewLayout: layout)
@@ -41,7 +40,7 @@ class DiscoverCollectionView: UIView {
     collectionView.dataSource = self
     self.addSubview(collectionView)
   }
-
+  
   private func setupConstraints() {
     self.addSubview(collectionView)
     NSLayoutConstraint.activate([
@@ -54,11 +53,11 @@ class DiscoverCollectionView: UIView {
 }
 
 extension DiscoverCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
+  
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return recipes.count
   }
-
+  
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DiscoverCell.discoverIdentifier, for: indexPath) as? DiscoverCell else {
       return UICollectionViewCell()
@@ -68,11 +67,11 @@ extension DiscoverCollectionView: UICollectionViewDelegate, UICollectionViewData
     cell.configureCell(recipes[indexPath.row])
     return cell
   }
-
+  
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     return CGSize(width: self.frame.width - 20, height: 350)
   }
-
+  
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     let recipeAllInfo = recipes[indexPath.item]
     let recipe = Recipe(id: recipeAllInfo.id, title: recipeAllInfo.title, image: recipeAllInfo.image)
@@ -80,6 +79,7 @@ extension DiscoverCollectionView: UICollectionViewDelegate, UICollectionViewData
   }
 }
 
+//MARK: - Protocols
 protocol DiscoverCollectionDidSelectProtocol: AnyObject {
   func didSelectRecipe(_ recipe: Recipe)
 }

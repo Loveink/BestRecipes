@@ -9,62 +9,54 @@ import UIKit
 
 class CategoryNameCell: UICollectionViewCell {
 
-    static let identifier = "CategoryCell"
-
-    let categoryLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.numberOfLines = 1
-        label.textAlignment = .center
-        label.textColor = .primary20
-      label.font = UIFont.poppinsSemiBold(size: 14)
-        return label
-    }()
+  static let identifier = "CategoryCell"
+  private let categoryLabel = UILabel.makeLabel(text: "", font: .poppinsSemiBold(size: 14), textColor: .primary20)
 
   override var isSelected: Bool {
-      didSet {
-          if isSelected {
-              backgroundColor = UIColor.primary50
-              categoryLabel.textColor = UIColor.white
-          } else {
-            backgroundColor = UIColor.white
-            categoryLabel.textColor = UIColor.primary20
-          }
+    didSet {
+      if isSelected {
+        backgroundColor = UIColor.primary50
+        categoryLabel.textColor = UIColor.white
+      } else {
+        backgroundColor = UIColor.white
+        categoryLabel.textColor = UIColor.primary20
       }
+    }
+  }
+  
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    setupViews()
+    setupConstraints()
+    setupUICell()
   }
 
+  func setupUICell() {
+    backgroundColor = .white
+    layer.masksToBounds = false
+    layer.cornerRadius = 15
+    categoryLabel.numberOfLines = 1
+    categoryLabel.textAlignment = .center
+  }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupViews()
-        setupConstraints()
-        setupUICell()
-    }
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
 
-    func setupUICell() {
-        backgroundColor = .white
-        layer.masksToBounds = false
-        layer.cornerRadius = 15
-    }
+  public func configure(with title: String) {
+    categoryLabel.text = title
+  }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+  private func setupViews() {
+    contentView.addSubview(categoryLabel)
+  }
 
-    public func configure(with title: String) {
-        categoryLabel.text = title
-    }
-
-    private func setupViews() {
-        contentView.addSubview(categoryLabel)
-    }
-
-    private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            categoryLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
-            categoryLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            categoryLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            categoryLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
-        ])
-    }
+  private func setupConstraints() {
+    NSLayoutConstraint.activate([
+      categoryLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
+      categoryLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+      categoryLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+      categoryLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+    ])
+  }
 }

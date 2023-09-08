@@ -37,7 +37,6 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     }
   }
 
-
   private func setupItems() {
     let customButtonController = CreateRecipeViewController()
     customButtonController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "add")?.withRenderingMode(.alwaysOriginal), selectedImage: UIImage(named: "add")?.withRenderingMode(.alwaysOriginal))

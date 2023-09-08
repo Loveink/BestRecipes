@@ -17,8 +17,13 @@ class ProfilePageViewController: UIViewController, ImageSelectionDelegate {
 
   var myRecipes = GetFromCoreData.getRecipeMyRecipeModelsFromCoreData()
   var myIngridients = GetFromCoreData.fetchArrayOfArraysFromCoreData()
+  private let imageChoice = ImageSelectionViewController()
+
+  private var myRecipeLabel = UILabel.makeLabelForCells(text: "My recipes", font: .poppinsSemiBold(size: 24), textColor: .black)
   private var mainLabel = UILabel.makeLabelForCells(text: "My Profile", font: .poppinsSemiBold(size: 24), textColor: .black)
+
   private let collectionView = UICollectionView(frame: CGRect(x: 0, y: 0, width: 200, height: 200), collectionViewLayout: UICollectionViewFlowLayout())
+
   var imageProfileView: UIImageView = {
     let imageView = UIImageView()
     imageView.contentMode = .scaleAspectFill
@@ -30,8 +35,6 @@ class ProfilePageViewController: UIViewController, ImageSelectionDelegate {
     imageView.image = imageProfileViewSaved
     return imageView
   }()
-  private var myRecipeLabel = UILabel.makeLabelForCells(text: "My recipes", font: .poppinsSemiBold(size: 24), textColor: .black)
-  private let imageChoice = ImageSelectionViewController()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -68,7 +71,6 @@ class ProfilePageViewController: UIViewController, ImageSelectionDelegate {
     collectionView.dataSource = self
     collectionView.register(MyRecipeCell.self, forCellWithReuseIdentifier: "MyRecipeCell")
     collectionView.backgroundColor = .white
-
     view.addSubview(collectionView)
   }
 

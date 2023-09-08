@@ -10,12 +10,11 @@ import Kingfisher
 
 class TrendingCell: UICollectionViewCell {
 
+  static let identifier = "TrendingCell"
   var liked: Bool = false
   var currentRecipe: RecipeInfoForCell?
-
-  static let identifier = "TrendingCell"
   let bookmarksManager = BookmarksManager.shared
-
+  let thumbsUpEmoji = "👍"
 
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -28,64 +27,24 @@ class TrendingCell: UICollectionViewCell {
   }
 
   //MARK: - Outlets
-  let dishImageView: UIImageView = {
-    let image = UIImageView()
-    image.image = UIImage(named: "image")
-    image.contentMode = .scaleAspectFill
-    image.layer.cornerRadius = 20
-    image.clipsToBounds = true
-    image.translatesAutoresizingMaskIntoConstraints = false
-    return image
-  }()
+  let dishImageView = UIImageView.makeImage(cornerRadius: 20)
+  let authorImageView = UIImageView.makeImage(named: "Creator", cornerRadius: 8)
 
   let titleLabel = UILabel.makeLabelForCells(text: "How to make sharwama at home", font: .poppinsSemiBold(size: 16), textColor: .black)
-
-  let authorImageView: UIImageView = {
-    let image = UIImageView()
-    image.image = UIImage(named: "Creator")
-    image.contentMode = .scaleAspectFill
-    image.layer.cornerRadius = 8
-    image.clipsToBounds = true
-    image.translatesAutoresizingMaskIntoConstraints = false
-    return image
-  }()
-
   let authorLabel = UILabel.makeLabelForCells(text: "By Zeelicious foods", font: .poppinsRegular(size: 12), textColor: .black)
-
   let minuteLabel = UILabel.makeLabelForCells(text: "15 min", font: .poppinsRegular(size: 12), textColor: .white)
-
-  lazy var minuteView: UIView = {
-      let view = UIView()
-      view.backgroundColor = UIColor(red: 0.19, green: 0.19, blue: 0.19, alpha: 0.3)
-      view.layer.cornerRadius = 8
-      view.translatesAutoresizingMaskIntoConstraints = false
-      return view
-  }()
-
   let likesLabel = UILabel.makeLabelForCells(text: "23 likes", font: .poppinsRegular(size: 12), textColor: .white)
 
-  lazy var likesView: UIView = {
-      let view = UIView()
-      view.backgroundColor = UIColor(red: 0.19, green: 0.19, blue: 0.19, alpha: 0.3)
-      view.layer.cornerRadius = 8
-      view.translatesAutoresizingMaskIntoConstraints = false
-      return view
-  }()
-
-  lazy var whiteCircleView: UIView = {
-      let view = UIView()
-      view.backgroundColor = .white
-      view.layer.cornerRadius = 17
-      view.translatesAutoresizingMaskIntoConstraints = false
-      return view
-  }()
-
+  let minuteView = UIView.makeView(backgroundColor: UIColor(red: 0.19, green: 0.19, blue: 0.19, alpha: 0.3), cornerRadius: 8)
+  let likesView = UIView.makeView(backgroundColor: UIColor(red: 0.19, green: 0.19, blue: 0.19, alpha: 0.3), cornerRadius: 8)
+  let whiteCircleView = UIView.makeView(backgroundColor: .white, cornerRadius: 17)
+  
   lazy var favouriteButton: UIButton = {
-      let button = UIButton()
-      button.setImage(UIImage(named: "bookmark"), for: .normal)
-      button.addTarget(self, action: #selector(favouriteButtonPressed), for: .touchUpInside)
-      button.translatesAutoresizingMaskIntoConstraints = false
-      return button
+    let button = UIButton()
+    button.setImage(UIImage(named: "bookmark"), for: .normal)
+    button.addTarget(self, action: #selector(favouriteButtonPressed), for: .touchUpInside)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    return button
   }()
 
   //MARK: - Functions
@@ -104,8 +63,6 @@ class TrendingCell: UICollectionViewCell {
   let options: KingfisherOptionsInfo = [
     .cacheOriginalImage
   ]
-
-  let thumbsUpEmoji = "👍"
 
   public func configureCell(_ data: RecipeInfoForCell) {
     DispatchQueue.main.async {
@@ -180,7 +137,6 @@ class TrendingCell: UICollectionViewCell {
       likesView.topAnchor.constraint(equalTo: dishImageView.topAnchor, constant: 10),
       likesView.widthAnchor.constraint(equalToConstant: 58),
       likesView.heightAnchor.constraint(equalToConstant: 21),
-
     ])
   }
 }
