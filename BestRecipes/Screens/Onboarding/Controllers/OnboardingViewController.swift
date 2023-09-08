@@ -35,6 +35,7 @@ class OnboardingViewController: UIViewController {
     return titleLabel
   }()
 
+<<<<<<< Updated upstream
   private lazy var descriptionLabel: UILabel = {
     let descriptionLabel = UILabel.makeLabel(font: .poppinsRegular(size: 16), textColor: .white)
     descriptionLabel.numberOfLines = 1
@@ -42,6 +43,106 @@ class OnboardingViewController: UIViewController {
     descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
     return descriptionLabel
   }()
+=======
+    }
+    
+    private func addSubviews() {
+        view.addSubview(imageView)
+        view.addSubview(topLabel)
+        view.addSubview(pageControl)
+        view.addSubview(titleLabel)
+        view.addSubview(descriptionLabel)
+        view.addSubview(nextButton)
+        view.addSubview(skipButton)
+    }
+    
+    //MARK: - Constraints
+    private func setupConstraints() {
+        view.backgroundColor = .white
+        
+        NSLayoutConstraint.activate([
+            
+            topLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            topLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            
+            imageView.topAnchor.constraint(equalTo: view.topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            
+            nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
+            nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            nextButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -30),
+            nextButton.heightAnchor.constraint(equalToConstant: 56),
+            
+            pageControl.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            pageControl.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -20),
+            
+            titleLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -30),
+//            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+//            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            titleLabel.widthAnchor.constraint(equalToConstant: 320),
+            
+            descriptionLabel.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -64),
+            descriptionLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
+            descriptionLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            
+            skipButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            skipButton.topAnchor.constraint(equalTo: nextButton.bottomAnchor, constant: 5)
+            
+            
+        ])
+    }
+    
+    //MARK: - Functions
+    @objc private func updateUI() {
+        let slide = slides[currentIndex]
+        
+        imageView.image = slide.image
+        titleLabel.text = slide.title
+        descriptionLabel.text = slide.description
+        
+        if currentIndex == 0 {
+            nextButton.setTitle("Get Started", for: .normal)
+            titleLabel.font = titleLabel.font.withSize(62)
+            skipButton.isHidden = true
+            pageControl.isHidden = true
+        } else if currentIndex == slides.count - 1 {
+            nextButton.setTitle("Start cooking", for: .normal)
+            titleLabel.font = titleLabel.font.withSize(40)
+            skipButton.isHidden = true
+            topLabel.isHidden = true
+          pageControl.isHidden = false
+        } else {
+            nextButton.setTitle("Continue", for: .normal)
+            titleLabel.font = titleLabel.font.withSize(40)
+            skipButton.isHidden = false
+            topLabel.isHidden = true
+            pageControl.isHidden = false
+        }
+    }
+    
+    @objc private func nextButtonTapped() {
+        if currentIndex == slides.count - 1 {
+            print("Last button pressed")
+            goToHomeScreen()
+        
+        } else {
+            print("Not last button pressed")
+            currentIndex += 1
+            updateUI()
+            pageControl.currentPage = currentIndex
+            pageControl.setIndicatorImage(UIImage(named: "Rectangle1"), forPage: currentIndex)
+        }
+    }
+    
+    
+    @objc private func skipButtonTapped() {
+        print("Skip Button Tapped")
+        goToHomeScreen()
+    }
+>>>>>>> Stashed changes
 
   private lazy var topLabel: UILabel = {
     let topLabel = UILabel.makeLabel(font: .poppinsRegular(size: 16), textColor: .white)
@@ -77,6 +178,13 @@ class OnboardingViewController: UIViewController {
       updateUI()
     }
   }
+    
+    private func goToHomeScreen() {
+        let vc = MainTabBarController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc , animated: true)
+        UserDefaults.standard.set(true, forKey: "isOnboardingCompleted")
+    }
 
   private let pageControl: UIPageControl = {
     let page = UIPageControl()
