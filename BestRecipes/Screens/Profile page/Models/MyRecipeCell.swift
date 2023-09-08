@@ -12,7 +12,6 @@ import UIKit
 class MyRecipeCell: UICollectionViewCell {
 
   var currentRecipe: RecipeInfoForCell?
-
   let bookmarksManager = BookmarksManager.shared
 
   override init(frame: CGRect) {
@@ -26,27 +25,10 @@ class MyRecipeCell: UICollectionViewCell {
   }
 
   //MARK: - Outlets
-   let dishImageView: UIImageView = {
-    let image = UIImageView()
-    image.image = UIImage(named: "image")
-    image.contentMode = .scaleAspectFill
-    image.layer.cornerRadius = 20
-    image.clipsToBounds = true
-    image.translatesAutoresizingMaskIntoConstraints = false
-    return image
-  }()
-
-   let titleLabel = UILabel.makeLabelForCells(text: "How to make sharwama at home", font: .poppinsSemiBold(size: 16), textColor: .white)
-
-   let minuteLabel = UILabel.makeLabelForCells(text: "15 min", font: .poppinsSemiBold(size: 12), textColor: .white)
-
-  lazy var minuteView: UIView = {
-      let view = UIView()
-      view.backgroundColor = UIColor(red: 0.19, green: 0.19, blue: 0.19, alpha: 0.3)
-      view.layer.cornerRadius = 8
-      view.translatesAutoresizingMaskIntoConstraints = false
-      return view
-  }()
+  let dishImageView = UIImageView.makeImage(cornerRadius: 20)
+  let titleLabel = UILabel.makeLabelForCells(text: "How to make sharwama at home", font: .poppinsSemiBold(size: 16), textColor: .white)
+  let minuteLabel = UILabel.makeLabelForCells(text: "15 min", font: .poppinsSemiBold(size: 12), textColor: .white)
+  lazy var minuteView = UIView.makeView(backgroundColor: UIColor(red: 0.19, green: 0.19, blue: 0.19, alpha: 0.3), cornerRadius: 8)
 
   //MARK: - Functions
   private func setupViews() {
@@ -56,8 +38,6 @@ class MyRecipeCell: UICollectionViewCell {
     contentView.addSubview(minuteView)
     minuteLabel.numberOfLines = 2
   }
-    
-    
 
   //MARK: - Constraints
   private func setupConstraints() {

@@ -7,16 +7,12 @@
 
 import UIKit
 
-protocol CategoriesCollectionViewDelegate: AnyObject {
-  func didSelectRecipe(_ recipe: Recipe)
-}
-
 class CategoriesCollectionView: UIView {
-
+  
   var collectionView: UICollectionView!
   let bookmarksManager = BookmarksManager.shared
   weak var delegate: CategoriesCollectionViewDelegate?
-
+  
   var recipes: [Recipe] = [] {
     didSet {
       DispatchQueue.main.async {
@@ -24,7 +20,7 @@ class CategoriesCollectionView: UIView {
       }
     }
   }
-
+  
   var recipeFullInfo: [RecipeInfoForCell] = [] {
     didSet {
       DispatchQueue.main.async {
@@ -32,18 +28,18 @@ class CategoriesCollectionView: UIView {
       }
     }
   }
-
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     configureCollection()
     addSubview(collectionView)
     setupConstraints()
   }
-
+  
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-
+  
   func configureCollection() {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
@@ -55,7 +51,7 @@ class CategoriesCollectionView: UIView {
     collectionView.delegate = self
     collectionView.dataSource = self
   }
-
+  
   private func setupConstraints() {
     NSLayoutConstraint.activate([
       collectionView.topAnchor.constraint(equalTo: topAnchor),
@@ -68,11 +64,11 @@ class CategoriesCollectionView: UIView {
 
 //MARK: - Extensions
 extension CategoriesCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
+  
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return recipeFullInfo.count
   }
-
+  
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCell.identifier, for: indexPath) as? CategoryCell else {
       return UICollectionViewCell()
@@ -87,15 +83,20 @@ extension CategoriesCollectionView: UICollectionViewDelegate, UICollectionViewDa
     cell.configureCell(recipeFullInfo[indexPath.row])
     return cell
   }
-
+  
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     return CGSize(width: 150, height: 210)
   }
-
+  
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     if recipes.count > 0 {
       let selectedRecipe = recipes[indexPath.item]
       delegate?.didSelectRecipe(selectedRecipe)
     }
   }
+}
+
+//MARK: - Protocols
+protocol CategoriesCollectionViewDelegate: AnyObject {
+  func didSelectRecipe(_ recipe: Recipe)
 }

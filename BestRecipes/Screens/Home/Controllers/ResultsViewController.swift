@@ -99,7 +99,6 @@ extension ResultsViewController: UITableViewDelegate, UITableViewDataSource {
       }
     } else {
       cell.titleLabel.text = "No recipes"
-
     }
     cell.backgroundColor = .white
     return cell
@@ -108,6 +107,7 @@ extension ResultsViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 200
   }
+
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if recipes.count > 0 {
       let selectedRecipe = recipes[indexPath.item]

@@ -8,13 +8,15 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-  
+
+  // MARK: - Properties
   private let searchBar = SearchBar()
   private let trendingCollectionView = TrendingCollectionView()
   private let categoryName = CategoriesNames()
   private let categoryCollectionView = CategoriesCollectionView()
   private let cuisineCollectionView = СuisineCollectionView()
   private let recentCollectionView = RecentCollectionView()
+  private var apiKeyIndex = 0
 
   private let scrollView: UIScrollView = {
     let scrollView = UIScrollView()
@@ -22,47 +24,47 @@ class HomeViewController: UIViewController {
     return scrollView
   }()
   
-  var mainLabel = UILabel.makeLabelForCells(text: "Get amazing recipes for cooking", font: .poppinsSemiBold(size: 24), textColor: .neutral100)
-  var trendingLabel = UILabel.makeLabelForCells(text: "Trending now 🔥", font: .poppinsSemiBold(size: 20), textColor: .neutral100)
-  var categoryLabel = UILabel.makeLabelForCells(text: "Popular category", font: .poppinsSemiBold(size: 20), textColor: .neutral100)
-  var recentRecipeLabel = UILabel.makeLabelForCells(text: "Recent recipe", font: .poppinsSemiBold(size: 20), textColor: .neutral100)
-  var cuisineLabel = UILabel.makeLabelForCells(text: "Popular cuisine", font: .poppinsSemiBold(size: 20), textColor: .neutral100)
+  private let mainLabel = UILabel.makeLabelForCells(text: "Get amazing recipes for cooking", font: .poppinsSemiBold(size: 24), textColor: .neutral100)
+  private let trendingLabel = UILabel.makeLabelForCells(text: "Trending now 🔥", font: .poppinsSemiBold(size: 20), textColor: .neutral100)
+  private let categoryLabel = UILabel.makeLabelForCells(text: "Popular category", font: .poppinsSemiBold(size: 20), textColor: .neutral100)
+  private let recentRecipeLabel = UILabel.makeLabelForCells(text: "Recent recipe", font: .poppinsSemiBold(size: 20), textColor: .neutral100)
+  private let cuisineLabel = UILabel.makeLabelForCells(text: "Popular cuisine", font: .poppinsSemiBold(size: 20), textColor: .neutral100)
   
-  var seeAllButtonTrend = SeeAllButton()
-  var seeAllButtonCategory = SeeAllButton()
-  var seeAllButtonRecent = SeeAllButton()
-  var seeAllButtonCuisine = SeeAllButton()
-  
-  
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-      fetchRecentRecipe()
-    navigationController?.setNavigationBarHidden(false, animated: false)
-    tabBarController?.tabBar.isHidden = false
-    trendingCollectionView.collectionView.reloadData()
-  }
-  
+  let seeAllButtonTrend = SeeAllButton()
+  let seeAllButtonCategory = SeeAllButton()
+  let seeAllButtonCuisine = SeeAllButton()
+
+  // MARK: - Life Cycle Methods
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    hideKeyBoard()
+
     view.backgroundColor = .white
+    hideKeyBoard()
     configureSeeAllButtons()
     setupScrollView()
     setupSearchBar()
-    setupNameView()
     setupCollectionView()
     setupConstraints()
     loadTrendingRecipes()
     fetchFirstSearch()
-    
+    setupDelegates()
+  }
+
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    fetchRecentRecipe()
+    navigationController?.setNavigationBarHidden(false, animated: false)
+    tabBarController?.tabBar.isHidden = false
+    trendingCollectionView.collectionView.reloadData()
+  }
+
+  // MARK: - Private Methods
+  private func setupDelegates() {
     categoryName.delegateCollectionDidSelect = self
     cuisineCollectionView.delegateCollectionDidSelect = self
     categoryCollectionView.delegate = self
     trendingCollectionView.delegate = self
     recentCollectionView.delegate = self
-    
   }
   
   private func hideKeyBoard() {
@@ -75,23 +77,19 @@ class HomeViewController: UIViewController {
     view.endEditing(true)
   }
   
-  func setupScrollView() {
+  private func setupScrollView() {
     view.addSubview(scrollView)
     scrollView.contentSize = CGSize(width: .zero, height: 1400)
     scrollView.backgroundColor = .white
   }
   
-  func setupSearchBar() {
+  private func setupSearchBar() {
     searchBar.searchBar.translatesAutoresizingMaskIntoConstraints = false
     scrollView.addSubview(searchBar.view)
-  }
-  
-  func setupNameView() {
     scrollView.addSubview(mainLabel)
-    lastVisitedViewController = HomeViewController()
   }
   
-  func setupCollectionView() {
+  private func setupCollectionView() {
     trendingCollectionView.translatesAutoresizingMaskIntoConstraints = false
     categoryName.translatesAutoresizingMaskIntoConstraints = false
     categoryCollectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -109,13 +107,10 @@ class HomeViewController: UIViewController {
     scrollView.addSubview(seeAllButtonCuisine)
     scrollView.addSubview(cuisineCollectionView)
     scrollView.addSubview(recentRecipeLabel)
-    scrollView.addSubview(seeAllButtonRecent)
     scrollView.addSubview(recentCollectionView)
   }
-  
-  
+
   private func setupConstraints() {
-    
     NSLayoutConstraint.activate([
       scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
       scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -176,20 +171,23 @@ class HomeViewController: UIViewController {
       recentRecipeLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 8),
       recentRecipeLabel.widthAnchor.constraint(greaterThanOrEqualToConstant: 150),
 
-      seeAllButtonRecent.topAnchor.constraint(equalTo: cuisineCollectionView.bottomAnchor, constant: 8),
-      seeAllButtonRecent.trailingAnchor.constraint(equalTo: seeAllButtonCuisine.trailingAnchor),
-
       recentCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
       recentCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
       recentCollectionView.topAnchor.constraint(equalTo: recentRecipeLabel.bottomAnchor, constant: 10),
       recentCollectionView.heightAnchor.constraint(equalToConstant: 200),
       recentCollectionView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor, constant: -20)
-
     ])
   }
   
-  private var apiKeyIndex = 0
-  
+  // MARK: - Methods for loading data from API
+  private func checkKey() {
+    apiKeyIndex += 1
+    if apiKeyIndex >= apiKey.count {
+      apiKeyIndex = 0
+    }
+    apiKeySelect = apiKey[apiKeyIndex]
+  }
+
   private func loadTrendingRecipes() {
     Task {
       do {
@@ -203,17 +201,13 @@ class HomeViewController: UIViewController {
         self.trendingCollectionView.recipeFullInfo = secondResponce
         self.seeAllButtonTrend.recipes = secondResponce
       } catch {
-        apiKeyIndex += 1 // Увеличиваем индекс ключа
-        if apiKeyIndex >= apiKey.count {
-          apiKeyIndex = 0 // Вернуться к первому ключу, если достигнут конец массива
-        }
-        apiKeySelect = apiKey[apiKeyIndex] // Используем новый ключ
-        loadTrendingRecipes() // Повторно вызываем функцию
+        checkKey()
+        loadTrendingRecipes()
       }
     }
   }
   
-  func fetchFirstSearch() {
+  private func fetchFirstSearch() {
     Task {
       do {
         let data = try await RecipeAPI.fetchSearch(with: "Main Course")
@@ -227,41 +221,32 @@ class HomeViewController: UIViewController {
         }
       } catch {
         await MainActor.run {
-          apiKeyIndex += 1
-          if apiKeyIndex >= apiKey.count {
-            apiKeyIndex = 0
-          }
-          apiKeySelect = apiKey[apiKeyIndex]
+          checkKey()
           fetchFirstSearch()
         }
       }
     }
   }
-    
-    func fetchRecentRecipe() {
-      Task {
-        do {
-            let arrayOfId =  GetFromCoreData.getRecentIdFromCoreData()
-            let resultString = arrayOfId.map(String.init).joined(separator: ",")
 
-          let data = try await RecipeAPI.fetchFullInfoFromIdString(with: resultString)
-          self.recentCollectionView.recipesFull = data
-        } catch {
-            await MainActor.run {
-              apiKeyIndex += 1
-              if apiKeyIndex >= apiKey.count {
-                apiKeyIndex = 0
-              }
-              apiKeySelect = apiKey[apiKeyIndex]
-                fetchRecentRecipe()
-          }
+  private func fetchRecentRecipe() {
+    Task {
+      do {
+        let arrayOfId =  GetFromCoreData.getRecentIdFromCoreData()
+        let resultString = arrayOfId.map(String.init).joined(separator: ",")
+
+        let data = try await RecipeAPI.fetchFullInfoFromIdString(with: resultString)
+        self.recentCollectionView.recipesFull = data
+      } catch {
+        await MainActor.run {
+          checkKey()
+          fetchRecentRecipe()
         }
       }
     }
-    
-    
+  }
 }
 
+//MARK: - Extensions for collections
 extension HomeViewController: CollectionDidSelectProtocol {
   func fetchSearch(categoryName: String) {
     Task {
@@ -278,11 +263,7 @@ extension HomeViewController: CollectionDidSelectProtocol {
         }
       } catch {
         await MainActor.run {
-          apiKeyIndex += 1
-          if apiKeyIndex >= apiKey.count {
-            apiKeyIndex = 0
-          }
-          apiKeySelect = apiKey[apiKeyIndex]
+          checkKey()
           fetchSearch(categoryName: categoryName)
         }
       }
@@ -293,9 +274,8 @@ extension HomeViewController: CollectionDidSelectProtocol {
 extension HomeViewController: CollectionCuisineDidSelectProtocol {
   func fetchCuisine(cuisine: String) {
     let resultsViewController = ResultsViewController(cuisine: cuisine)
-      resultsViewController.modalPresentationStyle = .currentContext
+    resultsViewController.modalPresentationStyle = .currentContext
     self.present(resultsViewController, animated: true, completion: nil)
-    lastVisitedViewController = SearchViewController()
   }
 }
 

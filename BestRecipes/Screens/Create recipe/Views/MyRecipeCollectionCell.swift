@@ -7,12 +7,9 @@
 
 import UIKit
 
-
-
 class MyRecipeCollectionCell: UICollectionViewCell, UITextFieldDelegate {
   
   var collectionDelegate: MyRecipeCollectionCellDelegate?
-    
   var indexPath: IndexPath?
   
   let textField1: UITextField = {
@@ -21,12 +18,12 @@ class MyRecipeCollectionCell: UICollectionViewCell, UITextFieldDelegate {
     textField.layer.borderWidth = 1.0
     textField.layer.cornerRadius = 8
     textField.layer.borderColor = UIColor.red.cgColor
-      textField.returnKeyType = .done
+    textField.returnKeyType = .done
     let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
     textField.leftView = paddingView
     textField.leftViewMode = .always
-      textField.attributedPlaceholder = NSAttributedString(string: "Item name", attributes:  [.foregroundColor: UIColor.gray])
-      textField.textColor = .black
+    textField.attributedPlaceholder = NSAttributedString(string: "Item name", attributes:  [.foregroundColor: UIColor.gray])
+    textField.textColor = .black
     return textField
   }()
   
@@ -36,12 +33,12 @@ class MyRecipeCollectionCell: UICollectionViewCell, UITextFieldDelegate {
     textField.layer.borderWidth = 1.0
     textField.layer.cornerRadius = 8
     textField.layer.borderColor = UIColor.red.cgColor
-      textField.returnKeyType = .done
+    textField.returnKeyType = .done
     let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: textField.frame.height))
     textField.leftView = paddingView
     textField.leftViewMode = .always
-      textField.attributedPlaceholder = NSAttributedString(string: "Quantity", attributes:  [.foregroundColor: UIColor.gray])
-      textField.textColor = .black
+    textField.attributedPlaceholder = NSAttributedString(string: "Quantity", attributes:  [.foregroundColor: UIColor.gray])
+    textField.textColor = .black
     
     return textField
   }()
@@ -68,16 +65,15 @@ class MyRecipeCollectionCell: UICollectionViewCell, UITextFieldDelegate {
   }
   
   private func setupUI() {
-  
     addSubview(textField1)
     addSubview(textField2)
     addSubview(selectButton)
-      isTexField1Empty()
-      isTexField2Empty()
-
-      textField1.delegate = self
-      textField2.delegate = self
-
+    isTexField1Empty()
+    isTexField2Empty()
+    
+    textField1.delegate = self
+    textField2.delegate = self
+    
     NSLayoutConstraint.activate([
       textField1.topAnchor.constraint(equalTo: topAnchor),
       textField1.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -93,55 +89,42 @@ class MyRecipeCollectionCell: UICollectionViewCell, UITextFieldDelegate {
       textField2.bottomAnchor.constraint(equalTo: bottomAnchor),
       textField2.trailingAnchor.constraint(equalTo: selectButton.leadingAnchor)
     ])
-
+    
   }
   
   @objc private func selectButtonTapped(_ sender: UIButton) {
-      collectionDelegate?.selectButtonTapped(at: sender.tag)
+    collectionDelegate?.selectButtonTapped(at: sender.tag)
   }
   
-    @objc private func textField1DidChange(_ textField: UITextField) {
-        collectionDelegate?.textField1DidChange(at: indexPath!, newValue: textField.text ?? "")
-        isTexField1Empty()
-    }
+  @objc private func textField1DidChange(_ textField: UITextField) {
+    collectionDelegate?.textField1DidChange(at: indexPath!, newValue: textField.text ?? "")
+    isTexField1Empty()
+  }
   
   @objc private func textField2DidChange(_ textField: UITextField) {
-      collectionDelegate?.textField2DidChange(at: indexPath!, newValue: textField.text ?? "")
-      isTexField2Empty()
+    collectionDelegate?.textField2DidChange(at: indexPath!, newValue: textField.text ?? "")
+    isTexField2Empty()
   }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-           textField1.resignFirstResponder()
-           textField2.resignFirstResponder() // Закрываем клавиатуру
-           return true
-       }
-    
-    func isTexField1Empty() {
-        if let text = textField1.text, text.isEmpty {
-            textField1.layer.borderColor = UIColor.red.cgColor
-//            textFielDelegate?.textField1IsEmpty(true)
-
-        } else {
-            textField1.layer.borderColor = UIColor.systemGreen.cgColor
-//            textFielDelegate?.textField1IsEmpty(false)
-
-        }
-        
-        
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField1.resignFirstResponder()
+    textField2.resignFirstResponder() // Закрываем клавиатуру
+    return true
+  }
+  
+  func isTexField1Empty() {
+    if let text = textField1.text, text.isEmpty {
+      textField1.layer.borderColor = UIColor.red.cgColor
+    } else {
+      textField1.layer.borderColor = UIColor.systemGreen.cgColor
     }
-    func isTexField2Empty() {
-        
-        if let text = textField2.text, text.isEmpty {
-            textField2.layer.borderColor = UIColor.red.cgColor
-//            textFielDelegate?.textField2IsEmpty(true)
-
-        } else {
-            textField2.layer.borderColor = UIColor.systemGreen.cgColor
-//            textFielDelegate?.textField2IsEmpty(false)
-
-        }
+  }
+  
+  func isTexField2Empty() {
+    if let text = textField2.text, text.isEmpty {
+      textField2.layer.borderColor = UIColor.red.cgColor
+    } else {
+      textField2.layer.borderColor = UIColor.systemGreen.cgColor
     }
-
+  }
 }
-
-

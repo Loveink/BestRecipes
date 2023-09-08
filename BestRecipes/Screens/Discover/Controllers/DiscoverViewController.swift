@@ -33,7 +33,6 @@ class DiscoverViewController: UIViewController {
   private func setupCollectionView() {
     view.addSubview(collectionView)
     view.addSubview(mainLabel)
-
     collectionView.translatesAutoresizingMaskIntoConstraints = false
   }
 
@@ -51,6 +50,7 @@ class DiscoverViewController: UIViewController {
   }
 }
 
+//MARK: - Extension
 extension DiscoverViewController: DiscoverCollectionDidSelectProtocol {
   func didSelectRecipe(_ recipe: Recipe) {
     SaveToCoreData.saveRecentArrayToCoreData(recipe.id)

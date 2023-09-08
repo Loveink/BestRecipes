@@ -118,7 +118,6 @@ class OnboardingViewController: UIViewController {
     view.backgroundColor = .white
 
     NSLayoutConstraint.activate([
-
       topLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       topLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
 
@@ -136,8 +135,6 @@ class OnboardingViewController: UIViewController {
       pageControl.bottomAnchor.constraint(equalTo: nextButton.topAnchor, constant: -20),
 
       titleLabel.bottomAnchor.constraint(equalTo: descriptionLabel.topAnchor, constant: -30),
-      //            titleLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-      //            titleLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
       titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       titleLabel.widthAnchor.constraint(equalToConstant: 320),
 

@@ -26,7 +26,6 @@ class ServingPickerView: UIView {
   }()
   
   private let label = UILabel.makeLabel(text: "Serves", font: .poppinsSemiBold(size: 16), textColor: .black)
-  
   private let labelServes = UILabel.makeLabel(text: "1", font: .poppinsRegular(size: 16), textColor: .neutral50)
   
   private lazy var picker: UIPickerView = {

@@ -7,37 +7,24 @@
 
 import UIKit
 
-protocol RecentCollectionViewDelegate: AnyObject {
-  func didSelectRecipeRe(_ recipe: RecipeInfoForCell)
-}
-
 class RecentCollectionView: UIView {
 
   var collectionView: UICollectionView!
   weak var delegate: RecentCollectionViewDelegate?
-  var navController: UIViewController!
-//
-//  var recipes: [Recipe] = [] {
-//    didSet {
-//      DispatchQueue.main.async {
-//        self.collectionView.reloadData()
-//      }
-//    }
-//  }
 
   var recipesFull: [RecipeInfoForCell] = [] {
-      didSet {
-        DispatchQueue.main.async {
-          self.collectionView.reloadData()
-        }
+    didSet {
+      DispatchQueue.main.async {
+        self.collectionView.reloadData()
       }
     }
+  }
 
-    override func layoutSubviews() {
-            super.layoutSubviews()
-        collectionView.reloadData()
-        }
-    
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    collectionView.reloadData()
+  }
+
   override init(frame: CGRect) {
     super.init(frame: frame)
     backgroundColor = .white
@@ -46,13 +33,10 @@ class RecentCollectionView: UIView {
     setupConstraints()
   }
 
-
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
 
-    
-    
   func configureCollection() {
     let layout = UICollectionViewFlowLayout()
     layout.scrollDirection = .horizontal
@@ -99,4 +83,9 @@ extension RecentCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
     let selectedRecipe = recipesFull[indexPath.item]
     delegate?.didSelectRecipeRe(selectedRecipe)
   }
+}
+
+//MARK: - Protocols
+protocol RecentCollectionViewDelegate: AnyObject {
+  func didSelectRecipeRe(_ recipe: RecipeInfoForCell)
 }

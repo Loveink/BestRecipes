@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol TrendingCollectionViewDelegate: AnyObject {
-  func didSelectRecipe(_ recipe: Recipe)
-}
-
 class TrendingCollectionView: UIView {
   
   var collectionView: UICollectionView!
@@ -99,4 +95,9 @@ extension TrendingCollectionView: UICollectionViewDelegate, UICollectionViewData
       delegate?.didSelectRecipe(selectedRecipe)
     }
   }
+}
+
+//MARK: - Protocols
+protocol TrendingCollectionViewDelegate: AnyObject {
+  func didSelectRecipe(_ recipe: Recipe)
 }

@@ -9,14 +9,8 @@ import UIKit
 
 class CustomCellRecipe: UITableViewCell {
 
-  private var whiteBackgroundView: UIView = {
-    let view = UIView()
-    view.backgroundColor = .white
-    view.layer.cornerRadius = 5
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
-  }()
-
+  private var whiteBackgroundView = UIView.makeView(backgroundColor: .white, cornerRadius: 5)
+  
   var dishImageView: UIImageView = {
     let dishImageView = UIImageView()
     dishImageView.clipsToBounds = true
