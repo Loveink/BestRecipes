@@ -84,7 +84,7 @@ class TitleViewController: UIViewController {
             navigationController?.navigationBar.isHidden = true
         } else {
             let viewController = OnboardingViewController()
-            navigationController?.setViewControllers([viewController], animated: true)
+            navigationController?.setViewControllers([viewController], animated: false)
             navigationController?.navigationBar.isHidden = true
         }
     }
