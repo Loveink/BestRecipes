@@ -180,7 +180,15 @@ class HomeViewController: UIViewController {
   }
   
   // MARK: - Methods for loading data from API
+  private var maxApiKeyAttempts = 4
+  private var currentApiKeyAttempts = 0
+
   private func checkKey() {
+    currentApiKeyAttempts += 1
+    if currentApiKeyAttempts >= maxApiKeyAttempts {
+      print("Достигнуто максимальное количество попыток обновления ключей")
+      return
+    }
     apiKeyIndex += 1
     if apiKeyIndex >= apiKey.count {
       apiKeyIndex = 0
@@ -194,38 +202,37 @@ class HomeViewController: UIViewController {
       do {
         let response = try await RecipeAPI.fetchTrends()
         self.trendingCollectionView.recipes = response.results
-        var recipesId: String = ""
-        for number in 0..<self.trendingCollectionView.recipes.count {
-          recipesId += String(self.trendingCollectionView.recipes[number].id) + ","
-        }
-        let secondResponce = try await RecipeAPI.fetchFullInfoFromIdString(with: recipesId)
-        self.trendingCollectionView.recipeFullInfo = secondResponce
-        self.seeAllButtonTrend.recipes = secondResponce
+        let recipeIds = response.results.map { String($0.id) }.joined(separator: ",")
+        let secondResponse = try await RecipeAPI.fetchFullInfoFromIdString(with: recipeIds)
+        self.trendingCollectionView.recipeFullInfo = secondResponse
+        self.seeAllButtonTrend.recipes = secondResponse
+        print("trending")
       } catch {
         print(error.localizedDescription)
         checkKey()
-//        loadTrendingRecipes()
+        if currentApiKeyAttempts < maxApiKeyAttempts {
+          loadTrendingRecipes()
+        }
       }
     }
   }
-  
+
   private func fetchFirstSearch() {
     Task {
       do {
         let data = try await RecipeAPI.fetchSearch(with: "Main Course")
         self.categoryCollectionView.recipes = data.results
-        var recipesId: String = ""
-        for number in 0...( self.categoryCollectionView.recipes.count - 1) {
-          recipesId += String( self.categoryCollectionView.recipes[number].id) + ","
-          let secondResponce =  try await RecipeAPI.fetchFullInfoFromIdString(with: recipesId)
-          self.categoryCollectionView.recipeFullInfo = secondResponce
-          self.seeAllButtonCategory.recipes = secondResponce
-        }
+        let recipeIds = data.results.map { String($0.id) }.joined(separator: ",")
+        let secondResponse = try await RecipeAPI.fetchFullInfoFromIdString(with: recipeIds)
+        self.categoryCollectionView.recipeFullInfo = secondResponse
+        self.seeAllButtonCategory.recipes = secondResponse
       } catch {
         await MainActor.run {
           print(error.localizedDescription)
           checkKey()
-//          fetchFirstSearch()
+          if currentApiKeyAttempts < maxApiKeyAttempts {
+            fetchFirstSearch()
+          }
         }
       }
     }
@@ -243,7 +250,9 @@ class HomeViewController: UIViewController {
         await MainActor.run {
           print(error.localizedDescription)
           checkKey()
-//          fetchRecentRecipe()
+          if currentApiKeyAttempts < maxApiKeyAttempts {
+            fetchRecentRecipe()
+          }
         }
       }
     }
@@ -257,18 +266,17 @@ extension HomeViewController: CollectionDidSelectProtocol {
       do {
         let data = try await RecipeAPI.fetchSearch(with: categoryName)
         self.categoryCollectionView.recipes = data.results
-        var recipesId: String = ""
-        for number in 0...( self.categoryCollectionView.recipes.count - 1) {
-          recipesId += String( self.categoryCollectionView.recipes[number].id) + ","
-          let secondResponce =  try await RecipeAPI.fetchFullInfoFromIdString(with: recipesId)
-          self.categoryCollectionView.recipeFullInfo = secondResponce
-          self.seeAllButtonCategory.recipes = secondResponce
-          self.seeAllButtonCategory.name = categoryName
-        }
+        let recipesId = data.results.map { String($0.id) }.joined(separator: ",")
+        let secondResponse = try await RecipeAPI.fetchFullInfoFromIdString(with: recipesId)
+        self.categoryCollectionView.recipeFullInfo = secondResponse
+        self.seeAllButtonCategory.recipes = secondResponse
+        self.seeAllButtonCategory.name = categoryName
       } catch {
         await MainActor.run {
           checkKey()
-//          fetchSearch(categoryName: categoryName)
+          if currentApiKeyAttempts < maxApiKeyAttempts {
+            fetchSearch(categoryName: categoryName)
+          }
         }
       }
     }
