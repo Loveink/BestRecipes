@@ -5,12 +5,6 @@
 //  Created by Vanopr on 30.08.2023.
 //
 
-
-
-// "82c2d8b368364b64ba37c4f11aa55670", //Vanopr Keys
-// "c0472158d42f45c9b91c7244460c36e1",
-// "cb0a8f037cba4750bd8706d4473228d6"
-
 import UIKit
 
 class ProfilePageViewController: UIViewController, ImageSelectionDelegate {
