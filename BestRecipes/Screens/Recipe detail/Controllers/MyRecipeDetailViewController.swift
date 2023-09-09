@@ -9,17 +9,56 @@ import Foundation
 import UIKit
 
 class MyRecipeDetailViewController: UIViewController {
-
   var recipe: Recipe?
   let navigationBar = CustomNavigationBar()
   var myRecipe: MyRecipe?
   var ingredients: [RowDataCell]?
 
-  private lazy var nameLabel = UILabel.makeLabel(font: .poppinsSemiBold(size: 20), textColor: .neutral100)
-  private lazy var servesLabel = UILabel.makeLabel(font: .poppinsSemiBold(size: 15), textColor: .white)
-  private lazy var ingridentsLabel = UILabel.makeLabel(text: "Ingridents", font: .poppinsSemiBold(size: 16), textColor: .white)
-  private lazy var itemLabel = UILabel.makeLabel(font: .poppinsRegular(size: 16), textColor: .white)
-  private lazy var imageFood = UIImageView.makeImage(named: "no image 1", cornerRadius: 20)
+  private lazy var nameLabel: UILabel = {
+    let textLabel = UILabel()
+    textLabel.text = ""
+    textLabel.textAlignment = .center
+    textLabel.font = .poppinsSemiBold(size: 20)
+    textLabel.translatesAutoresizingMaskIntoConstraints = false
+    return textLabel
+  }()
+
+  private lazy var servesLabel: UILabel = {
+    let textLabel = UILabel()
+    textLabel.text = ""
+    textLabel.textAlignment = .left
+    textLabel.font = .poppinsSemiBold(size: 15)
+    textLabel.textColor = .white
+    textLabel.translatesAutoresizingMaskIntoConstraints = false
+    return textLabel
+  }()
+
+  private lazy var imageFood: UIImageView = {
+    let imageFood = UIImageView()
+    imageFood.clipsToBounds = true
+    imageFood.layer.cornerRadius = 20
+    imageFood.contentMode = .scaleAspectFill
+    imageFood.image = UIImage(named: "no image 1")
+    imageFood.translatesAutoresizingMaskIntoConstraints = false
+    return imageFood
+  }()
+
+  private lazy var ingridentsLabel: UILabel = {
+    let ingridentsLabel = UILabel()
+    ingridentsLabel.text = "Ingridents"
+    ingridentsLabel.font = .poppinsSemiBold(size: 16)
+    ingridentsLabel.translatesAutoresizingMaskIntoConstraints = false
+    return ingridentsLabel
+  }()
+
+  private lazy var itemLabel: UILabel = {
+    let itemLabel = UILabel()
+    itemLabel.text = ""
+    itemLabel.font = .poppinsRegular(size: 16)
+    itemLabel.textAlignment = .right
+    itemLabel.translatesAutoresizingMaskIntoConstraints = false
+    return itemLabel
+  }()
 
   private lazy var tableView: UITableView = {
     let tableView = UITableView()
@@ -30,6 +69,8 @@ class MyRecipeDetailViewController: UIViewController {
   private lazy var horizontalStackView: UIStackView = {
     let horizontalStackView = UIStackView()
     horizontalStackView.axis = .horizontal
+    horizontalStackView.addArrangedSubview(ingridentsLabel)
+    horizontalStackView.addArrangedSubview(itemLabel)
     horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
     return horizontalStackView
   }()
@@ -38,7 +79,13 @@ class MyRecipeDetailViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = .white
     setupNavBar()
+    view.addSubview(nameLabel)
+    nameLabel.text = myRecipe?.recipeName
+    itemLabel.text = "\(ingredients?.count ?? 0) items"
+    servesLabel.text = "serves for " + (myRecipe?.serves)! + " | " + (myRecipe?.cookTime)!
     setupImageView()
+    view.addSubview(ingridentsLabel)
+    view.addSubview(horizontalStackView)
     setupTableView()
     setConstrains()
   }
@@ -59,27 +106,14 @@ class MyRecipeDetailViewController: UIViewController {
     view.addSubview(tableView)
   }
 
-  private func setupStackView() {
-    horizontalStackView.addArrangedSubview(ingridentsLabel)
-    horizontalStackView.addArrangedSubview(itemLabel)
-    view.addSubview(ingridentsLabel)
-    view.addSubview(horizontalStackView)
-  }
-
   private func setupImageView() {
     if let imageData = myRecipe?.recipeImage {
       imageFood.image = UIImage(data: imageData)
     }
     view.addSubview(imageFood)
-    view.addSubview(nameLabel)
     imageFood.addSubview(servesLabel)
-    nameLabel.textAlignment = .center
-    servesLabel.textAlignment = .left
-    itemLabel.textAlignment = .right
-    nameLabel.text = myRecipe?.recipeName
-    itemLabel.text = "\(ingredients?.count ?? 0) items"
-    servesLabel.text = "serves for " + (myRecipe?.serves)! + " | " + (myRecipe?.cookTime)!
   }
+
   private func setConstrains() {
     NSLayoutConstraint.activate([
       navigationBar.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -90,17 +124,14 @@ class MyRecipeDetailViewController: UIViewController {
       nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
       nameLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
       nameLabel.heightAnchor.constraint(equalToConstant: 44),
-
       imageFood.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 10),
       imageFood.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
       imageFood.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
       imageFood.heightAnchor.constraint(equalToConstant: 200),
-
       servesLabel.bottomAnchor.constraint(equalTo: imageFood.bottomAnchor, constant: -10),
       servesLabel.leadingAnchor.constraint(equalTo: imageFood.leadingAnchor, constant: 10),
       servesLabel.trailingAnchor.constraint(equalTo: imageFood.trailingAnchor),
       servesLabel.heightAnchor.constraint(equalToConstant: 44),
-
       horizontalStackView.topAnchor.constraint(equalTo: imageFood.bottomAnchor,constant: 10),
       horizontalStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
       horizontalStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
@@ -113,6 +144,7 @@ class MyRecipeDetailViewController: UIViewController {
   }
 }
 
+//MARK: - Extension
 extension MyRecipeDetailViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "CustomCellRecipe", for: indexPath) as! CustomCellRecipe

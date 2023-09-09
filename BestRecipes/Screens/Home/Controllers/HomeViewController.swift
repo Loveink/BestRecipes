@@ -186,6 +186,7 @@ class HomeViewController: UIViewController {
       apiKeyIndex = 0
     }
     apiKeySelect = apiKey[apiKeyIndex]
+    print(apiKey[apiKeyIndex])
   }
 
   private func loadTrendingRecipes() {
@@ -201,8 +202,9 @@ class HomeViewController: UIViewController {
         self.trendingCollectionView.recipeFullInfo = secondResponce
         self.seeAllButtonTrend.recipes = secondResponce
       } catch {
+        print(error.localizedDescription)
         checkKey()
-        loadTrendingRecipes()
+//        loadTrendingRecipes()
       }
     }
   }
@@ -221,8 +223,9 @@ class HomeViewController: UIViewController {
         }
       } catch {
         await MainActor.run {
+          print(error.localizedDescription)
           checkKey()
-          fetchFirstSearch()
+//          fetchFirstSearch()
         }
       }
     }
@@ -238,8 +241,9 @@ class HomeViewController: UIViewController {
         self.recentCollectionView.recipesFull = data
       } catch {
         await MainActor.run {
+          print(error.localizedDescription)
           checkKey()
-          fetchRecentRecipe()
+//          fetchRecentRecipe()
         }
       }
     }
@@ -264,7 +268,7 @@ extension HomeViewController: CollectionDidSelectProtocol {
       } catch {
         await MainActor.run {
           checkKey()
-          fetchSearch(categoryName: categoryName)
+//          fetchSearch(categoryName: categoryName)
         }
       }
     }

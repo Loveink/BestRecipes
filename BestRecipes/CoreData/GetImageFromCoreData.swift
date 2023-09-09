@@ -121,7 +121,7 @@ struct GetFromCoreData {
     } catch {
       print("Ошибка при выполнении запроса: \(error)")
     }
-    print("")
+    print("--")
     return recentIds
   }
 }
