@@ -53,6 +53,7 @@ class HomeViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     fetchRecentRecipe()
+    hideKeyBoard()
     navigationController?.setNavigationBarHidden(false, animated: false)
     tabBarController?.tabBar.isHidden = false
     trendingCollectionView.collectionView.reloadData()
@@ -180,7 +181,7 @@ class HomeViewController: UIViewController {
   }
   
   // MARK: - Methods for loading data from API
-  private var maxApiKeyAttempts = 4
+  private var maxApiKeyAttempts = apiKey.count
   private var currentApiKeyAttempts = 0
 
   private func checkKey() {
